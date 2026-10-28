@@ -21,7 +21,9 @@ class WorkspaceTests(unittest.TestCase):
     def setUp(self):
         self.temporary = tempfile.TemporaryDirectory(prefix="thesis-skill-test-")
         self.addCleanup(self.temporary.cleanup)
-        self.base = Path(self.temporary.name)
+        # Windows runners may expose TEMP via an 8.3 alias; the initializer
+        # intentionally returns resolved paths, so compare canonical fixtures.
+        self.base = Path(self.temporary.name).resolve()
         self.root = self.base / "project"
         self.root.mkdir()
 
