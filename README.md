@@ -21,16 +21,16 @@
 
 新工作区默认只建五份访谈、定位、环境及入口记录。定位确认后，再按软件工程、调查实证、实验、文献综述、理论分析或混合路径扩充。缺少工具时采用已可用的替代方式；关键证据缺少时保留具体缺口。
 
-从项目根目录预览新工作区：
+在本技能仓库目录执行，将目标项目参数替换为论文工作区父目录的绝对路径：
 
 ```text
-python scripts/init_workspace.py --root . --dry-run
+python scripts/init_workspace.py --root "<目标项目目录>" --dry-run
 ```
 
 直接接续已有论文目录：
 
 ```text
-python scripts/init_workspace.py --workspace <已有论文目录> --profile software --dry-run
+python scripts/init_workspace.py --workspace "<已有论文目录>" --profile software --dry-run
 ```
 
 `--workspace` 与 `--root`、`--directory` 互斥；`software` 只用于已确认的系统实现路径。确认位置后去掉 `--dry-run` 才会实际补建文件，既有入口和进度按返回的接续清单继续维护。
