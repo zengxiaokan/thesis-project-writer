@@ -257,6 +257,7 @@ def initialize(root=None, directory=None, dry_run=False, profile="intake", works
     new_dirs = [path for path in dirs if not path.exists()]
     for path in dirs:
         if not path.exists() and not dry_run:
+            validate_before_write(path, root, workspace, expect_file=False)
             path.mkdir(exist_ok=True)
     for path, content in files.items():
         relative = path.relative_to(root).as_posix()
@@ -265,6 +266,7 @@ def initialize(root=None, directory=None, dry_run=False, profile="intake", works
             continue
         if not dry_run:
             try:
+                validate_before_write(path, root, workspace, expect_file=True)
                 with open(path, "x", encoding="utf-8", newline="\n") as handle:
                     handle.write(content)
             except FileExistsError:
@@ -283,6 +285,23 @@ def initialize(root=None, directory=None, dry_run=False, profile="intake", works
             "created_files": created, "planned_files": planned,
             "created_or_planned": created + planned, "preserved": skipped,
             "continuation_required": continuation}
+
+
+def validate_before_write(path, root, workspace, expect_file):
+    """Recheck relevant ancestors; this narrows, but cannot eliminate, races."""
+    for candidate in [path, *path.parents]:
+        if candidate == root:
+            break
+        if is_link_or_reparse(candidate):
+            raise ValueError(f"Destination changed to a link or reparse point: {candidate}")
+        try:
+            candidate.resolve().relative_to(workspace)
+        except ValueError:
+            raise ValueError(f"Destination escapes selected workspace: {candidate}")
+        if candidate.exists():
+            wanted_file = candidate == path and expect_file
+            if wanted_file != candidate.is_file():
+                raise ValueError(f"Destination has an incompatible type: {candidate}")
 
 
 def main():
@@ -305,7 +324,8 @@ def main():
     except (ValueError, OSError) as exc:
         print(f"Initialization failed: {exc}", file=sys.stderr)
         return 1
-    print(json.dumps(result, ensure_ascii=False, indent=2))
+    # Escaped JSON remains valid even when the terminal cannot encode Chinese.
+    print(json.dumps(result, ensure_ascii=True, indent=2))
     return 0
 
 

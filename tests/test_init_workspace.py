@@ -1,12 +1,15 @@
 """Regression checks for workspace creation; all writes use temporary directories."""
 import ast
+import builtins
 import json
+import os
 from pathlib import Path
 import runpy
 import subprocess
 import sys
 import tempfile
 import unittest
+from unittest import mock
 
 
 SCRIPT = Path(__file__).resolve().parents[1] / "scripts" / "init_workspace.py"
@@ -183,6 +186,8 @@ class WorkspaceTests(unittest.TestCase):
 
     def create_junction(self, target, link):
         import _winapi
+        if not hasattr(_winapi, "CreateJunction"):
+            self.skipTest("This Python build does not provide CreateJunction")
         _winapi.CreateJunction(str(target), str(link))
         # Remove the junction itself before TemporaryDirectory performs cleanup.
         self.addCleanup(lambda: link.rmdir() if link.exists() else None)
@@ -262,6 +267,40 @@ class WorkspaceTests(unittest.TestCase):
 
     def test_script_syntax_is_compatible_with_declared_python_38(self):
         ast.parse(SCRIPT.read_text(encoding="utf-8"), feature_version=(3, 8))
+
+    def test_cli_chinese_paths_work_with_ascii_terminal(self):
+        workspace = self.root / "论文"
+        workspace.mkdir()
+        environment = dict(os.environ, PYTHONUTF8="0", PYTHONIOENCODING="ascii")
+        completed = subprocess.run(
+            [sys.executable, "-B", str(SCRIPT), "--workspace", str(workspace), "--dry-run"],
+            env=environment, capture_output=True, text=True, encoding="ascii", check=True,
+        )
+        self.assertEqual(Path(json.loads(completed.stdout)["workspace"]), workspace)
+        self.assertEqual(list(workspace.iterdir()), [])
+
+    @unittest.skipUnless(sys.platform == "win32", "Windows junctions only")
+    def test_ancestor_replaced_during_writes_is_rechecked(self):
+        workspace = self.root / "thesis"
+        target = self.base / "outside-during-write"
+        target.mkdir()
+        changed = []
+
+        def replace_ancestor_after_first_open(path, *args, **kwargs):
+            handle = builtins.open(path, *args, **kwargs)
+            if not changed:
+                link = workspace / "intake"
+                self.assertEqual(list(link.iterdir()), [])
+                link.rmdir()
+                self.create_junction(target, link)
+                changed.append(True)
+            return handle
+
+        with mock.patch.dict(initialize.__globals__, {"open": replace_ancestor_after_first_open}):
+            with self.assertRaisesRegex(ValueError, "reparse|escapes"):
+                initialize(self.root)
+        self.assertTrue(changed)
+        self.assertEqual(list(target.iterdir()), [])
 
 
 if __name__ == "__main__":
