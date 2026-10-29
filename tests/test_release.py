@@ -23,7 +23,8 @@ class ReleaseTests(unittest.TestCase):
                              "examples/figures/render_chart.py", "examples/figures/source_data.csv",
                              "examples/figures/counts.svg"):
                 self.assertIn("thesis-project-writer/" + required, names)
-            self.assertFalse(any("workspace/" in name or ".github/" in name or "__pycache__" in name for name in names))
+            self.assertFalse(any("workspace/" in name or ".github/" in name or "__pycache__" in name
+                                 or "evals/difficult/" in name for name in names))
             self.assertTrue(all(info.date_time == (1980, 1, 1, 0, 0, 0) for info in archive.infolist()))
             self.assertIsNone(archive.testzip())
 

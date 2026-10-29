@@ -1,0 +1,13 @@
+{
+  "material_kind": "synthetic_evaluation_fixture_not_real_execution",
+  "release": "2.0",
+  "batch": "regression-v2-2026-10-28",
+  "suite": "functional-regression",
+  "unit": "cases",
+  "total": 12,
+  "status_counts": {"passed": 9, "failed": 1, "blocked": 1, "not_run": 1},
+  "failed_cases": [{"name": "transport_duplicate_delivery", "expected": "one external delivery", "observed": "duplicate external delivery after retry"}],
+  "blocked_cases": ["live_transport_connection"],
+  "not_run_cases": ["long_duration_scheduler_observation"],
+  "scope_note": "Fixture-authored report for version reconciliation; no actual tests were run to create this fixture."
+}

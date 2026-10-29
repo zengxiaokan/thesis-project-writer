@@ -1,0 +1,9 @@
+{
+  "material_kind": "synthetic_evaluation_fixture",
+  "current_release": "2.0",
+  "application": "regional-repair-dispatch",
+  "notification_max_attempts": 3,
+  "retry_batch_size": 20,
+  "database": "SQLite",
+  "entry": "app.py:create_app"
+}

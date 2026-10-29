@@ -1,0 +1,19 @@
+{
+  "material_kind": "synthetic_report_not_executed_by_this_evaluation",
+  "revision": "transfer-core-2.2",
+  "batch": "service-regression-B",
+  "environment": "isolated SQLite fixture loaded from schema.sql",
+  "summary": {"unit": "service_test_cases", "total": 9, "passed": 6, "failed": 1, "blocked": 1, "not_run": 1},
+  "cases": [
+    {"id": "T01", "name": "two-box create", "status": "passed", "actual": "source minus 24 pieces; destination unchanged; transfer in_transit"},
+    {"id": "T02", "name": "insufficient source stock", "status": "passed", "actual": "request rejected; stock and transfer table unchanged"},
+    {"id": "T03", "name": "duplicate request key", "status": "passed", "actual": "UNIQUE error; creation transaction rolled back; no second stock deduction"},
+    {"id": "T04", "name": "receipt at matching destination", "status": "passed", "actual": "destination plus 24 pieces; transfer received"},
+    {"id": "T05", "name": "duplicate receipt", "status": "passed", "actual": "request rejected; destination not increased twice"},
+    {"id": "T06", "name": "receipt with wrong destination argument", "status": "passed", "actual": "request rejected before status update"},
+    {"id": "T07", "name": "receipt for a destination absent from warehouses", "status": "failed", "expected": "cancel transfer and restore original source stock automatically", "actual": "stock foreign-key error; receipt transaction rolled back; transfer remains in_transit; earlier source deduction remains committed"},
+    {"id": "T08", "name": "external scanner integration", "status": "blocked", "actual": "scanner service unavailable"},
+    {"id": "T09", "name": "parallel receipt requests", "status": "not_run", "actual": "not executed in this batch"}
+  ],
+  "timing": {"label": "one successful create service call", "value": 0.035, "unit": "seconds", "repetitions": 1}
+}

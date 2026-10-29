@@ -1,0 +1,10 @@
+{
+  "material_kind": "synthetic_evaluation_fixture_not_real_execution",
+  "release": "1.0",
+  "batch": "http-smoke-v1-2026-09-12",
+  "suite": "http-smoke",
+  "unit": "requests",
+  "total": 40,
+  "status_counts": {"status_2xx": 38, "status_5xx": 2},
+  "scope_note": "Fixture-authored HTTP request counts; not case pass counts and not current-release evidence."
+}

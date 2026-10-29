@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "conditions": [
+    "none",
+    "original",
+    "current",
+    "candidate"
+  ],
+  "cases": [
+    {
+      "id": "repair-dispatch",
+      "input": "cases/repair-dispatch/input",
+      "repetitions": 2
+    },
+    {
+      "id": "inventory-transfer",
+      "input": "cases/inventory-transfer/input",
+      "repetitions": 1
+    }
+  ],
+  "model_policy": "All runs inherit the same parent model settings; concrete model identifier is not exposed by the session.",
+  "scope": "Synthetic input-based chapter tasks; no installed-skill or real-manuscript mutation."
+}

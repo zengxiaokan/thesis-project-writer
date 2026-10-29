@@ -1,0 +1,23 @@
+{
+  "current_commit": "31b34cc28a50e8cf5b6f58dad0bbdfcadf7741a1",
+  "current_files": {
+    "SKILL.md": "736298526bd27cbeb2da6f3d8199949f2c104c03634535e286b7ce4c201abdab",
+    "references/academic-style.md": "42614934ffef1a1b2acd673aca93ee61d4c0dd1025f036d72fab320454171d31",
+    "references/environment-and-fallbacks.md": "e8983dc5db3d4ecfa039a9d320036c9a1477473d1bc14864da63073179dadeaa",
+    "references/evidence-and-review.md": "17ba6a7e44f0c2e1111ed231695eedcbb1b87acd183a150641f3d49199c11cd4",
+    "references/figures-and-tables.md": "32d4853e3ea046e86daef5659c9b9722d20bb1a39542d458685ffc36abca665e",
+    "references/host-adapters.md": "af052161c42fe5c8e6c19c520dbd06abfa68e1fd8d130b68f658f062fc8119fe",
+    "references/interview-and-positioning.md": "e1d61a82422f67c60392efb9ecb471f35820008b9a023e3a53ddbffa1a6fbd58",
+    "references/local-verification.md": "f308397da800c5af9ba2541b350e032e400188d7df7433fec255d108ee60fc40",
+    "references/project-analysis.md": "de28efd8e4d808345d6dad9fef6b5e3ad156722f5d9d2f5687d9b5a8f68b7d01",
+    "references/research-routes.md": "8436bcad02b2ead56ff5814b033e189ac310d3a9e80d8929352727ff2adeb8a5",
+    "references/workspace.md": "b5f2dbd5bfa5dc2e7d6810f1e3683f35b5651c5ba5a4ea4ce44e29cbc4c74ef3"
+  },
+  "original_excerpt": {
+    "scope": "quality-standards sections 2 and 3; writing-rules selected generic sections; not the full original project workflow",
+    "source_hashes": {
+      "quality-standards.md": "002f2678fdd9e8891addbacaef5d7bacf49b8a8bb3e06bd41f61685afaa16a79",
+      "writing-rules.md": "52706b0e1e1eb2336765610b2e9a54ac8bdd6ea5fc3c46709cd061cbd6a8509d"
+    }
+  }
+}

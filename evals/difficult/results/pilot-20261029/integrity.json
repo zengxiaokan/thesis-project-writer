@@ -1,0 +1,13 @@
+{
+  "raw_outputs": 12,
+  "input_rule_hashes_verified": 12,
+  "frozen_sources_verified": true,
+  "ordering_seed": 20261029,
+  "contexts": "fresh fork_turns=none for every writer and reviewer",
+  "basic_evals_sha256": "22f5141e464285f3af48102f4668420f7c70ba6f3c21e7e77066a041a2e5884d",
+  "installed_skill_updated": false,
+  "real_manuscript_updated": false,
+  "model_identifier": "not exposed; inherited parent settings for all writers",
+  "score_source": "independent anonymous-agent rubric review; not human review",
+  "strong_os_isolation": false
+}

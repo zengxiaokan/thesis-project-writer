@@ -1,0 +1,21 @@
+{
+  "anonymous_id": "B01",
+  "case": "inventory-transfer",
+  "condition": "none",
+  "repetition": 1,
+  "output_sha256": "9ff50fbd147e5de6b962d918123fd8056f2bd17dd99642290922b88be9972ead",
+  "model_policy": "All runs inherit the same parent model settings; concrete model identifier is not exposed by the session.",
+  "files_sha256": {
+    "input/config.json": "41ccbf5ed2c3bff67378852cd7a21ff94f9a429a71d58e4897a1be6cbf4704af",
+    "input/README.md": "6e8332904cb0c8e2dc7067715413d5012d230facca8db8abc4c03f144dbdadce",
+    "input/reports/archive-1.4.json": "59ff07fa1f8d9dad231386e0d43f7330f59ead63172490385d5396c6ac35e153",
+    "input/reports/current-2.2.json": "d9c03aee602e1b7872eccb80a65008c1c4f23412c3812a099c2ad597f5bd2cc0",
+    "input/schema.sql": "0f8250075452302964eb34e46262e61b7edd3367daf6fe1fa9126c37b036ed71",
+    "input/src/repository.py": "f208222e479fc6f90878da887923b9beae562efdbc86ba855af8376fae78f936",
+    "input/src/service.py": "3d79a43844afd5bc90d4372fd7c45ad3eda8d1a75bfa0e1c9563d5dd1560b962",
+    "input/task.md": "7986329c08751b893f59869e1344e5b182222f94cfd17d6280043bb7bc30208a",
+    "input/thesis/chapter-5.md": "355a2a6b91d8ca6187eff3830bec0bfb934b1213291e2244323b242d643767e5",
+    "input/thesis/positioning.md": "6c44d1feedcd7f30b6851bcd7515b0603f379e0def2a509d953fa3a7479bf979"
+  },
+  "access_boundary": "Input copies and read-only file flags plus runner instructions; not an OS-level read sandbox."
+}

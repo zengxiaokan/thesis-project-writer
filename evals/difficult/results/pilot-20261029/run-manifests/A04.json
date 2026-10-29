@@ -1,0 +1,21 @@
+{
+  "anonymous_id": "A04",
+  "case": "repair-dispatch",
+  "condition": "none",
+  "repetition": 1,
+  "output_sha256": "b3f32cc8712cff7d9ef02232af8cef349a1bbbc3703ef732fbe5b1efa4361e4f",
+  "model_policy": "All runs inherit the same parent model settings; concrete model identifier is not exposed by the session.",
+  "files_sha256": {
+    "input/app.py": "09a68acf8ce8d761a855e7dbff991638c4a8c0ebaff324b5717ac063cc3eee86",
+    "input/archive/README-v1.md": "5affb538f725001b7164ee1e39657e13441942b56bf6e5f2bfb2331dd4b596bb",
+    "input/archive/results-v1.json": "06d7399051e4bebf59d9aee9569921d0e233e7a988918c742b04d6bbb06c702b",
+    "input/current-results.json": "dc76d32bedc4bf6b5732bd2e2830252e2ef9482e8aa8dfcf189cceed933ccf96",
+    "input/dispatch.py": "bdf06fc07086404dc2df1720ecea2c847f262e0ee14995feca71789bd6dd6665",
+    "input/notifications.py": "289cd845251466c4ab44160f05bad09da47d0c12ba409ea3dd9afdad07833036",
+    "input/project.json": "44b8081752c4863ee86b3a8b3ac3284a3c1edea4b7b830e33c4cf2aaf49a51ee",
+    "input/repository.py": "8a2cc18351c3aeb1394b091a78f6d0d8769b76ac775ab62b014cfd2cc38f86a7",
+    "input/schema.sql": "7adbb9313357d126cdc37da3993a046913449b315b7aea6e371678805e5e91b8",
+    "input/task.md": "adde5f1b5e55ee596bf580f0b5f2687ab3ae0802372336df8a7bf475887fccf0"
+  },
+  "access_boundary": "Input copies and read-only file flags plus runner instructions; not an OS-level read sandbox."
+}

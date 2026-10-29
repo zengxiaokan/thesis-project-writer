@@ -8,7 +8,7 @@
 
 [开始使用](#获取与使用) · [看看实际样例](examples/initialization-study/README.md) · [下载发行包](https://github.com/zengxiaokan/thesis-project-writer/raw/refs/heads/main/dist/thesis-project-writer.zip)
 
-当前版本 [0.3.0](VERSION) · [MIT 开源](LICENSE) · [跨平台 CI](https://github.com/zengxiaokan/thesis-project-writer/actions)
+当前版本 [0.4.0](VERSION) · [MIT 开源](LICENSE) · [跨平台 CI](https://github.com/zengxiaokan/thesis-project-writer/actions)
 
 ## 从你正在做的事开始
 
@@ -26,6 +26,7 @@
 - **先看懂，再定位。** 让提问建立在项目和材料画像上，把“想研究什么”和“现在能做什么”放在一起考虑。
 - **材料有归处。** 按需组织证据、章节蓝图、正文、图源与审查记录，给关键论述留下可回查的来源。
 - **图表讲得清。** 从章节问题选择图种，让流程、关系和数据各有依据，保留可编辑源与导出文件，并检查图文是否一致。
+- **章节看得到机制。** 按本章任务检查主体、条件、处理关系、数据变化和失败边界，用原稿位置定位“只列功能”的段落，补依据、删重复。
 - **认真对待你的原稿。** 沿用作者指定的正式稿与同步方向，按本轮范围续写、审查或润色。
 - **进度能接续。** 复用已有答案、蓝图与有效证据，把已完成内容和下一步记录下来。
 - **执行贴合实际条件。** 文档、浏览器、MCP 和本地工具按可用能力选择；条件变化时说明替代方案及交付差距。
@@ -126,6 +127,8 @@ python scripts/init_workspace.py --workspace "<已有论文目录>" --profile so
 在可信且没有并发改变目录结构的工作区使用。全量预检及每次写入前的复查可以拒绝已发现的路径变化，但不是原子防竞态，也不提供失败自动回滚。详见 [工作区指南](references/workspace.md)。
 
 ## 验证与发行
+
+章节充分性见 [深度指南](references/chapter-quality.md) 和 [完整章对照](examples/chapter-depth/README.md)。基础行为回归与[原始材料困难评测](https://github.com/zengxiaokan/thesis-project-writer/tree/main/evals/difficult)分别维护；后者使用四种规则条件和独立输入/评分，开发评测不装入技能 ZIP。[首轮十二次实测](docs/depth-evaluation.md)未显示候选规则相对基线的增益。实际输出与结果以报告为准，不以脚本通过率或规则数量证明写作效果。
 
 ```text
 python -B -m unittest discover -s tests -v

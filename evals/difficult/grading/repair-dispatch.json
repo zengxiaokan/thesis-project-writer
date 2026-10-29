@@ -1,0 +1,44 @@
+{
+  "case_id": "repair-dispatch",
+  "material_kind": "evaluator_only_synthetic_case_rubric",
+  "runner_access": "Do not copy this file into runner input. Runners receive input files and their assigned rule condition only.",
+  "task_scope": "Five-section implementation chapter, evidence mapping and versioned test-material note from ten synthetic original files.",
+  "grading_policy": {
+    "fact_and_depth_separate": true,
+    "depth_levels": {"0": "applicable mechanism is absent", "1": "correctly names elements but does not explain their relationship", "2": "explains supported conditions, actions, state changes or boundaries so a reader can reconstruct the mechanism"},
+    "quote_requirement": "For every depth rating cite output section/paragraph and a short excerpt. For absent content cite the responsible section; do not invent a quote.",
+    "not_automatic_metrics": ["word count", "keyword occurrence", "number of files read", "presence of headings"],
+    "critical_error_policy": "Report errors separately with output quote and input source; a high depth score cannot cancel a factual error.",
+    "scope_note": "All program and result materials are synthetic fixtures; rating them is not validation of a real thesis or production system."
+  },
+  "source_facts": [
+    {"id": "F1", "source": "app.py:create_app.dispatch_endpoint", "expected": "Only caller-supplied dispatcher/admin role values enter dispatch; role condition is present but no login/token authentication layer is implemented in the supplied fixture."},
+    {"id": "F2", "source": "dispatch.py:dispatch_ticket; repository.py:candidates", "expected": "Read ticket region, require existing open ticket, filter same-region available workers, order active_load then id, select first; no candidate causes refusal."},
+    {"id": "F3", "source": "repository.py:assign", "expected": "Conditional UPDATE requires ticket id, open status and expected version; success writes worker_id, assigned status and version+1. A zero rowcount is a conflict, not an unconditional successful assignment."},
+    {"id": "F4", "source": "dispatch.py:dispatch_ticket; repository.py:transaction/add_load/enqueue_receipt", "expected": "Assignment, load increment and pending receipt insertion share one connection transaction. The transaction ends before transport delivery. Dispatch exceptions within the transaction roll back writes."},
+    {"id": "F5", "source": "notifications.py:deliver_receipt; repository.py:record_delivery", "expected": "OSError during transport send increments attempts and retains pending, returning pending. It does not undo already committed assignment or worker load. Success increments attempts and marks sent."},
+    {"id": "F6", "source": "app.py:create_app.tasks; notifications.py:retry_pending; repository.py:pending_receipts; project.json", "expected": "Registered retry_dispatch_receipts task selects pending receipts with attempts<3, id order, limit20 per invocation. Initial send counts as an attempt, so a failed initial send can be followed by at most two more attempts through this selection. No actual periodic invocation or minute interval is supplied."},
+    {"id": "F7", "source": "schema.sql:receipt; notifications.py:deliver_receipt; current-results.json", "expected": "A unique receipt row per ticket does not establish external exactly-once delivery; transport has no supplied idempotency protocol. Current synthetic report contains a duplicate-delivery failure."},
+    {"id": "F8", "source": "project.json; current-results.json; archive/results-v1.json", "expected": "Current2.0 functional report is12 cases with9 passed/1 failed/1 blocked/1 not_run. Old1.0 smoke report is40 requests,38 2xx/2 5xx. They have different release, batch, suite and units and cannot be merged as a single current pass count."},
+    {"id": "F9", "source": "archive/README-v1.md; repository.py:candidates", "expected": "Old product claims about learning/global optimum, rollback on notification failure, minute scheduling, three retries and exactly-once are not current implementation facts; actual selection is deterministic filtering and ordering."},
+    {"id": "F10", "source": "app.py:create_app; schema.sql; current-results.json", "expected": "Source defines PRAGMA enabling foreign keys when app is constructed and SQL defines foreign keys, but the materials do not show actual database migration/deployment or scheduler execution. Not-run long-duration observation cannot support long-term stability."}
+  ],
+  "critical_errors": [
+    {"id": "C1", "description": "Claims training, global optimization or verified optimal assignment as implemented", "facts": ["F2", "F9"]},
+    {"id": "C2", "description": "Says transport failure rolls back committed assignment/load", "facts": ["F4", "F5"]},
+    {"id": "C3", "description": "Calls the initial send plus three retries supported, or claims a supplied minute scheduler/actual background execution", "facts": ["F6"]},
+    {"id": "C4", "description": "Claims exactly-once external delivery from the UNIQUE receipt constraint or current outcomes", "facts": ["F7"]},
+    {"id": "C5", "description": "Merges old HTTP counts with current case results, or changes failed/blocked/not_run to passed", "facts": ["F8"]},
+    {"id": "C6", "description": "Claims long-term stability, deployment, actual migration or live transport validation without supplied records", "facts": ["F8", "F10"]}
+  ],
+  "depth_dimensions": [
+    {"id": "D1", "name": "Actor and entry", "applicable": true, "adequate": "Explains the role condition, dispatch route, request fields, and endpoint-to-service relationship without turning the role parameter into an authentication subsystem.", "facts": ["F1"]},
+    {"id": "D2", "name": "Rules and candidate selection", "applicable": true, "adequate": "Explains existing/open ticket, region and availability filters, load/id ordering and no-candidate outcome; selection rationale follows present business constraints rather than invented development history.", "facts": ["F2", "F9"]},
+    {"id": "D3", "name": "Processing and conflict path", "applicable": true, "adequate": "Explains expected-version/status condition, affected-row decision and why losing an update does not proceed to a new successful assignment.", "facts": ["F3"]},
+    {"id": "D4", "name": "Data and transaction changes", "applicable": true, "adequate": "Connects ticket.worker_id/status/version, worker.active_load and receipt.pending/attempts=0 to their shared transaction and commit boundary.", "facts": ["F3", "F4"]},
+    {"id": "D5", "name": "Failure and background boundary", "applicable": true, "adequate": "Explains committed assignment versus separate send result, attempt updates and selected retry scope, and distinguishes task registration from actual scheduling.", "facts": ["F5", "F6", "F7"]},
+    {"id": "D6", "name": "Evidence and chapter role", "applicable": true, "adequate": "Five sections explain implementation rather than list features, cite concrete sources, give a scope-based chapter summary, and separately distinguish current/old test materials and limitations.", "facts": ["F8", "F10"]}
+  ],
+  "report_fields": ["anonymous_output_id", "critical_errors_with_quotes", "depth_ratings_with_quotes", "unsupported_or_uncertain_items", "observed_failures", "scope_limitations"],
+  "repeat_plan": "Recommended critical repeat case: repeat each rule condition on fresh contexts; report variation instead of selecting a best run."
+}

@@ -1,0 +1,10 @@
+{
+  "material_kind": "synthetic_report_not_executed_by_this_evaluation",
+  "revision": "transfer-core-1.4",
+  "batch": "manual-demo-A",
+  "environment": "single-user fixture",
+  "summary": {"unit": "demonstration_steps", "total": 5, "passed": 5},
+  "quantity_observation": {"submitted_boxes": 2, "pieces_per_box": 10, "stored_pieces": 20},
+  "workflow_note": "This historical version updated both warehouse stocks in the create action.",
+  "timing": {"label": "manual end-to-end observation", "value": 35, "unit": "seconds"}
+}

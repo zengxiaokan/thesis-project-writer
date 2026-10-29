@@ -1,0 +1,86 @@
+[
+  {
+    "anonymous_id": "A01",
+    "case": "repair-dispatch",
+    "condition": "none",
+    "repetition": 2,
+    "output_sha256": "e8c6237e3f1e0915ac9d5296e6aea4db79ac53bb884c84a4377dc164a181e72b"
+  },
+  {
+    "anonymous_id": "A02",
+    "case": "repair-dispatch",
+    "condition": "original",
+    "repetition": 1,
+    "output_sha256": "4289e8cec9fa687190d1cdce714fb98d3cfa8b08d8fe1a395003bf3e09281987"
+  },
+  {
+    "anonymous_id": "A03",
+    "case": "repair-dispatch",
+    "condition": "original",
+    "repetition": 2,
+    "output_sha256": "e01e2ceb59958d73934e4c86d6acce5105a2e6087ba3e0c1754d92452c9e14f8"
+  },
+  {
+    "anonymous_id": "A04",
+    "case": "repair-dispatch",
+    "condition": "none",
+    "repetition": 1,
+    "output_sha256": "b3f32cc8712cff7d9ef02232af8cef349a1bbbc3703ef732fbe5b1efa4361e4f"
+  },
+  {
+    "anonymous_id": "A05",
+    "case": "repair-dispatch",
+    "condition": "current",
+    "repetition": 1,
+    "output_sha256": "788f98e9f786f2809281fda83ed9787da54664d0c581b7b880a9efacaa519847"
+  },
+  {
+    "anonymous_id": "A06",
+    "case": "repair-dispatch",
+    "condition": "candidate",
+    "repetition": 1,
+    "output_sha256": "bd541b9e80bd9827fea113d8bddca1acf36db6e50fded201a9cdc6f0be55a931"
+  },
+  {
+    "anonymous_id": "A07",
+    "case": "repair-dispatch",
+    "condition": "current",
+    "repetition": 2,
+    "output_sha256": "79d2036e6058fc33612398b9a1fa25ee2787c7425cf80ae14016469ed3c70433"
+  },
+  {
+    "anonymous_id": "A08",
+    "case": "repair-dispatch",
+    "condition": "candidate",
+    "repetition": 2,
+    "output_sha256": "795ded7d8da637f9c391b41b6c94c357d72c14de9624aefbb947a2e4979edf2e"
+  },
+  {
+    "anonymous_id": "B01",
+    "case": "inventory-transfer",
+    "condition": "none",
+    "repetition": 1,
+    "output_sha256": "9ff50fbd147e5de6b962d918123fd8056f2bd17dd99642290922b88be9972ead"
+  },
+  {
+    "anonymous_id": "B02",
+    "case": "inventory-transfer",
+    "condition": "current",
+    "repetition": 1,
+    "output_sha256": "c06595f64091b0f1d310a35b8f762dfa78027c966dda7b79094bc4a6a7762f08"
+  },
+  {
+    "anonymous_id": "B03",
+    "case": "inventory-transfer",
+    "condition": "original",
+    "repetition": 1,
+    "output_sha256": "ff67360087c20c8fa559a58dbe5e236a049c0b6c87715ee3d4ec94ad30c074e3"
+  },
+  {
+    "anonymous_id": "B04",
+    "case": "inventory-transfer",
+    "condition": "candidate",
+    "repetition": 1,
+    "output_sha256": "98e8708e6eddcea310cb68bb8a32a626dbe5c2cba5c1bcf348ab6e706331baae"
+  }
+]

@@ -26,6 +26,10 @@ jobs:
           python-version: ${{ matrix.python }}
       - name: Regression checks
         run: python -B -m unittest discover -s tests -v
+      - name: Evaluation input separation checks
+        run: python -B -m unittest discover -s evals/difficult -p test_*.py -v
+      - name: Validate archived anonymous rating evidence
+        run: python -B evals/difficult/summarize.py evals/difficult/results/pilot-20261029
       - name: Verify release contents and deterministic archive
         run: python -B scripts/build_release.py --check
       - name: Replay actual initialization observations

@@ -26,7 +26,7 @@ dot -Tsvg examples/figures/initializer-flow.dot -o "<临时输出目录>/initial
 
 数据来自 [实际运行观察](../initialization-study/observation.json) 的 `analysis_created_files`、`intake_created_files` 和 `upgrade_created_files`。本例只比较同一次 `analysis → intake → software` 调用序列中每次新增的文件数量，单位为“份”，纵轴从零开始。不同配置的目录职责不同，这些数字不是研究质量、完成百分比、执行时间或性能指标。
 
-本次实际计数依次为 **4、2、15**。观察记录对应的初始化器源码 SHA-256 为 `885fa9e3c2a05392dcb6d10bf08db4bbb980d57c5c20c68c4af9ae682e815b4b`；CSV 已逐项对照实际观察，未手工补写计数。导出使用 Windows、Python 3.14.6、Matplotlib 3.11.0 与 Microsoft YaHei，已检查 PNG 预览中的中文、单位、零起点和三个数值标签。同一环境复跑得到相同 SVG 和 CSV 字节，不据此承诺其他渲染版本生成相同布局或字节。
+本次实际计数依次为 **4、2、15**。观察记录对应的初始化器源码 SHA-256 为 `7f614f2df34b33ad8eefc6d88de0c54be1acc62ff4b109622561349297ccc7ba`；CSV 已逐项对照实际观察，未手工补写计数。导出使用 Windows、Python 3.14.6、Matplotlib 3.11.0 与 Microsoft YaHei，已检查 PNG 预览中的中文、单位、零起点和三个数值标签。同一环境复跑得到相同 SVG 和 CSV 字节，不据此承诺其他渲染版本生成相同布局或字节。
 
 [source_data.csv](source_data.csv) 保留本次观察中用于绘图的类别、显示名、键名与原始计数；[render_chart.py](render_chart.py) 从指定观察 JSON 读取和验证整数，然后生成 CSV 及 [SVG 导出](counts.svg)。SVG 中中文以路径保存以减少字体替换，但数据和脚本仍是后续编辑依据。原始观察含初始化器源码指纹与实际运行环境；重新运行观察或修改初始化器后应一并更新数据与图，不能手改柱高以配合正文。
 

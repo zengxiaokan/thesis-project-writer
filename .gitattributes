@@ -1,2 +1,5 @@
 * text=auto eol=lf
 *.zip -text
+# Raw evaluation outputs and grades retain original bytes, including line endings.
+evals/difficult/results/**/outputs/*.md -text -whitespace
+evals/difficult/results/**/grades/*.json -text -whitespace

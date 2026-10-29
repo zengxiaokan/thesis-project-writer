@@ -1,0 +1,215 @@
+{
+  "runs": [
+    {
+      "anonymous_id": "A01",
+      "case": "repair-dispatch",
+      "condition": "none",
+      "repetition": 2,
+      "depth_total": 12,
+      "critical_errors": 0,
+      "other_issues": 0,
+      "complete_chapter": true
+    },
+    {
+      "anonymous_id": "A02",
+      "case": "repair-dispatch",
+      "condition": "original",
+      "repetition": 1,
+      "depth_total": 12,
+      "critical_errors": 0,
+      "other_issues": 0,
+      "complete_chapter": true
+    },
+    {
+      "anonymous_id": "A03",
+      "case": "repair-dispatch",
+      "condition": "original",
+      "repetition": 2,
+      "depth_total": 12,
+      "critical_errors": 0,
+      "other_issues": 0,
+      "complete_chapter": true
+    },
+    {
+      "anonymous_id": "A04",
+      "case": "repair-dispatch",
+      "condition": "none",
+      "repetition": 1,
+      "depth_total": 12,
+      "critical_errors": 0,
+      "other_issues": 0,
+      "complete_chapter": true
+    },
+    {
+      "anonymous_id": "A05",
+      "case": "repair-dispatch",
+      "condition": "current",
+      "repetition": 1,
+      "depth_total": 12,
+      "critical_errors": 0,
+      "other_issues": 0,
+      "complete_chapter": true
+    },
+    {
+      "anonymous_id": "A06",
+      "case": "repair-dispatch",
+      "condition": "candidate",
+      "repetition": 1,
+      "depth_total": 12,
+      "critical_errors": 0,
+      "other_issues": 0,
+      "complete_chapter": true
+    },
+    {
+      "anonymous_id": "A07",
+      "case": "repair-dispatch",
+      "condition": "current",
+      "repetition": 2,
+      "depth_total": 12,
+      "critical_errors": 0,
+      "other_issues": 0,
+      "complete_chapter": true
+    },
+    {
+      "anonymous_id": "A08",
+      "case": "repair-dispatch",
+      "condition": "candidate",
+      "repetition": 2,
+      "depth_total": 12,
+      "critical_errors": 0,
+      "other_issues": 0,
+      "complete_chapter": true
+    },
+    {
+      "anonymous_id": "B01",
+      "case": "inventory-transfer",
+      "condition": "none",
+      "repetition": 1,
+      "depth_total": 12,
+      "critical_errors": 0,
+      "other_issues": 0,
+      "complete_chapter": true
+    },
+    {
+      "anonymous_id": "B02",
+      "case": "inventory-transfer",
+      "condition": "current",
+      "repetition": 1,
+      "depth_total": 12,
+      "critical_errors": 0,
+      "other_issues": 0,
+      "complete_chapter": true
+    },
+    {
+      "anonymous_id": "B03",
+      "case": "inventory-transfer",
+      "condition": "original",
+      "repetition": 1,
+      "depth_total": 12,
+      "critical_errors": 0,
+      "other_issues": 1,
+      "complete_chapter": true
+    },
+    {
+      "anonymous_id": "B04",
+      "case": "inventory-transfer",
+      "condition": "candidate",
+      "repetition": 1,
+      "depth_total": 12,
+      "critical_errors": 0,
+      "other_issues": 0,
+      "complete_chapter": true
+    }
+  ],
+  "groups": [
+    {
+      "case": "inventory-transfer",
+      "condition": "candidate",
+      "runs": 1,
+      "depth_mean": 12,
+      "depth_min": 12,
+      "depth_max": 12,
+      "runs_with_critical_errors": 0,
+      "other_issues": 0,
+      "complete_chapters": 1
+    },
+    {
+      "case": "inventory-transfer",
+      "condition": "current",
+      "runs": 1,
+      "depth_mean": 12,
+      "depth_min": 12,
+      "depth_max": 12,
+      "runs_with_critical_errors": 0,
+      "other_issues": 0,
+      "complete_chapters": 1
+    },
+    {
+      "case": "inventory-transfer",
+      "condition": "none",
+      "runs": 1,
+      "depth_mean": 12,
+      "depth_min": 12,
+      "depth_max": 12,
+      "runs_with_critical_errors": 0,
+      "other_issues": 0,
+      "complete_chapters": 1
+    },
+    {
+      "case": "inventory-transfer",
+      "condition": "original",
+      "runs": 1,
+      "depth_mean": 12,
+      "depth_min": 12,
+      "depth_max": 12,
+      "runs_with_critical_errors": 0,
+      "other_issues": 1,
+      "complete_chapters": 1
+    },
+    {
+      "case": "repair-dispatch",
+      "condition": "candidate",
+      "runs": 2,
+      "depth_mean": 12,
+      "depth_min": 12,
+      "depth_max": 12,
+      "runs_with_critical_errors": 0,
+      "other_issues": 0,
+      "complete_chapters": 2
+    },
+    {
+      "case": "repair-dispatch",
+      "condition": "current",
+      "runs": 2,
+      "depth_mean": 12,
+      "depth_min": 12,
+      "depth_max": 12,
+      "runs_with_critical_errors": 0,
+      "other_issues": 0,
+      "complete_chapters": 2
+    },
+    {
+      "case": "repair-dispatch",
+      "condition": "none",
+      "runs": 2,
+      "depth_mean": 12,
+      "depth_min": 12,
+      "depth_max": 12,
+      "runs_with_critical_errors": 0,
+      "other_issues": 0,
+      "complete_chapters": 2
+    },
+    {
+      "case": "repair-dispatch",
+      "condition": "original",
+      "runs": 2,
+      "depth_mean": 12,
+      "depth_min": 12,
+      "depth_max": 12,
+      "runs_with_critical_errors": 0,
+      "other_issues": 0,
+      "complete_chapters": 2
+    }
+  ],
+  "scope": "Aggregates supplied anonymous-agent judgments; quote checks are not semantic or human validation."
+}
