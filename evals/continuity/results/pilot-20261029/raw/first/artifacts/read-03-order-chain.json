@@ -1,0 +1,46 @@
+{
+  "files": [
+    {
+      "path": "modules/residents/service.py",
+      "text": "\"\"\"Synthetic resident rules, not authentication.\"\"\"\ndef register(repo, name, zone):\n    if not name.strip() or not zone.strip():\n        raise ValueError(\"name and delivery zone required\")\n    return repo.insert(\"residents\", {\"name\": name, \"zone\": zone, \"active\": True, \"points\": 0})\n\ndef require_active(repo, resident_id):\n    row = repo.get(\"residents\", resident_id)\n    if row is None or not row[\"active\"]:\n        raise ValueError(\"resident inactive or missing\")\n    return row\n",
+      "sha256_text_lf": "0a12da178bc2553d2d6870f9f1d47c8e1007143e0dfa132a9bf59d3346ee20e6",
+      "bytes": 482
+    },
+    {
+      "path": "modules/catalog/service.py",
+      "text": "\"\"\"Synthetic saleable catalog and freeze action.\"\"\"\ndef list_saleable(repo):\n    return repo.find(\"catalog\", lambda row: row[\"saleable\"])\n\ndef require_saleable(repo, product_id):\n    row = repo.get(\"catalog\", product_id)\n    if row is None or not row[\"saleable\"]:\n        raise ValueError(\"product unavailable\")\n    return row\n\ndef freeze(repo, product_id):\n    row = repo.get(\"catalog\", product_id)\n    if row is None:\n        raise ValueError(\"product missing\")\n    row[\"saleable\"] = False\n",
+      "sha256_text_lf": "716128fffb555e1799834f1d43cb9ac56e3ffbce7ecd660a17625fb887404044",
+      "bytes": 492
+    },
+    {
+      "path": "modules/pricing/service.py",
+      "text": "\"\"\"Synthetic integer-cent pricing without a tax engine.\"\"\"\ndef subtotal(lines):\n    for line in lines:\n        if type(line[\"unit_cents\"]) is not int or line[\"unit_cents\"] <= 0:\n            raise ValueError(\"positive integer cents required\")\n    return sum(line[\"unit_cents\"] * line[\"quantity\"] for line in lines)\n",
+      "sha256_text_lf": "e214b1b17647ad8361bfff8f8a1bfa1dc6653c26dcf0a812a6d90df9d7065284",
+      "bytes": 314
+    },
+    {
+      "path": "modules/carts/service.py",
+      "text": "\"\"\"Synthetic cart lines indexed by resident and product.\"\"\"\ndef put(repo, resident_id, product_id, quantity):\n    if type(quantity) is not int or quantity <= 0:\n        raise ValueError(\"positive integer quantity required\")\n    rows = repo.find(\"cart_lines\", lambda row: row[\"resident_id\"] == resident_id and row[\"product_id\"] == product_id)\n    if rows:\n        rows[0][\"quantity\"] = quantity\n        return rows[0]\n    return repo.insert(\"cart_lines\", {\"resident_id\": resident_id, \"product_id\": product_id, \"quantity\": quantity})\n\ndef lines_for(repo, resident_id):\n    return repo.find(\"cart_lines\", lambda row: row[\"resident_id\"] == resident_id)\n",
+      "sha256_text_lf": "e39d14d8e996d5e2368b1252dfab92864362cc9d54f5ae52389d02bc3b8e3d09",
+      "bytes": 649
+    },
+    {
+      "path": "modules/coupons/service.py",
+      "text": "\"\"\"Synthetic owner-bound fixed discounts; expiry equal to now is accepted.\"\"\"\ndef discount(repo, coupon_id, resident_id, amount, now):\n    if coupon_id is None:\n        return 0\n    row = repo.get(\"coupons\", coupon_id)\n    if row is None or row[\"resident_id\"] != resident_id or not row[\"active\"]:\n        raise ValueError(\"coupon unavailable\")\n    if row[\"expires_at\"] < now or amount < row[\"minimum_cents\"]:\n        raise ValueError(\"coupon condition not met\")\n    return min(amount, row[\"discount_cents\"])\n",
+      "sha256_text_lf": "5eea21195ae55c360c5e0ccf57113f2c6feadf7e8652eb5927fc8c4696683a84",
+      "bytes": 508
+    },
+    {
+      "path": "modules/inventory/service.py",
+      "text": "\"\"\"Synthetic available/reserved counters; caller supplies transaction.\"\"\"\ndef stock(repo, product_id):\n    rows = repo.find(\"inventory\", lambda row: row[\"product_id\"] == product_id)\n    if not rows:\n        raise ValueError(\"stock missing\")\n    return rows[0]\n\ndef reserve(repo, product_id, quantity):\n    row = stock(repo, product_id)\n    if row[\"available\"] < quantity:\n        raise ValueError(\"stock insufficient\")\n    row[\"available\"] -= quantity\n    row[\"reserved\"] += quantity\n\ndef release(repo, product_id, quantity):\n    row = stock(repo, product_id)\n    if row[\"reserved\"] < quantity:\n        raise ValueError(\"reserved stock insufficient\")\n    row[\"reserved\"] -= quantity\n    row[\"available\"] += quantity\n\ndef consume(repo, product_id, quantity):\n    row = stock(repo, product_id)\n    if row[\"reserved\"] < quantity:\n        raise ValueError(\"reserved stock insufficient\")\n    row[\"reserved\"] -= quantity\n",
+      "sha256_text_lf": "4b3263457d36a80b20eaff2317d0634ae4bc95a634ddf0764a34e084b51b6d64",
+      "bytes": 915
+    },
+    {
+      "path": "modules/orders/service.py",
+      "text": "\"\"\"Synthetic order orchestration, not an executed business system.\"\"\"\nfrom modules.residents.service import require_active\nfrom modules.carts.service import lines_for\nfrom modules.catalog.service import require_saleable\nfrom modules.pricing.service import subtotal\nfrom modules.coupons.service import discount\nfrom modules.inventory import service as inventory\nfrom modules.invoices import service as invoices\nfrom modules.loyalty import service as loyalty\nfrom modules.refunds import service as refunds\nfrom modules.outbox import service as outbox\n\ndef place(repo, resident_id, now, coupon_id=None):\n    resident = require_active(repo, resident_id)\n    cart = lines_for(repo, resident_id)\n    if not cart:\n        raise ValueError(\"empty cart\")\n    lines = []\n    merchants = set()\n    for item in cart:\n        product = require_saleable(repo, item[\"product_id\"])\n        merchants.add(product[\"merchant_id\"])\n        lines.append({\"product_id\": product[\"id\"], \"quantity\": item[\"quantity\"], \"unit_cents\": product[\"price_cents\"]})\n    if len(merchants) != 1:\n        raise ValueError(\"one merchant per order\")\n    amount = subtotal(lines)\n    amount -= discount(repo, coupon_id, resident_id, amount, now)\n    with repo.transaction():\n        for line in lines:\n            inventory.reserve(repo, line[\"product_id\"], line[\"quantity\"])\n        order = repo.insert(\"orders\", {\"resident_id\": resident_id, \"merchant_id\": next(iter(merchants)), \"zone\": resident[\"zone\"], \"status\": \"reserved\", \"payment_state\": \"unpaid\", \"total_cents\": amount, \"created_at\": now, \"lines\": lines})\n        invoices.create(repo, order[\"id\"], amount)\n        loyalty.prepare(repo, order[\"id\"], resident_id, amount)\n        outbox.enqueue(repo, \"order_created\", order[\"id\"])\n    return order[\"id\"]\n\ndef cancel(repo, order_id, now):\n    with repo.transaction():\n        order = repo.get(\"orders\", order_id)\n        if order is None:\n            raise ValueError(\"order missing\")\n        if order[\"status\"] != \"reserved\":\n            raise ValueError(\"order cannot be cancelled\")\n        for line in order[\"lines\"]:\n            inventory.release(repo, line[\"product_id\"], line[\"quantity\"])\n        order[\"status\"] = \"cancelled\"\n        order[\"cancelled_at\"] = now\n        if order[\"payment_state\"] == \"captured\":\n            refunds.issue(repo, order_id, order[\"total_cents\"])\n        invoices.void(repo, order_id)\n        outbox.enqueue(repo, \"order_cancelled\", order_id)\n    return \"cancelled\"\n",
+      "sha256_text_lf": "a137c2bb5059b50fcb570667e905bc378112e7cef70b04005ed12014a98e4a15",
+      "bytes": 2468
+    }
+  ]
+}

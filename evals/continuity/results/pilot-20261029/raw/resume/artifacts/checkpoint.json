@@ -1,0 +1,4808 @@
+{
+  "schema_version": 2,
+  "checkpoint_id": "RESUME-SYNTHETIC-SHOP-1.1-R2",
+  "artifact_revision": "r2",
+  "date": "2026-10-29",
+  "task": "材料变化后的定向接续：更新4.3、流程图源、测试计划、画像、主张与接续；仍为静态说明。",
+  "workspace_root": "C:\\Users\\13671\\.codex\\visualizations\\2026\\10\\28\\01a182cf-e7e0-79b3-8535-f72c94173f77\\batch3-runtime\\resume",
+  "source_root": "C:\\Users\\13671\\.codex\\visualizations\\2026\\10\\28\\01a182cf-e7e0-79b3-8535-f72c94173f77\\batch3-runtime\\resume\\project",
+  "artifact_root": "C:\\Users\\13671\\.codex\\visualizations\\2026\\10\\28\\01a182cf-e7e0-79b3-8535-f72c94173f77\\batch3-runtime\\resume\\artifacts",
+  "authorization": {
+    "synthetic_only": true,
+    "no_network": true,
+    "no_project_execution_or_import": true,
+    "no_dependency_installation": true,
+    "no_real_user_questions": true,
+    "project_read_only": true,
+    "project_access_only_via_trusted_material_reader": true
+  },
+  "confirmed_positioning": {
+    "topic": "社区订货配送",
+    "level": "计算机本科软件设计与实现",
+    "focus": [
+      "实际业务规则",
+      "跨模块调用",
+      "状态及本地账目变化",
+      "实现边界"
+    ],
+    "authoritative_format": "Markdown",
+    "confirmed": true,
+    "interview_needed": false,
+    "sources": [
+      {
+        "path": "thesis/positioning.md",
+        "sha256": "15ac46cfc6e87aec8f99b799fae1867e2c2c2d3c77b29b3cd2393be6fed8abc6",
+        "hash_mode": "text-lf",
+        "locator": "whole file"
+      },
+      {
+        "path": "thesis/outline.md",
+        "sha256": "da81dac466f047b94470c558e53bfb6602fa893dbca0a7480ed1b471b8e6e8c6",
+        "hash_mode": "text-lf",
+        "locator": "whole file"
+      }
+    ]
+  },
+  "outline": {
+    "4.1": "服务组织与入口",
+    "4.2": "商品及库存准备",
+    "4.3": "订单创建与取消",
+    "4.4": "配送、售后与维护处理",
+    "current_scope": "只写4.3；完整分析覆盖4.4关联模块，正文仅取边界和维护取消连接。"
+  },
+  "source_revision": {
+    "value": "synthetic-shop-1.1",
+    "source": {
+      "path": "registry.py",
+      "sha256": "c5430f094049367f301d5a1397edf98587a19c42d4b1d39d99b09d9cf31a8af9",
+      "hash_mode": "text-lf",
+      "locator": "REVISION"
+    },
+    "previous_value": "synthetic-shop-1.0",
+    "git_state": "未取得Git提交或运行发布基线。"
+  },
+  "evidence_scope": {
+    "full_business_coverage": true,
+    "business_modules": 21,
+    "all_inventory_paths_model_read": false,
+    "runtime_executed": false,
+    "business_tests_executed": false,
+    "sql_executed": false,
+    "deployed": false,
+    "third_party_sources": false,
+    "claims_status": "静态已核实，非运行成功结论",
+    "coverage_basis": "跨会话静态接续：20个既有模块及28份同指纹材料复用记录，orders/registry重新全文核查，recalls新增核查；不是本轮全量重读。",
+    "current_round_model_read_paths": [
+      "modules/orders/service.py",
+      "registry.py",
+      "modules/recalls/service.py"
+    ],
+    "inherited_business_modules": 20,
+    "new_business_modules": 1
+  },
+  "inventory_baseline": {
+    "path": "inventory-current.json",
+    "report_status": "listed",
+    "files": [
+      {
+        "path": "README.md",
+        "bytes": 769,
+        "mtime_ns": 1793285969936604000,
+        "sha256": "4a1a988c9246b8778d392bccfe6fc5b77ebbfc69b365092a85eb4b5d18aa9be4",
+        "hash_mode": "text-lf"
+      },
+      {
+        "path": "app.py",
+        "bytes": 288,
+        "mtime_ns": 1793285969937136900,
+        "sha256": "9db2699d41808c4685544f373e260748974e54c1feefd44bdd6a5e9cc9425a96",
+        "hash_mode": "text-lf"
+      },
+      {
+        "path": "jobs/runner.py",
+        "bytes": 418,
+        "mtime_ns": 1793285969939500300,
+        "sha256": "e5ff87258ea422afd0976380bea8ab95128c1c7ecfd95d9ff0c25bf266b74377",
+        "hash_mode": "text-lf"
+      },
+      {
+        "path": "modules/carts/service.py",
+        "bytes": 649,
+        "mtime_ns": 1793285969944507000,
+        "sha256": "e39d14d8e996d5e2368b1252dfab92864362cc9d54f5ae52389d02bc3b8e3d09",
+        "hash_mode": "text-lf"
+      },
+      {
+        "path": "modules/catalog/service.py",
+        "bytes": 492,
+        "mtime_ns": 1793285969942499000,
+        "sha256": "716128fffb555e1799834f1d43cb9ac56e3ffbce7ecd660a17625fb887404044",
+        "hash_mode": "text-lf"
+      },
+      {
+        "path": "modules/coupons/service.py",
+        "bytes": 508,
+        "mtime_ns": 1793285969945507200,
+        "sha256": "5eea21195ae55c360c5e0ccf57113f2c6feadf7e8652eb5927fc8c4696683a84",
+        "hash_mode": "text-lf"
+      },
+      {
+        "path": "modules/delivery/service.py",
+        "bytes": 748,
+        "mtime_ns": 1793286016418181800,
+        "sha256": "71f81db95b134f355c74a30086b89b55d11945d7491a3f6de6afa5432e776456",
+        "hash_mode": "text-lf"
+      },
+      {
+        "path": "modules/inventory/service.py",
+        "bytes": 915,
+        "mtime_ns": 1793285969946507100,
+        "sha256": "4b3263457d36a80b20eaff2317d0634ae4bc95a634ddf0764a34e084b51b6d64",
+        "hash_mode": "text-lf"
+      },
+      {
+        "path": "modules/invoices/service.py",
+        "bytes": 524,
+        "mtime_ns": 1793285969948508100,
+        "sha256": "766bbd0432a83c99eab85c5ff3f37972714b952093ac10d2bc382ec7efb32026",
+        "hash_mode": "text-lf"
+      },
+      {
+        "path": "modules/loyalty/service.py",
+        "bytes": 691,
+        "mtime_ns": 1793286016422187900,
+        "sha256": "73b17841fbc9ca74c35e8c39596c2f50c542c460cd16cc8122edbda257be4268",
+        "hash_mode": "text-lf"
+      },
+      {
+        "path": "modules/notifications/service.py",
+        "bytes": 382,
+        "mtime_ns": 1793286016420188400,
+        "sha256": "b3e675aa84c87ff63b74d9ed2e7e68f17ad90378c110c51f8f9219ef9bdf976c",
+        "hash_mode": "text-lf"
+      },
+      {
+        "path": "modules/orders/service.py",
+        "bytes": 2485,
+        "mtime_ns": 1793286889310742500,
+        "sha256": "dd2003646e5ed74471f4bd26f9cdca058b5cfb571558330d2b585c20934125ca",
+        "hash_mode": "text-lf"
+      },
+      {
+        "path": "modules/outbox/service.py",
+        "bytes": 745,
+        "mtime_ns": 1793286016421188500,
+        "sha256": "64b32fe0b68974c85e72f7c51a7f338684139ed2bfc21e0f7d0515f8c6334594",
+        "hash_mode": "text-lf"
+      },
+      {
+        "path": "modules/packing/service.py",
+        "bytes": 548,
+        "mtime_ns": 1793286016415708100,
+        "sha256": "20708fd703dc69aafa5a94d9804805b99a8fbf87da00f7977e5694c09b5dfce2",
+        "hash_mode": "text-lf"
+      },
+      {
+        "path": "modules/payments/service.py",
+        "bytes": 593,
+        "mtime_ns": 1793285969947508300,
+        "sha256": "911c7b72c3a6d4321117376d3dae4bf587237a1ff84ad6441e161c45bacf9e8e",
+        "hash_mode": "text-lf"
+      },
+      {
+        "path": "modules/picking/service.py",
+        "bytes": 446,
+        "mtime_ns": 1793285969949509900,
+        "sha256": "fee0cddea17a1208bcfbe39b94a18c2a83f398dfe9dee0cc3e4a763e6230130a",
+        "hash_mode": "text-lf"
+      },
+      {
+        "path": "modules/pricing/service.py",
+        "bytes": 314,
+        "mtime_ns": 1793285969943498500,
+        "sha256": "e214b1b17647ad8361bfff8f8a1bfa1dc6653c26dcf0a812a6d90df9d7065284",
+        "hash_mode": "text-lf"
+      },
+      {
+        "path": "modules/recalls/service.py",
+        "bytes": 655,
+        "mtime_ns": 1793286889314236200,
+        "sha256": "dd1703c8c0a7b19b970ef9b020bbe50a341ce25405ed661fe36df3c90fa2f1e3",
+        "hash_mode": "text-lf"
+      },
+      {
+        "path": "modules/recovery/service.py",
+        "bytes": 702,
+        "mtime_ns": 1793286016423188700,
+        "sha256": "7e994358c2bb3acf410b378d80996311d838544ac29e2d633e13bb1ed6fbaaca",
+        "hash_mode": "text-lf"
+      },
+      {
+        "path": "modules/refunds/service.py",
+        "bytes": 986,
+        "mtime_ns": 1793286016419187500,
+        "sha256": "9f4a44678901facc1ac968e7d3429b9888b57517abeb08e262a523190a6ae332",
+        "hash_mode": "text-lf"
+      },
+      {
+        "path": "modules/residents/service.py",
+        "bytes": 482,
+        "mtime_ns": 1793285969942499000,
+        "sha256": "0a12da178bc2553d2d6870f9f1d47c8e1007143e0dfa132a9bf59d3346ee20e6",
+        "hash_mode": "text-lf"
+      },
+      {
+        "path": "modules/returns/service.py",
+        "bytes": 603,
+        "mtime_ns": 1793286016418181800,
+        "sha256": "18ffdc0d974ff28b78be39df22c33fdc128f73a173f0c0562c76deee3023fa93",
+        "hash_mode": "text-lf"
+      },
+      {
+        "path": "modules/settlements/service.py",
+        "bytes": 711,
+        "mtime_ns": 1793286016423188700,
+        "sha256": "8fc0dcf0d5807c8bd6d7eadd3400bf78e010eb131819462de4037b7700eb91ca",
+        "hash_mode": "text-lf"
+      },
+      {
+        "path": "modules/shipping/service.py",
+        "bytes": 825,
+        "mtime_ns": 1793286016417030900,
+        "sha256": "e05da7d83471ec46f3634d4b0777f2c36ea73aaae28a898d849ec0374c074677",
+        "hash_mode": "text-lf"
+      },
+      {
+        "path": "project.json",
+        "bytes": 221,
+        "mtime_ns": 1793285969937136900,
+        "sha256": "2c0af21d0be62ec16729efe828db19c0d1de29927952b98119e8d7bdf8ce95c7",
+        "hash_mode": "text-lf"
+      },
+      {
+        "path": "registry.py",
+        "bytes": 1358,
+        "mtime_ns": 1793286889312740600,
+        "sha256": "c5430f094049367f301d5a1397edf98587a19c42d4b1d39d99b09d9cf31a8af9",
+        "hash_mode": "text-lf"
+      },
+      {
+        "path": "schema.sql",
+        "bytes": 1656,
+        "mtime_ns": 1793285969940498400,
+        "sha256": "74c8492546575e19aa48afc9472a3e1121271b82e4f341a8b527e2348c458b12",
+        "hash_mode": "text-lf"
+      },
+      {
+        "path": "store.py",
+        "bytes": 1136,
+        "mtime_ns": 1793285969939500300,
+        "sha256": "e8d26766d28a229ed2dce47fdce0487ce5e03777560c58ec3d79642ab5eab110",
+        "hash_mode": "text-lf"
+      },
+      {
+        "path": "task.md",
+        "bytes": 1575,
+        "mtime_ns": 1793286016426062400,
+        "sha256": "48a332166f39c35505bb6c7a0a8c7c8fa258202f524163f8fe8c31d0c7647c7d",
+        "hash_mode": "text-lf"
+      },
+      {
+        "path": "thesis/outline.md",
+        "bytes": 253,
+        "mtime_ns": 1793286016426062400,
+        "sha256": "da81dac466f047b94470c558e53bfb6602fa893dbca0a7480ed1b471b8e6e8c6",
+        "hash_mode": "text-lf"
+      },
+      {
+        "path": "thesis/positioning.md",
+        "bytes": 532,
+        "mtime_ns": 1793286016424677800,
+        "sha256": "15ac46cfc6e87aec8f99b799fae1867e2c2c2d3c77b29b3cd2393be6fed8abc6",
+        "hash_mode": "text-lf"
+      }
+    ],
+    "excluded": [],
+    "skipped": [],
+    "findings": [],
+    "default_excluded_names": [
+      ".git",
+      ".mypy_cache",
+      ".pytest_cache",
+      ".tox",
+      ".venv",
+      "__pycache__",
+      "build",
+      "dist",
+      "node_modules",
+      "venv"
+    ],
+    "scope_note": "本轮语义复核完成后登记为新接续基线；旧基线保留。非原子扫描。"
+  },
+  "reading_measurement": {
+    "inventory_calls": 1,
+    "inventory_hash_disk_reads": 31,
+    "inventory_hash_bytes": 23210,
+    "inventory_model_content_reads": 0,
+    "content_reader_batches": 1,
+    "content_reader_unique_paths": 3,
+    "content_reader_file_events": 3,
+    "content_reader_bytes": 4498,
+    "repeated_project_content_reads": 0,
+    "previous_raw_wrapper_outputs_reused": [
+      "store.py",
+      "modules/catalog/service.py",
+      "modules/inventory/service.py",
+      "modules/refunds/service.py",
+      "modules/picking/service.py",
+      "modules/packing/service.py",
+      "modules/shipping/service.py",
+      "modules/recovery/service.py"
+    ],
+    "prior_outputs_reuse_reason": "核对冻结、释放、退款、packing/出库边界、维护筛选和新增外层快照语义；这些8份不是本轮project内容读取事件。",
+    "unchanged_paths_restored_without_current_wrapper_read": [
+      "README.md",
+      "app.py",
+      "jobs/runner.py",
+      "modules/carts/service.py",
+      "modules/catalog/service.py",
+      "modules/coupons/service.py",
+      "modules/delivery/service.py",
+      "modules/inventory/service.py",
+      "modules/invoices/service.py",
+      "modules/loyalty/service.py",
+      "modules/notifications/service.py",
+      "modules/outbox/service.py",
+      "modules/packing/service.py",
+      "modules/payments/service.py",
+      "modules/picking/service.py",
+      "modules/pricing/service.py",
+      "modules/recovery/service.py",
+      "modules/refunds/service.py",
+      "modules/residents/service.py",
+      "modules/returns/service.py",
+      "modules/settlements/service.py",
+      "modules/shipping/service.py",
+      "project.json",
+      "schema.sql",
+      "store.py",
+      "task.md",
+      "thesis/outline.md",
+      "thesis/positioning.md"
+    ],
+    "log": "../read-log.jsonl",
+    "distinction": "一次清单哈希31份磁盘读取；一次--read使模型实际读取3份全文；previous文本和规则另计。",
+    "previous_source_cache_model_fulltext_paths_count": 8,
+    "previous_source_cache_python_loaded_files": [
+      "previous/read-01-positioning.json",
+      "previous/read-02-core.json",
+      "previous/read-03-order-chain.json",
+      "previous/read-04-ledgers-maintenance.json",
+      "previous/read-05-fulfilment.json"
+    ],
+    "source_reading_scope_note": "本轮当前源码全文3份，模型还重读8份旧原文缓存及orders/registry旧差异片段；不能将wrapper3份作为全部模型源码阅读。缓存解析层加载5份JSON内的全部旧30份文本。见read-scope.json逐路径理由。"
+  },
+  "sources": [
+    {
+      "path": "README.md",
+      "sha256": "4a1a988c9246b8778d392bccfe6fc5b77ebbfc69b365092a85eb4b5d18aa9be4",
+      "hash_mode": "text-lf",
+      "locator": "全文；行范围1-7",
+      "bytes": 769,
+      "mtime_ns": 1793285969936604000,
+      "model_read_status": "inherited_previous_full_read_current_hash_equal",
+      "reader_artifact": "../previous/read-02-core.json",
+      "source_claim_ids": [
+        "C-CONTEXT-001"
+      ]
+    },
+    {
+      "path": "app.py",
+      "sha256": "9db2699d41808c4685544f373e260748974e54c1feefd44bdd6a5e9cc9425a96",
+      "hash_mode": "text-lf",
+      "locator": "全文；行范围1-7",
+      "bytes": 288,
+      "mtime_ns": 1793285969937136900,
+      "model_read_status": "inherited_previous_full_read_current_hash_equal",
+      "reader_artifact": "../previous/read-02-core.json",
+      "source_claim_ids": [
+        "C-CONTEXT-001"
+      ]
+    },
+    {
+      "path": "jobs/runner.py",
+      "sha256": "e5ff87258ea422afd0976380bea8ab95128c1c7ecfd95d9ff0c25bf266b74377",
+      "hash_mode": "text-lf",
+      "locator": "全文；行范围1-10",
+      "bytes": 418,
+      "mtime_ns": 1793285969939500300,
+      "model_read_status": "inherited_previous_full_read_current_hash_equal",
+      "reader_artifact": "../previous/read-02-core.json",
+      "source_claim_ids": [
+        "C-ORD-006",
+        "C-RECOVERY-001"
+      ]
+    },
+    {
+      "path": "modules/carts/service.py",
+      "sha256": "e39d14d8e996d5e2368b1252dfab92864362cc9d54f5ae52389d02bc3b8e3d09",
+      "hash_mode": "text-lf",
+      "locator": "全文；行范围1-12",
+      "bytes": 649,
+      "mtime_ns": 1793285969944507000,
+      "model_read_status": "inherited_previous_full_read_current_hash_equal",
+      "reader_artifact": "../previous/read-03-order-chain.json",
+      "source_claim_ids": [
+        "C-PRICE-001",
+        "C-CART-001"
+      ]
+    },
+    {
+      "path": "modules/catalog/service.py",
+      "sha256": "716128fffb555e1799834f1d43cb9ac56e3ffbce7ecd660a17625fb887404044",
+      "hash_mode": "text-lf",
+      "locator": "全文；行范围1-15",
+      "bytes": 492,
+      "mtime_ns": 1793285969942499000,
+      "model_read_status": "inherited_previous_full_read_current_hash_equal",
+      "reader_artifact": "../previous/read-03-order-chain.json",
+      "source_claim_ids": [
+        "C-CAT-001",
+        "C-ORD-001",
+        "C-RECALL-001"
+      ]
+    },
+    {
+      "path": "modules/coupons/service.py",
+      "sha256": "5eea21195ae55c360c5e0ccf57113f2c6feadf7e8652eb5927fc8c4696683a84",
+      "hash_mode": "text-lf",
+      "locator": "全文；行范围1-10",
+      "bytes": 508,
+      "mtime_ns": 1793285969945507200,
+      "model_read_status": "inherited_previous_full_read_current_hash_equal",
+      "reader_artifact": "../previous/read-03-order-chain.json",
+      "source_claim_ids": [
+        "C-COUPON-001",
+        "C-ORD-002",
+        "C-ORD-007",
+        "C-ORD-008"
+      ]
+    },
+    {
+      "path": "modules/delivery/service.py",
+      "sha256": "71f81db95b134f355c74a30086b89b55d11945d7491a3f6de6afa5432e776456",
+      "hash_mode": "text-lf",
+      "locator": "全文；行范围1-17",
+      "bytes": 748,
+      "mtime_ns": 1793286016418181800,
+      "model_read_status": "inherited_previous_full_read_current_hash_equal",
+      "reader_artifact": "../previous/read-05-fulfilment.json",
+      "source_claim_ids": [
+        "C-DELIVERY-001",
+        "C-LOYALTY-001",
+        "C-SETTLE-001"
+      ]
+    },
+    {
+      "path": "modules/inventory/service.py",
+      "sha256": "4b3263457d36a80b20eaff2317d0634ae4bc95a634ddf0764a34e084b51b6d64",
+      "hash_mode": "text-lf",
+      "locator": "全文；行范围1-26",
+      "bytes": 915,
+      "mtime_ns": 1793285969946507100,
+      "model_read_status": "inherited_previous_full_read_current_hash_equal",
+      "reader_artifact": "../previous/read-03-order-chain.json",
+      "source_claim_ids": [
+        "C-INV-001",
+        "C-ORD-004",
+        "C-FULFILL-002"
+      ]
+    },
+    {
+      "path": "modules/invoices/service.py",
+      "sha256": "766bbd0432a83c99eab85c5ff3f37972714b952093ac10d2bc382ec7efb32026",
+      "hash_mode": "text-lf",
+      "locator": "全文；行范围1-11",
+      "bytes": 524,
+      "mtime_ns": 1793285969948508100,
+      "model_read_status": "inherited_previous_full_read_current_hash_equal",
+      "reader_artifact": "../previous/read-04-ledgers-maintenance.json",
+      "source_claim_ids": [
+        "C-ORD-003",
+        "C-ORD-004",
+        "C-INVOICE-001"
+      ]
+    },
+    {
+      "path": "modules/loyalty/service.py",
+      "sha256": "73b17841fbc9ca74c35e8c39596c2f50c542c460cd16cc8122edbda257be4268",
+      "hash_mode": "text-lf",
+      "locator": "全文；行范围1-13",
+      "bytes": 691,
+      "mtime_ns": 1793286016422187900,
+      "model_read_status": "inherited_previous_full_read_current_hash_equal",
+      "reader_artifact": "../previous/read-04-ledgers-maintenance.json",
+      "source_claim_ids": [
+        "C-ORD-003",
+        "C-ORD-007",
+        "C-DELIVERY-001",
+        "C-LOYALTY-001"
+      ]
+    },
+    {
+      "path": "modules/notifications/service.py",
+      "sha256": "b3e675aa84c87ff63b74d9ed2e7e68f17ad90378c110c51f8f9219ef9bdf976c",
+      "hash_mode": "text-lf",
+      "locator": "全文；行范围1-7",
+      "bytes": 382,
+      "mtime_ns": 1793286016420188400,
+      "model_read_status": "inherited_previous_full_read_current_hash_equal",
+      "reader_artifact": "../previous/read-04-ledgers-maintenance.json",
+      "source_claim_ids": [
+        "C-ORD-006",
+        "C-NOTIFY-001"
+      ]
+    },
+    {
+      "path": "modules/orders/service.py",
+      "sha256": "dd2003646e5ed74471f4bd26f9cdca058b5cfb571558330d2b585c20934125ca",
+      "hash_mode": "text-lf",
+      "locator": "全文；行范围1-52",
+      "bytes": 2485,
+      "mtime_ns": 1793286889310742500,
+      "model_read_status": "full_text_read_current_round_after_diff",
+      "reader_artifact": "read-01-changes.json",
+      "source_claim_ids": [
+        "C-PRICE-001",
+        "C-CART-001",
+        "C-COUPON-001",
+        "C-ORD-001",
+        "C-ORD-002",
+        "C-ORD-003",
+        "C-ORD-004",
+        "C-ORD-005",
+        "C-ORD-007",
+        "C-ORD-008",
+        "C-REFUND-001",
+        "C-LOYALTY-001",
+        "C-RECALL-001",
+        "C-RECALL-002"
+      ],
+      "previous_sha256": "a137c2bb5059b50fcb570667e905bc378112e7cef70b04005ed12014a98e4a15"
+    },
+    {
+      "path": "modules/outbox/service.py",
+      "sha256": "64b32fe0b68974c85e72f7c51a7f338684139ed2bfc21e0f7d0515f8c6334594",
+      "hash_mode": "text-lf",
+      "locator": "全文；行范围1-18",
+      "bytes": 745,
+      "mtime_ns": 1793286016421188500,
+      "model_read_status": "inherited_previous_full_read_current_hash_equal",
+      "reader_artifact": "../previous/read-04-ledgers-maintenance.json",
+      "source_claim_ids": [
+        "C-ORD-003",
+        "C-ORD-004",
+        "C-ORD-006",
+        "C-OUTBOX-001"
+      ]
+    },
+    {
+      "path": "modules/packing/service.py",
+      "sha256": "20708fd703dc69aafa5a94d9804805b99a8fbf87da00f7977e5694c09b5dfce2",
+      "hash_mode": "text-lf",
+      "locator": "全文；行范围1-9",
+      "bytes": 548,
+      "mtime_ns": 1793286016415708100,
+      "model_read_status": "inherited_previous_full_read_current_hash_equal",
+      "reader_artifact": "../previous/read-05-fulfilment.json",
+      "source_claim_ids": [
+        "C-ORD-007",
+        "C-FULFILL-001"
+      ]
+    },
+    {
+      "path": "modules/payments/service.py",
+      "sha256": "911c7b72c3a6d4321117376d3dae4bf587237a1ff84ad6441e161c45bacf9e8e",
+      "hash_mode": "text-lf",
+      "locator": "全文；行范围1-11",
+      "bytes": 593,
+      "mtime_ns": 1793285969947508300,
+      "model_read_status": "inherited_previous_full_read_current_hash_equal",
+      "reader_artifact": "../previous/read-04-ledgers-maintenance.json",
+      "source_claim_ids": [
+        "C-ORD-005",
+        "C-ORD-008",
+        "C-PAY-001"
+      ]
+    },
+    {
+      "path": "modules/picking/service.py",
+      "sha256": "fee0cddea17a1208bcfbe39b94a18c2a83f398dfe9dee0cc3e4a763e6230130a",
+      "hash_mode": "text-lf",
+      "locator": "全文；行范围1-9",
+      "bytes": 446,
+      "mtime_ns": 1793285969949509900,
+      "model_read_status": "inherited_previous_full_read_current_hash_equal",
+      "reader_artifact": "../previous/read-05-fulfilment.json",
+      "source_claim_ids": [
+        "C-ORD-004",
+        "C-ORD-007",
+        "C-FULFILL-001"
+      ]
+    },
+    {
+      "path": "modules/pricing/service.py",
+      "sha256": "e214b1b17647ad8361bfff8f8a1bfa1dc6653c26dcf0a812a6d90df9d7065284",
+      "hash_mode": "text-lf",
+      "locator": "全文；行范围1-6",
+      "bytes": 314,
+      "mtime_ns": 1793285969943498500,
+      "model_read_status": "inherited_previous_full_read_current_hash_equal",
+      "reader_artifact": "../previous/read-03-order-chain.json",
+      "source_claim_ids": [
+        "C-PRICE-001",
+        "C-ORD-002"
+      ]
+    },
+    {
+      "path": "modules/recovery/service.py",
+      "sha256": "7e994358c2bb3acf410b378d80996311d838544ac29e2d633e13bb1ed6fbaaca",
+      "hash_mode": "text-lf",
+      "locator": "全文；行范围1-13",
+      "bytes": 702,
+      "mtime_ns": 1793286016423188700,
+      "model_read_status": "inherited_previous_full_read_current_hash_equal",
+      "reader_artifact": "../previous/read-04-ledgers-maintenance.json",
+      "source_claim_ids": [
+        "C-ORD-006",
+        "C-RECOVERY-001",
+        "C-RECALL-002"
+      ]
+    },
+    {
+      "path": "modules/refunds/service.py",
+      "sha256": "9f4a44678901facc1ac968e7d3429b9888b57517abeb08e262a523190a6ae332",
+      "hash_mode": "text-lf",
+      "locator": "全文；行范围1-16",
+      "bytes": 986,
+      "mtime_ns": 1793286016419187500,
+      "model_read_status": "inherited_previous_full_read_current_hash_equal",
+      "reader_artifact": "../previous/read-04-ledgers-maintenance.json",
+      "source_claim_ids": [
+        "C-ORD-005",
+        "C-ORD-008",
+        "C-RETURN-001",
+        "C-REFUND-001"
+      ]
+    },
+    {
+      "path": "modules/residents/service.py",
+      "sha256": "0a12da178bc2553d2d6870f9f1d47c8e1007143e0dfa132a9bf59d3346ee20e6",
+      "hash_mode": "text-lf",
+      "locator": "全文；行范围1-11",
+      "bytes": 482,
+      "mtime_ns": 1793285969942499000,
+      "model_read_status": "inherited_previous_full_read_current_hash_equal",
+      "reader_artifact": "../previous/read-03-order-chain.json",
+      "source_claim_ids": [
+        "C-RES-001",
+        "C-ORD-001"
+      ]
+    },
+    {
+      "path": "modules/returns/service.py",
+      "sha256": "18ffdc0d974ff28b78be39df22c33fdc128f73a173f0c0562c76deee3023fa93",
+      "hash_mode": "text-lf",
+      "locator": "全文；行范围1-13",
+      "bytes": 603,
+      "mtime_ns": 1793286016418181800,
+      "model_read_status": "inherited_previous_full_read_current_hash_equal",
+      "reader_artifact": "../previous/read-05-fulfilment.json",
+      "source_claim_ids": [
+        "C-RETURN-001"
+      ]
+    },
+    {
+      "path": "modules/settlements/service.py",
+      "sha256": "8fc0dcf0d5807c8bd6d7eadd3400bf78e010eb131819462de4037b7700eb91ca",
+      "hash_mode": "text-lf",
+      "locator": "全文；行范围1-13",
+      "bytes": 711,
+      "mtime_ns": 1793286016423188700,
+      "model_read_status": "inherited_previous_full_read_current_hash_equal",
+      "reader_artifact": "../previous/read-05-fulfilment.json",
+      "source_claim_ids": [
+        "C-DELIVERY-001",
+        "C-SETTLE-001"
+      ]
+    },
+    {
+      "path": "modules/shipping/service.py",
+      "sha256": "e05da7d83471ec46f3634d4b0777f2c36ea73aaae28a898d849ec0374c074677",
+      "hash_mode": "text-lf",
+      "locator": "全文；行范围1-16",
+      "bytes": 825,
+      "mtime_ns": 1793286016417030900,
+      "model_read_status": "inherited_previous_full_read_current_hash_equal",
+      "reader_artifact": "../previous/read-05-fulfilment.json",
+      "source_claim_ids": [
+        "C-FULFILL-002"
+      ]
+    },
+    {
+      "path": "project.json",
+      "sha256": "2c0af21d0be62ec16729efe828db19c0d1de29927952b98119e8d7bdf8ce95c7",
+      "hash_mode": "text-lf",
+      "locator": "全文；行范围1-8",
+      "bytes": 221,
+      "mtime_ns": 1793285969937136900,
+      "model_read_status": "inherited_previous_full_read_current_hash_equal",
+      "reader_artifact": "../previous/read-02-core.json",
+      "source_claim_ids": [
+        "C-ORD-006",
+        "C-OUTBOX-001",
+        "C-RECOVERY-001"
+      ]
+    },
+    {
+      "path": "registry.py",
+      "sha256": "c5430f094049367f301d5a1397edf98587a19c42d4b1d39d99b09d9cf31a8af9",
+      "hash_mode": "text-lf",
+      "locator": "全文；行范围1-33",
+      "bytes": 1358,
+      "mtime_ns": 1793286889312740600,
+      "model_read_status": "full_text_read_current_round_after_diff",
+      "reader_artifact": "read-01-changes.json",
+      "source_claim_ids": [
+        "C-CONTEXT-001",
+        "C-ORD-001",
+        "C-ORD-007",
+        "C-REFUND-001",
+        "C-RECALL-001"
+      ],
+      "previous_sha256": "fed5ae6a5ab24a6760d24c488337babda19dd36b9e035867c9019c61788d3389"
+    },
+    {
+      "path": "schema.sql",
+      "sha256": "74c8492546575e19aa48afc9472a3e1121271b82e4f341a8b527e2348c458b12",
+      "hash_mode": "text-lf",
+      "locator": "全文；行范围1-16",
+      "bytes": 1656,
+      "mtime_ns": 1793285969940498400,
+      "model_read_status": "inherited_previous_full_read_current_hash_equal",
+      "reader_artifact": "../previous/read-02-core.json",
+      "source_claim_ids": [
+        "C-STORE-001"
+      ]
+    },
+    {
+      "path": "store.py",
+      "sha256": "e8d26766d28a229ed2dce47fdce0487ce5e03777560c58ec3d79642ab5eab110",
+      "hash_mode": "text-lf",
+      "locator": "全文；行范围1-33",
+      "bytes": 1136,
+      "mtime_ns": 1793285969939500300,
+      "model_read_status": "inherited_previous_full_read_current_hash_equal",
+      "reader_artifact": "../previous/read-02-core.json",
+      "source_claim_ids": [
+        "C-STORE-001",
+        "C-ORD-003",
+        "C-ORD-008",
+        "C-RECALL-002"
+      ]
+    },
+    {
+      "path": "task.md",
+      "sha256": "48a332166f39c35505bb6c7a0a8c7c8fa258202f524163f8fe8c31d0c7647c7d",
+      "hash_mode": "text-lf",
+      "locator": "全文；行范围1-11",
+      "bytes": 1575,
+      "mtime_ns": 1793286016426062400,
+      "model_read_status": "inherited_previous_full_read_current_hash_equal",
+      "reader_artifact": "../previous/read-02-core.json",
+      "source_claim_ids": []
+    },
+    {
+      "path": "thesis/outline.md",
+      "sha256": "da81dac466f047b94470c558e53bfb6602fa893dbca0a7480ed1b471b8e6e8c6",
+      "hash_mode": "text-lf",
+      "locator": "全文；行范围1-9",
+      "bytes": 253,
+      "mtime_ns": 1793286016426062400,
+      "model_read_status": "inherited_previous_full_read_current_hash_equal",
+      "reader_artifact": "../previous/read-01-positioning.json",
+      "source_claim_ids": []
+    },
+    {
+      "path": "thesis/positioning.md",
+      "sha256": "15ac46cfc6e87aec8f99b799fae1867e2c2c2d3c77b29b3cd2393be6fed8abc6",
+      "hash_mode": "text-lf",
+      "locator": "全文；行范围1-5",
+      "bytes": 532,
+      "mtime_ns": 1793286016424677800,
+      "model_read_status": "inherited_previous_full_read_current_hash_equal",
+      "reader_artifact": "../previous/read-01-positioning.json",
+      "source_claim_ids": [
+        "C-CONTEXT-001"
+      ]
+    },
+    {
+      "path": "modules/recalls/service.py",
+      "sha256": "dd1703c8c0a7b19b970ef9b020bbe50a341ce25405ed661fe36df3c90fa2f1e3",
+      "hash_mode": "text-lf",
+      "locator": "全文；行范围1-13",
+      "bytes": 655,
+      "mtime_ns": 1793286889314236200,
+      "model_read_status": "new_source_full_text_read_current_round",
+      "reader_artifact": "read-01-changes.json",
+      "source_claim_ids": [
+        "C-RECALL-001",
+        "C-RECALL-002"
+      ]
+    }
+  ],
+  "modules": [
+    {
+      "module_id": "M-RESIDENTS",
+      "name": "residents",
+      "source": {
+        "path": "modules/residents/service.py",
+        "sha256": "0a12da178bc2553d2d6870f9f1d47c8e1007143e0dfa132a9bf59d3346ee20e6",
+        "hash_mode": "text-lf",
+        "locator": "whole file"
+      },
+      "responsibility": "居民资料创建及活动状态前置判断；不提供身份认证",
+      "functions": [
+        "register",
+        "require_active"
+      ],
+      "entries": [
+        "registry.py ROUTES[POST /residents] -> register",
+        "modules/orders/service.py place -> require_active"
+      ],
+      "key_connections": [
+        "orders.place 读取居民活动状态与配送 zone",
+        "loyalty.grant 更新居民 points"
+      ],
+      "data": [
+        "residents: name, zone, active, points"
+      ],
+      "confirmed_rules": [
+        "register 拒绝 strip 后为空的姓名/区域，写 active=True、points=0",
+        "require_active 拒绝缺失或 active=False"
+      ],
+      "coverage": "inherited_full_static_read_current_hash_equal",
+      "evidence_type": "source_implementation_not_executed",
+      "open_items": [
+        "无认证、角色或调用人凭证；字符串类型等输入未统一校验"
+      ],
+      "claim_ids": [
+        "C-RES-001",
+        "C-ORD-001"
+      ]
+    },
+    {
+      "module_id": "M-CATALOG",
+      "name": "catalog",
+      "source": {
+        "path": "modules/catalog/service.py",
+        "sha256": "716128fffb555e1799834f1d43cb9ac56e3ffbce7ecd660a17625fb887404044",
+        "hash_mode": "text-lf",
+        "locator": "whole file"
+      },
+      "responsibility": "可售商品查询、下单可售校验及冻结",
+      "functions": [
+        "list_saleable",
+        "require_saleable",
+        "freeze"
+      ],
+      "entries": [
+        "registry.py ROUTES[GET /catalog] -> list_saleable",
+        "orders.place -> require_saleable",
+        "recalls.apply -> freeze；召回公开映射间接调用"
+      ],
+      "key_connections": [
+        "orders.place 从商品读取 merchant_id、price_cents 并冻结到订单行",
+        "inventory 以 product_id 关联商品",
+        "recalls.apply在外层快照内freeze，影响后续place可售判断"
+      ],
+      "data": [
+        "catalog: saleable, merchant_id, price_cents"
+      ],
+      "confirmed_rules": [
+        "require_saleable 拒绝缺失/不可售商品",
+        "freeze 将 saleable=False"
+      ],
+      "coverage": "inherited_full_static_read_current_hash_equal",
+      "evidence_type": "source_implementation_not_executed",
+      "open_items": [
+        "没有商品/库存初始化的公开入口；种子数据需后续准备"
+      ],
+      "claim_ids": [
+        "C-CAT-001",
+        "C-ORD-002"
+      ]
+    },
+    {
+      "module_id": "M-PRICING",
+      "name": "pricing",
+      "source": {
+        "path": "modules/pricing/service.py",
+        "sha256": "e214b1b17647ad8361bfff8f8a1bfa1dc6653c26dcf0a812a6d90df9d7065284",
+        "hash_mode": "text-lf",
+        "locator": "whole file"
+      },
+      "responsibility": "逐行检查单价并计算整数分小计",
+      "functions": [
+        "subtotal"
+      ],
+      "entries": [
+        "orders.place -> subtotal"
+      ],
+      "key_connections": [
+        "商品当前单价和购物车数量组成 lines -> subtotal -> coupons.discount"
+      ],
+      "data": [
+        "order.lines: product_id, quantity, unit_cents"
+      ],
+      "confirmed_rules": [
+        "type(unit_cents) 必须是 int 且 >0；返回单价乘数量之和",
+        "此函数不复核 quantity"
+      ],
+      "coverage": "inherited_full_static_read_current_hash_equal",
+      "evidence_type": "source_implementation_not_executed",
+      "open_items": [
+        "没有税费引擎；订单创建依赖 cart.put 的数量校验或可信数据"
+      ],
+      "claim_ids": [
+        "C-PRICE-001",
+        "C-ORD-002"
+      ]
+    },
+    {
+      "module_id": "M-CARTS",
+      "name": "carts",
+      "source": {
+        "path": "modules/carts/service.py",
+        "sha256": "e39d14d8e996d5e2368b1252dfab92864362cc9d54f5ae52389d02bc3b8e3d09",
+        "hash_mode": "text-lf",
+        "locator": "whole file"
+      },
+      "responsibility": "按居民/商品写入或替换购物车数量，读取居民全部行",
+      "functions": [
+        "put",
+        "lines_for"
+      ],
+      "entries": [
+        "registry.py ROUTES[POST /cart-lines] -> put",
+        "orders.place -> lines_for"
+      ],
+      "key_connections": [
+        "orders.place 消费购物车快照但不删除 cart_lines"
+      ],
+      "data": [
+        "cart_lines: resident_id, product_id, quantity"
+      ],
+      "confirmed_rules": [
+        "数量必须 type is int 且 >0；已有配对行只更新首行",
+        "put 不检查居民 active 或商品 saleable"
+      ],
+      "coverage": "inherited_full_static_read_current_hash_equal",
+      "evidence_type": "source_implementation_not_executed",
+      "open_items": [
+        "无清空动作、唯一性物理约束或提交幂等键"
+      ],
+      "claim_ids": [
+        "C-CART-001",
+        "C-ORD-007"
+      ]
+    },
+    {
+      "module_id": "M-COUPONS",
+      "name": "coupons",
+      "source": {
+        "path": "modules/coupons/service.py",
+        "sha256": "5eea21195ae55c360c5e0ccf57113f2c6feadf7e8652eb5927fc8c4696683a84",
+        "hash_mode": "text-lf",
+        "locator": "whole file"
+      },
+      "responsibility": "居民归属、活动、到期和门槛判断后的定额抵扣",
+      "functions": [
+        "discount"
+      ],
+      "entries": [
+        "orders.place -> discount"
+      ],
+      "key_connections": [
+        "接收 pricing.subtotal 的金额；返回抵扣额供 place 扣减"
+      ],
+      "data": [
+        "coupons: resident_id, active, expires_at, minimum_cents, discount_cents"
+      ],
+      "confirmed_rules": [
+        "None 返回0；归属不符、停用/缺失拒绝",
+        "expires_at < now 才过期；amount < minimum_cents 才不足门槛",
+        "返回 min(amount, discount_cents)，不消费或停用券"
+      ],
+      "coverage": "inherited_full_static_read_current_hash_equal",
+      "evidence_type": "source_implementation_not_executed",
+      "open_items": [
+        "折扣字段正负等数据约束未统一校验；不存在券领取/配置入口"
+      ],
+      "claim_ids": [
+        "C-COUPON-001",
+        "C-ORD-007"
+      ]
+    },
+    {
+      "module_id": "M-INVENTORY",
+      "name": "inventory",
+      "source": {
+        "path": "modules/inventory/service.py",
+        "sha256": "4b3263457d36a80b20eaff2317d0634ae4bc95a634ddf0764a34e084b51b6d64",
+        "hash_mode": "text-lf",
+        "locator": "whole file"
+      },
+      "responsibility": "在调用方边界中调整 available/reserved 计数",
+      "functions": [
+        "stock",
+        "reserve",
+        "release",
+        "consume"
+      ],
+      "entries": [
+        "orders.place -> reserve",
+        "orders.cancel -> release",
+        "shipping.dispatch -> consume"
+      ],
+      "key_connections": [
+        "按 product_id 查首条库存行",
+        "place 扣 available 加 reserved；cancel 反向；shipping 只扣 reserved"
+      ],
+      "data": [
+        "inventory: product_id, available, reserved"
+      ],
+      "confirmed_rules": [
+        "stock 缺失拒绝；reserve 检查 available >= quantity",
+        "release/consume 检查 reserved >= quantity"
+      ],
+      "coverage": "inherited_full_static_read_current_hash_equal",
+      "evidence_type": "source_implementation_not_executed",
+      "open_items": [
+        "无锁；数量类型/正数依赖调用链；单商品重复库存行未统一约束"
+      ],
+      "claim_ids": [
+        "C-INV-001",
+        "C-ORD-003",
+        "C-ORD-004"
+      ]
+    },
+    {
+      "module_id": "M-ORDERS",
+      "name": "orders",
+      "source": {
+        "path": "modules/orders/service.py",
+        "sha256": "dd2003646e5ed74471f4bd26f9cdca058b5cfb571558330d2b585c20934125ca",
+        "hash_mode": "text-lf",
+        "locator": "whole file",
+        "previous_sha256": "a137c2bb5059b50fcb570667e905bc378112e7cef70b04005ed12014a98e4a15"
+      },
+      "responsibility": "创建和取消的跨模块编排",
+      "functions": [
+        "place",
+        "cancel"
+      ],
+      "entries": [
+        "registry.py ROUTES[POST /orders] -> place",
+        "registry.py ROUTES[POST /orders/cancel] -> cancel",
+        "recovery.run -> cancel",
+        "recalls.apply -> cancel"
+      ],
+      "key_connections": [
+        "place -> residents/carts/catalog/pricing/coupons -> transaction -> inventory/invoices/loyalty/outbox",
+        "cancel -> transaction -> inventory.release -> status cancelled -> captured 时 refunds.issue -> invoices.void -> outbox.enqueue"
+      ],
+      "data": [
+        "orders: resident_id, merchant_id, zone, status, payment_state, total_cents, created_at, lines, cancelled_at"
+      ],
+      "confirmed_rules": [
+        "空购物车拒绝；全部商品可售且 merchant_id 集合恰为1",
+        "创建 reserved/unpaid，返回 id",
+        "取消允许 reserved或packing，不以是否付款决定可取消性，返回 cancelled"
+      ],
+      "coverage": "full_static_content_rechecked_current_round",
+      "evidence_type": "source_implementation_not_executed",
+      "open_items": [
+        "cancel 无操作者/居民参数和归属判断",
+        "place 不清购物车/消费券，不做幂等或数量二次校验",
+        "取消不调用 loyalty，pending积分及已有picks/packages留存"
+      ],
+      "claim_ids": [
+        "C-ORD-001",
+        "C-ORD-002",
+        "C-ORD-003",
+        "C-ORD-004",
+        "C-ORD-005",
+        "C-ORD-007"
+      ]
+    },
+    {
+      "module_id": "M-PAYMENTS",
+      "name": "payments",
+      "source": {
+        "path": "modules/payments/service.py",
+        "sha256": "911c7b72c3a6d4321117376d3dae4bf587237a1ff84ad6441e161c45bacf9e8e",
+        "hash_mode": "text-lf",
+        "locator": "whole file"
+      },
+      "responsibility": "本地付款账目登记",
+      "functions": [
+        "capture"
+      ],
+      "entries": [
+        "registry.py ROUTES[POST /payments/capture] -> capture"
+      ],
+      "key_connections": [
+        "orders reserved/unpaid -> captured，供 picking 和 cancel 读取",
+        "refunds 更新 payment.refunded_cents"
+      ],
+      "data": [
+        "payments: order_id, amount_cents, refunded_cents",
+        "orders.payment_state"
+      ],
+      "confirmed_rules": [
+        "在 transaction 内检查订单存在、reserved/unpaid、金额等于 total_cents",
+        "插入 refunded_cents=0 后改 captured；无正金额单独判断"
+      ],
+      "coverage": "inherited_full_static_read_current_hash_equal",
+      "evidence_type": "source_implementation_not_executed",
+      "open_items": [
+        "无支付网关；金额类型只由相等比较限制；可接受匹配的零金额"
+      ],
+      "claim_ids": [
+        "C-PAY-001",
+        "C-ORD-005"
+      ]
+    },
+    {
+      "module_id": "M-INVOICES",
+      "name": "invoices",
+      "source": {
+        "path": "modules/invoices/service.py",
+        "sha256": "766bbd0432a83c99eab85c5ff3f37972714b952093ac10d2bc382ec7efb32026",
+        "hash_mode": "text-lf",
+        "locator": "whole file"
+      },
+      "responsibility": "创建本地账单及取消时置无效",
+      "functions": [
+        "create",
+        "void"
+      ],
+      "entries": [
+        "orders.place -> create",
+        "orders.cancel -> void"
+      ],
+      "key_connections": [
+        "和订单、库存、积分、事件共同处于调用方 transaction 内"
+      ],
+      "data": [
+        "invoices: order_id, amount_cents, status"
+      ],
+      "confirmed_rules": [
+        "create 应用层拒绝同订单已存在账单；插入 issued",
+        "void 拒绝缺失账单，首条改 void"
+      ],
+      "coverage": "inherited_full_static_read_current_hash_equal",
+      "evidence_type": "source_implementation_not_executed",
+      "open_items": [
+        "并非税务发票接入；SQL UNIQUE 只属草稿"
+      ],
+      "claim_ids": [
+        "C-INVOICE-001",
+        "C-ORD-003",
+        "C-ORD-004"
+      ]
+    },
+    {
+      "module_id": "M-PICKING",
+      "name": "picking",
+      "source": {
+        "path": "modules/picking/service.py",
+        "sha256": "fee0cddea17a1208bcfbe39b94a18c2a83f398dfe9dee0cc3e4a763e6230130a",
+        "hash_mode": "text-lf",
+        "locator": "whole file"
+      },
+      "responsibility": "已付款预留订单的拣货完成",
+      "functions": [
+        "complete"
+      ],
+      "entries": [
+        "registry.py ROUTES[POST /picking] -> complete"
+      ],
+      "key_connections": [
+        "读取 orders reserved/captured -> 插 picks done -> order packing，衔接 packing.complete"
+      ],
+      "data": [
+        "picks: order_id, status",
+        "orders.status"
+      ],
+      "confirmed_rules": [
+        "缺单、非 reserved 或非 captured 拒绝；写操作有 transaction"
+      ],
+      "coverage": "inherited_full_static_read_current_hash_equal",
+      "evidence_type": "source_implementation_not_executed",
+      "open_items": [
+        "无拣货人员认证或实际仓库交互"
+      ],
+      "claim_ids": [
+        "C-FULFILL-001",
+        "C-ORD-004"
+      ]
+    },
+    {
+      "module_id": "M-PACKING",
+      "name": "packing",
+      "source": {
+        "path": "modules/packing/service.py",
+        "sha256": "20708fd703dc69aafa5a94d9804805b99a8fbf87da00f7977e5694c09b5dfce2",
+        "hash_mode": "text-lf",
+        "locator": "whole file"
+      },
+      "responsibility": "有拣货记录后生成包装记录",
+      "functions": [
+        "complete"
+      ],
+      "entries": [
+        "registry.py ROUTES[POST /packing] -> complete"
+      ],
+      "key_connections": [
+        "读取 orders packing、picks done -> 插 packages packed -> shipping.dispatch"
+      ],
+      "data": [
+        "packages: order_id, status"
+      ],
+      "confirmed_rules": [
+        "缺单/非 packing/无 done 拣货拒绝；已有任意 packages 行拒绝重复",
+        "不改订单 packing 状态；自身无 transaction"
+      ],
+      "coverage": "inherited_full_static_read_current_hash_equal",
+      "evidence_type": "source_implementation_not_executed",
+      "open_items": [
+        "无物理包装设备或运输适配器"
+      ],
+      "claim_ids": [
+        "C-FULFILL-001"
+      ]
+    },
+    {
+      "module_id": "M-SHIPPING",
+      "name": "shipping",
+      "source": {
+        "path": "modules/shipping/service.py",
+        "sha256": "e05da7d83471ec46f3634d4b0777f2c36ea73aaae28a898d849ec0374c074677",
+        "hash_mode": "text-lf",
+        "locator": "whole file"
+      },
+      "responsibility": "出库消耗预留并生成运输记录与事件",
+      "functions": [
+        "dispatch"
+      ],
+      "entries": [
+        "registry.py ROUTES[POST /shipping] -> dispatch"
+      ],
+      "key_connections": [
+        "transaction: packing + packed -> inventory.consume 每行 -> orders shipped -> shipments in_transit -> outbox order_shipped"
+      ],
+      "data": [
+        "orders.status",
+        "inventory.reserved",
+        "shipments: order_id, zone, status",
+        "outbox"
+      ],
+      "confirmed_rules": [
+        "订单/包装前置失败拒绝；shipment.zone 来自订单 zone"
+      ],
+      "coverage": "inherited_full_static_read_current_hash_equal",
+      "evidence_type": "source_implementation_not_executed",
+      "open_items": [
+        "无外部承运商 API；不代表物流已实际发运"
+      ],
+      "claim_ids": [
+        "C-FULFILL-002"
+      ]
+    },
+    {
+      "module_id": "M-DELIVERY",
+      "name": "delivery",
+      "source": {
+        "path": "modules/delivery/service.py",
+        "sha256": "71f81db95b134f355c74a30086b89b55d11945d7491a3f6de6afa5432e776456",
+        "hash_mode": "text-lf",
+        "locator": "whole file"
+      },
+      "responsibility": "按运输单保存区域确认交付并触发本地账目",
+      "functions": [
+        "confirm"
+      ],
+      "entries": [
+        "registry.py ROUTES[POST /delivery/confirm] -> confirm"
+      ],
+      "key_connections": [
+        "transaction: shipment in_transit + zone匹配 + order shipped -> 二者 delivered -> loyalty.grant -> settlements.accrue"
+      ],
+      "data": [
+        "shipments.status",
+        "orders.status",
+        "residents.points",
+        "loyalty.status",
+        "settlements"
+      ],
+      "confirmed_rules": [
+        "区域不匹配或状态不符拒绝；后续 grant/accrue 异常由 Store 回滚"
+      ],
+      "coverage": "inherited_full_static_read_current_hash_equal",
+      "evidence_type": "source_implementation_not_executed",
+      "open_items": [
+        "区域字符串相等不是认证或真实签收证明"
+      ],
+      "claim_ids": [
+        "C-DELIVERY-001",
+        "C-LOYALTY-001",
+        "C-SETTLE-001"
+      ]
+    },
+    {
+      "module_id": "M-RETURNS",
+      "name": "returns",
+      "source": {
+        "path": "modules/returns/service.py",
+        "sha256": "18ffdc0d974ff28b78be39df22c33fdc128f73a173f0c0562c76deee3023fa93",
+        "hash_mode": "text-lf",
+        "locator": "whole file"
+      },
+      "responsibility": "已交付订单的退货申请和审批记录",
+      "functions": [
+        "request",
+        "approve"
+      ],
+      "entries": [
+        "registry.py ROUTES[POST /returns] -> request",
+        "registry.py ROUTES[POST /returns/approve] -> approve"
+      ],
+      "key_connections": [
+        "approved 退货记录作为 refunds.issue 的另一许可条件"
+      ],
+      "data": [
+        "returns: order_id, reason, status"
+      ],
+      "confirmed_rules": [
+        "request 要求 order delivered 且非空原因，写 requested",
+        "approve 仅 requested -> approved；不改订单状态、不自动退款或补库存"
+      ],
+      "coverage": "inherited_full_static_read_current_hash_equal",
+      "evidence_type": "source_implementation_not_executed",
+      "open_items": [
+        "无审批人鉴权；可重复申请；无积分/结算冲销联动"
+      ],
+      "claim_ids": [
+        "C-RETURN-001"
+      ]
+    },
+    {
+      "module_id": "M-REFUNDS",
+      "name": "refunds",
+      "source": {
+        "path": "modules/refunds/service.py",
+        "sha256": "9f4a44678901facc1ac968e7d3429b9888b57517abeb08e262a523190a6ae332",
+        "hash_mode": "text-lf",
+        "locator": "whole file"
+      },
+      "responsibility": "校验取消/已批准退货与本地已付余额并记退款",
+      "functions": [
+        "issue"
+      ],
+      "entries": [
+        "registry.py ROUTES[POST /refunds] -> issue",
+        "orders.cancel 在 order 改 cancelled 后 -> issue"
+      ],
+      "key_connections": [
+        "读取 returns approved 或 orders cancelled；读取首条 payments -> 更新 refunded_cents -> 全额时 orders.payment_state refunded -> 插 refunds"
+      ],
+      "data": [
+        "payments.refunded_cents",
+        "orders.payment_state",
+        "refunds: order_id, amount_cents"
+      ],
+      "confirmed_rules": [
+        "金额必须 type is int 且 >0；付款存在；不超过 amount_cents-refunded_cents",
+        "只有全额退尽才改 refunded；自身无 transaction，由调用方控制"
+      ],
+      "coverage": "inherited_full_static_read_current_hash_equal",
+      "evidence_type": "source_implementation_not_executed",
+      "open_items": [
+        "公开路由直接调用没有外层 transaction；无外部退款网络",
+        "零元 captured 的取消在退款处失败，外层回滚"
+      ],
+      "claim_ids": [
+        "C-REFUND-001",
+        "C-ORD-005",
+        "C-ORD-008"
+      ]
+    },
+    {
+      "module_id": "M-NOTIFICATIONS",
+      "name": "notifications",
+      "source": {
+        "path": "modules/notifications/service.py",
+        "sha256": "b3e675aa84c87ff63b74d9ed2e7e68f17ad90378c110c51f8f9219ef9bdf976c",
+        "hash_mode": "text-lf",
+        "locator": "whole file"
+      },
+      "responsibility": "三类事件消息格式化并调用外部传入 transport",
+      "functions": [
+        "send"
+      ],
+      "entries": [
+        "outbox.deliver_pending -> send"
+      ],
+      "key_connections": [
+        "TEMPLATES 含 order_created/order_cancelled/order_shipped；send -> transport.send"
+      ],
+      "data": [
+        "event.kind, order_id；不直接写库"
+      ],
+      "confirmed_rules": [
+        "transport None 抛 OSError；否则发送 order_id 和消息文本"
+      ],
+      "coverage": "inherited_full_static_read_current_hash_equal",
+      "evidence_type": "source_implementation_not_executed",
+      "open_items": [
+        "没有可用 transport 实现；未知模板的 KeyError 不被 outbox 的 OSError 捕获"
+      ],
+      "claim_ids": [
+        "C-NOTIFY-001",
+        "C-ORD-006"
+      ]
+    },
+    {
+      "module_id": "M-OUTBOX",
+      "name": "outbox",
+      "source": {
+        "path": "modules/outbox/service.py",
+        "sha256": "64b32fe0b68974c85e72f7c51a7f338684139ed2bfc21e0f7d0515f8c6334594",
+        "hash_mode": "text-lf",
+        "locator": "whole file"
+      },
+      "responsibility": "本地事件入队、限批/限次数投递",
+      "functions": [
+        "enqueue",
+        "deliver_pending"
+      ],
+      "entries": [
+        "orders.place/cancel、shipping.dispatch -> enqueue",
+        "recovery.run -> deliver_pending"
+      ],
+      "key_connections": [
+        "enqueue pending/attempts0；deliver_pending -> notifications.send；按事件 id 升序"
+      ],
+      "data": [
+        "outbox: kind, order_id, status, attempts"
+      ],
+      "confirmed_rules": [
+        "只选 pending 且 attempts < max_attempts，取前 limit",
+        "成功 attempts+1/sent；OSError attempts+1 保持 pending；返回选中数量而非成功数"
+      ],
+      "coverage": "inherited_full_static_read_current_hash_equal",
+      "evidence_type": "source_implementation_not_executed",
+      "open_items": [
+        "次数耗尽仍 pending 但不再入选；非 OSError 中断；无去重/幂等保证"
+      ],
+      "claim_ids": [
+        "C-OUTBOX-001",
+        "C-ORD-006"
+      ]
+    },
+    {
+      "module_id": "M-LOYALTY",
+      "name": "loyalty",
+      "source": {
+        "path": "modules/loyalty/service.py",
+        "sha256": "73b17841fbc9ca74c35e8c39596c2f50c542c460cd16cc8122edbda257be4268",
+        "hash_mode": "text-lf",
+        "locator": "whole file"
+      },
+      "responsibility": "按实付订单金额准备积分，交付时入居民账户",
+      "functions": [
+        "prepare",
+        "grant"
+      ],
+      "entries": [
+        "orders.place -> prepare",
+        "delivery.confirm -> grant"
+      ],
+      "key_connections": [
+        "prepare amount_cents//100 -> loyalty pending；grant delivered+首条pending -> residents.points加分、posted",
+        "orders.cancel 未调用该模块"
+      ],
+      "data": [
+        "loyalty: order_id, resident_id, points, status",
+        "residents.points"
+      ],
+      "confirmed_rules": [
+        "grant 非 delivered 或无 pending 拒绝；prepare 没有重复/唯一性检查"
+      ],
+      "coverage": "inherited_full_static_read_current_hash_equal",
+      "evidence_type": "source_implementation_not_executed",
+      "open_items": [
+        "取消保留 pending 记录；售后未冲销积分"
+      ],
+      "claim_ids": [
+        "C-LOYALTY-001",
+        "C-ORD-003",
+        "C-ORD-007"
+      ]
+    },
+    {
+      "module_id": "M-SETTLEMENTS",
+      "name": "settlements",
+      "source": {
+        "path": "modules/settlements/service.py",
+        "sha256": "8fc0dcf0d5807c8bd6d7eadd3400bf78e010eb131819462de4037b7700eb91ca",
+        "hash_mode": "text-lf",
+        "locator": "whole file"
+      },
+      "responsibility": "交付时生成商户待结算记录，按商户记账关闭",
+      "functions": [
+        "accrue",
+        "close"
+      ],
+      "entries": [
+        "delivery.confirm -> accrue",
+        "registry.py ROUTES[POST /settlements/close] -> close"
+      ],
+      "key_connections": [
+        "accrue delivered -> settlements pending 金额=order.total_cents；close 同商户pending求和->booked"
+      ],
+      "data": [
+        "settlements: order_id, merchant_id, amount_cents, status"
+      ],
+      "confirmed_rules": [
+        "accrue 要求 delivered；close 返回本批总金额；无银行划转"
+      ],
+      "coverage": "inherited_full_static_read_current_hash_equal",
+      "evidence_type": "source_implementation_not_executed",
+      "open_items": [
+        "accrue 自身不去重；售后/退款没有结算冲销"
+      ],
+      "claim_ids": [
+        "C-SETTLE-001"
+      ]
+    },
+    {
+      "module_id": "M-RECOVERY",
+      "name": "recovery",
+      "source": {
+        "path": "modules/recovery/service.py",
+        "sha256": "7e994358c2bb3acf410b378d80996311d838544ac29e2d633e13bb1ed6fbaaca",
+        "hash_mode": "text-lf",
+        "locator": "whole file"
+      },
+      "responsibility": "配置绑定的维护入口，超时取消后尝试投递事件",
+      "functions": [
+        "run"
+      ],
+      "entries": [
+        "project.json job_handlers.maintenance -> modules.recovery.service:run",
+        "app.application -> jobs.runner.task_registry；jobs.runner.invoke 动态装载 -> run"
+      ],
+      "key_connections": [
+        "按 created_at < now-reservation_minutes*60 且 status reserved 选单，id升序 orders.cancel",
+        "取消循环全部完成后 outbox.deliver_pending(outbox_batch,max_delivery_attempts,transport)"
+      ],
+      "data": [
+        "orders/inventory/payments/refunds/invoices/outbox，间接更新"
+      ],
+      "confirmed_rules": [
+        "默认30分钟；等于cutoff不处理；不筛 payment_state",
+        "无调度器；单个 cancel 抛错会中断循环和后续通知；已完成的前序取消独立保留"
+      ],
+      "coverage": "inherited_full_static_read_current_hash_equal",
+      "evidence_type": "source_implementation_not_executed",
+      "open_items": [
+        "无自动定时运行证据；需要显式调用和 transport；maintenance 非全批原子事务"
+      ],
+      "claim_ids": [
+        "C-RECOVERY-001",
+        "C-ORD-006"
+      ]
+    },
+    {
+      "module_id": "M-RECALLS",
+      "name": "recalls",
+      "source": {
+        "path": "modules/recalls/service.py",
+        "sha256": "dd1703c8c0a7b19b970ef9b020bbe50a341ce25405ed661fe36df3c90fa2f1e3",
+        "hash_mode": "text-lf",
+        "locator": "apply全文"
+      },
+      "responsibility": "商品冻结与未出库匹配订单的整批取消",
+      "functions": [
+        "apply"
+      ],
+      "entries": [
+        "registry.py ROUTES[POST /catalog/recall] -> apply"
+      ],
+      "key_connections": [
+        "apply外层transaction -> catalog.freeze -> find含目标商品的reserved/packing订单 -> ID升序orders.cancel整单 -> 返回product_id/cancelled",
+        "cancel的内层异常继续传播至外层，恢复冻结及前序成功取消；维护无该外层"
+      ],
+      "data": [
+        "catalog.saleable",
+        "orders及cancel涉及的库存/付款/退款/账单/outbox；rows/sequence外层快照"
+      ],
+      "confirmed_rules": [
+        "任一行含目标商品且status在reserved/packing才匹配",
+        "整单取消而非仅目标行",
+        "无匹配仍冻结并返回空列表；商品缺失抛错",
+        "任一Exception恢复召回整批"
+      ],
+      "coverage": "new_module_full_static_content_read_current_round",
+      "evidence_type": "source_implementation_not_executed",
+      "open_items": [
+        "无运行召回证据/外部通知/认证/持久化/并发保证",
+        "cancel保留pending积分与已有picks/packages"
+      ],
+      "claim_ids": [
+        "C-RECALL-001",
+        "C-RECALL-002"
+      ]
+    }
+  ],
+  "infrastructure_and_materials": [
+    {
+      "path": "README.md",
+      "type": "document_declaration",
+      "role": "合成材料性质、静态边界和源码优先说明；无运行结果"
+    },
+    {
+      "path": "app.py",
+      "type": "source_implementation",
+      "role": "application 返回 revision、routes、配置任务字典与注入 repository；非 HTTP 服务器"
+    },
+    {
+      "path": "registry.py",
+      "type": "source_implementation",
+      "role": "REVISION=synthetic-shop-1.1；15 条字符串路由到模块函数映射；没有网络/鉴权层"
+    },
+    {
+      "path": "jobs/runner.py",
+      "type": "source_implementation",
+      "role": "task_registry 返回配置映射；invoke 按模块:函数动态分派，传 repo/config/now/transport；不是 scheduler"
+    },
+    {
+      "path": "store.py",
+      "type": "source_implementation",
+      "role": "16 个列表表与序号；get/find 返回行引用；insert 分配序号；transaction 深拷贝 rows+sequence，捕获 Exception 时整体替换并重抛；无 SQL、锁或持久性"
+    },
+    {
+      "path": "schema.sql",
+      "type": "sql_design_draft",
+      "role": "15张设计表；customer_order.resident_id REFERENCES resident(id)，invoice.order_id 与 loyalty.order_id UNIQUE；与内存结构独立，不被 Store 执行。SQL order_line 与内存 orders.lines 不同"
+    },
+    {
+      "path": "project.json",
+      "type": "configuration_declaration",
+      "role": "currency=CNY-cents；reservation_minutes=30；maintenance绑定；outbox_batch=20；max_delivery_attempts=3；配置存在不等于已运行"
+    },
+    {
+      "path": "task.md",
+      "type": "task_document",
+      "role": "旧任务材料；本轮以工作目录外层task.md为准，无实现证据"
+    },
+    {
+      "path": "thesis/positioning.md",
+      "type": "confirmed_positioning",
+      "role": "计算机本科社区订货配送；静态源码/配置/SQL；Markdown主稿；不再访谈"
+    },
+    {
+      "path": "thesis/outline.md",
+      "type": "confirmed_outline",
+      "role": "第四章4.1服务入口、4.2商品库存、4.3创建取消、4.4配送售后维护；本轮只写4.3"
+    }
+  ],
+  "key_connections": [
+    {
+      "connection_id": "M-RESIDENTS-K1",
+      "description": "orders.place 读取居民活动状态与配送 zone",
+      "source_path": "modules/residents/service.py",
+      "claim_ids": [
+        "C-RES-001",
+        "C-ORD-001"
+      ]
+    },
+    {
+      "connection_id": "M-RESIDENTS-K2",
+      "description": "loyalty.grant 更新居民 points",
+      "source_path": "modules/residents/service.py",
+      "claim_ids": [
+        "C-RES-001",
+        "C-ORD-001"
+      ]
+    },
+    {
+      "connection_id": "M-CATALOG-K1",
+      "description": "orders.place 从商品读取 merchant_id、price_cents 并冻结到订单行",
+      "source_path": "modules/catalog/service.py",
+      "claim_ids": [
+        "C-CAT-001",
+        "C-ORD-002"
+      ]
+    },
+    {
+      "connection_id": "M-CATALOG-K2",
+      "description": "inventory 以 product_id 关联商品",
+      "source_path": "modules/catalog/service.py",
+      "claim_ids": [
+        "C-CAT-001",
+        "C-ORD-002"
+      ]
+    },
+    {
+      "connection_id": "M-PRICING-K1",
+      "description": "商品当前单价和购物车数量组成 lines -> subtotal -> coupons.discount",
+      "source_path": "modules/pricing/service.py",
+      "claim_ids": [
+        "C-PRICE-001",
+        "C-ORD-002"
+      ]
+    },
+    {
+      "connection_id": "M-CARTS-K1",
+      "description": "orders.place 消费购物车快照但不删除 cart_lines",
+      "source_path": "modules/carts/service.py",
+      "claim_ids": [
+        "C-CART-001",
+        "C-ORD-007"
+      ]
+    },
+    {
+      "connection_id": "M-COUPONS-K1",
+      "description": "接收 pricing.subtotal 的金额；返回抵扣额供 place 扣减",
+      "source_path": "modules/coupons/service.py",
+      "claim_ids": [
+        "C-COUPON-001",
+        "C-ORD-007"
+      ]
+    },
+    {
+      "connection_id": "M-INVENTORY-K1",
+      "description": "按 product_id 查首条库存行",
+      "source_path": "modules/inventory/service.py",
+      "claim_ids": [
+        "C-INV-001",
+        "C-ORD-003",
+        "C-ORD-004"
+      ]
+    },
+    {
+      "connection_id": "M-INVENTORY-K2",
+      "description": "place 扣 available 加 reserved；cancel 反向；shipping 只扣 reserved",
+      "source_path": "modules/inventory/service.py",
+      "claim_ids": [
+        "C-INV-001",
+        "C-ORD-003",
+        "C-ORD-004"
+      ]
+    },
+    {
+      "connection_id": "M-ORDERS-K1",
+      "description": "place -> residents/carts/catalog/pricing/coupons -> transaction -> inventory/invoices/loyalty/outbox",
+      "source_path": "modules/orders/service.py",
+      "claim_ids": [
+        "C-ORD-001",
+        "C-ORD-002",
+        "C-ORD-003",
+        "C-ORD-004",
+        "C-ORD-005",
+        "C-ORD-007"
+      ]
+    },
+    {
+      "connection_id": "M-ORDERS-K2",
+      "description": "cancel -> transaction -> inventory.release -> status cancelled -> captured 时 refunds.issue -> invoices.void -> outbox.enqueue；入口接受reserved/packing；recalls.apply也是调用方",
+      "source_path": "modules/orders/service.py",
+      "claim_ids": [
+        "C-ORD-001",
+        "C-ORD-002",
+        "C-ORD-003",
+        "C-ORD-004",
+        "C-ORD-005",
+        "C-ORD-007"
+      ]
+    },
+    {
+      "connection_id": "M-PAYMENTS-K1",
+      "description": "orders reserved/unpaid -> captured，供 picking 和 cancel 读取",
+      "source_path": "modules/payments/service.py",
+      "claim_ids": [
+        "C-PAY-001",
+        "C-ORD-005"
+      ]
+    },
+    {
+      "connection_id": "M-PAYMENTS-K2",
+      "description": "refunds 更新 payment.refunded_cents",
+      "source_path": "modules/payments/service.py",
+      "claim_ids": [
+        "C-PAY-001",
+        "C-ORD-005"
+      ]
+    },
+    {
+      "connection_id": "M-INVOICES-K1",
+      "description": "和订单、库存、积分、事件共同处于调用方 transaction 内",
+      "source_path": "modules/invoices/service.py",
+      "claim_ids": [
+        "C-INVOICE-001",
+        "C-ORD-003",
+        "C-ORD-004"
+      ]
+    },
+    {
+      "connection_id": "M-PICKING-K1",
+      "description": "读取 orders reserved/captured -> 插 picks done -> order packing，衔接 packing.complete",
+      "source_path": "modules/picking/service.py",
+      "claim_ids": [
+        "C-FULFILL-001",
+        "C-ORD-004"
+      ]
+    },
+    {
+      "connection_id": "M-PACKING-K1",
+      "description": "读取 orders packing、picks done -> 插 packages packed -> shipping.dispatch",
+      "source_path": "modules/packing/service.py",
+      "claim_ids": [
+        "C-FULFILL-001"
+      ]
+    },
+    {
+      "connection_id": "M-SHIPPING-K1",
+      "description": "transaction: packing + packed -> inventory.consume 每行 -> orders shipped -> shipments in_transit -> outbox order_shipped",
+      "source_path": "modules/shipping/service.py",
+      "claim_ids": [
+        "C-FULFILL-002"
+      ]
+    },
+    {
+      "connection_id": "M-DELIVERY-K1",
+      "description": "transaction: shipment in_transit + zone匹配 + order shipped -> 二者 delivered -> loyalty.grant -> settlements.accrue",
+      "source_path": "modules/delivery/service.py",
+      "claim_ids": [
+        "C-DELIVERY-001",
+        "C-LOYALTY-001",
+        "C-SETTLE-001"
+      ]
+    },
+    {
+      "connection_id": "M-RETURNS-K1",
+      "description": "approved 退货记录作为 refunds.issue 的另一许可条件",
+      "source_path": "modules/returns/service.py",
+      "claim_ids": [
+        "C-RETURN-001"
+      ]
+    },
+    {
+      "connection_id": "M-REFUNDS-K1",
+      "description": "读取 returns approved 或 orders cancelled；读取首条 payments -> 更新 refunded_cents -> 全额时 orders.payment_state refunded -> 插 refunds",
+      "source_path": "modules/refunds/service.py",
+      "claim_ids": [
+        "C-REFUND-001",
+        "C-ORD-005",
+        "C-ORD-008"
+      ]
+    },
+    {
+      "connection_id": "M-NOTIFICATIONS-K1",
+      "description": "TEMPLATES 含 order_created/order_cancelled/order_shipped；send -> transport.send",
+      "source_path": "modules/notifications/service.py",
+      "claim_ids": [
+        "C-NOTIFY-001",
+        "C-ORD-006"
+      ]
+    },
+    {
+      "connection_id": "M-OUTBOX-K1",
+      "description": "enqueue pending/attempts0；deliver_pending -> notifications.send；按事件 id 升序",
+      "source_path": "modules/outbox/service.py",
+      "claim_ids": [
+        "C-OUTBOX-001",
+        "C-ORD-006"
+      ]
+    },
+    {
+      "connection_id": "M-LOYALTY-K1",
+      "description": "prepare amount_cents//100 -> loyalty pending；grant delivered+首条pending -> residents.points加分、posted",
+      "source_path": "modules/loyalty/service.py",
+      "claim_ids": [
+        "C-LOYALTY-001",
+        "C-ORD-003",
+        "C-ORD-007"
+      ]
+    },
+    {
+      "connection_id": "M-LOYALTY-K2",
+      "description": "orders.cancel 未调用该模块",
+      "source_path": "modules/loyalty/service.py",
+      "claim_ids": [
+        "C-LOYALTY-001",
+        "C-ORD-003",
+        "C-ORD-007"
+      ]
+    },
+    {
+      "connection_id": "M-SETTLEMENTS-K1",
+      "description": "accrue delivered -> settlements pending 金额=order.total_cents；close 同商户pending求和->booked",
+      "source_path": "modules/settlements/service.py",
+      "claim_ids": [
+        "C-SETTLE-001"
+      ]
+    },
+    {
+      "connection_id": "M-RECOVERY-K1",
+      "description": "按 created_at < now-reservation_minutes*60 且 status reserved 选单，id升序 orders.cancel",
+      "source_path": "modules/recovery/service.py",
+      "claim_ids": [
+        "C-RECOVERY-001",
+        "C-ORD-006"
+      ]
+    },
+    {
+      "connection_id": "M-RECOVERY-K2",
+      "description": "取消循环全部完成后 outbox.deliver_pending(outbox_batch,max_delivery_attempts,transport)",
+      "source_path": "modules/recovery/service.py",
+      "claim_ids": [
+        "C-RECOVERY-001",
+        "C-ORD-006"
+      ]
+    },
+    {
+      "connection_id": "M-RECALLS-K1",
+      "description": "registry召回映射 -> recalls.apply外层快照 -> catalog.freeze -> 按商品行与reserved/packing筛选 -> ID升序orders.cancel整单",
+      "source_path": "modules/recalls/service.py",
+      "claim_ids": [
+        "C-RECALL-001"
+      ]
+    },
+    {
+      "connection_id": "M-RECALLS-K2",
+      "description": "Store嵌套快照：任一cancel异常传出至apply，恢复冻结与前序成功取消；maintenance无整批快照",
+      "source_path": "modules/recalls/service.py",
+      "claim_ids": [
+        "C-RECALL-002",
+        "C-RECOVERY-001"
+      ]
+    }
+  ],
+  "entry_map": {
+    "public_route_mapping": {
+      "POST /residents": "modules/residents/service.py:register",
+      "GET /catalog": "modules/catalog/service.py:list_saleable",
+      "POST /cart-lines": "modules/carts/service.py:put",
+      "POST /orders": "modules/orders/service.py:place",
+      "POST /orders/cancel": "modules/orders/service.py:cancel",
+      "POST /payments/capture": "modules/payments/service.py:capture",
+      "POST /picking": "modules/picking/service.py:complete",
+      "POST /packing": "modules/packing/service.py:complete",
+      "POST /shipping": "modules/shipping/service.py:dispatch",
+      "POST /delivery/confirm": "modules/delivery/service.py:confirm",
+      "POST /returns": "modules/returns/service.py:request",
+      "POST /returns/approve": "modules/returns/service.py:approve",
+      "POST /refunds": "modules/refunds/service.py:issue",
+      "POST /settlements/close": "modules/settlements/service.py:close",
+      "POST /catalog/recall": "modules/recalls/service.py:apply"
+    },
+    "background": {
+      "config": "project.json:job_handlers.maintenance",
+      "runner": "jobs/runner.py:invoke",
+      "handler": "modules/recovery/service.py:run",
+      "scheduler": "absent"
+    }
+  },
+  "current_claims": [
+    {
+      "claim_id": "C-CONTEXT-001",
+      "statement": "该材料是合成社区订货配送服务；app和registry只组织函数入口，非实际HTTP/鉴权服务。",
+      "evidence_type": "static_source/config/sql_as_marked",
+      "status": "confirmed_static_not_runtime",
+      "sources": [
+        {
+          "path": "README.md",
+          "sha256": "4a1a988c9246b8778d392bccfe6fc5b77ebbfc69b365092a85eb4b5d18aa9be4",
+          "hash_mode": "text-lf",
+          "locator": "全文"
+        },
+        {
+          "path": "app.py",
+          "sha256": "9db2699d41808c4685544f373e260748974e54c1feefd44bdd6a5e9cc9425a96",
+          "hash_mode": "text-lf",
+          "locator": "application"
+        },
+        {
+          "path": "registry.py",
+          "sha256": "c5430f094049367f301d5a1397edf98587a19c42d4b1d39d99b09d9cf31a8af9",
+          "hash_mode": "text-lf",
+          "locator": "REVISION, ROUTES",
+          "previous_sha256": "fed5ae6a5ab24a6760d24c488337babda19dd36b9e035867c9019c61788d3389"
+        },
+        {
+          "path": "thesis/positioning.md",
+          "sha256": "15ac46cfc6e87aec8f99b799fae1867e2c2c2d3c77b29b3cd2393be6fed8abc6",
+          "hash_mode": "text-lf",
+          "locator": "已确认定位"
+        }
+      ],
+      "targets": [
+        {
+          "kind": "analysis",
+          "path": "analysis.md",
+          "locator": "模块覆盖表或关键连接；C-CONTEXT-001"
+        },
+        {
+          "kind": "chapter",
+          "path": "chapter.md",
+          "locator": "P43-01"
+        }
+      ],
+      "review": {
+        "initial_status": "needs_review_from_fingerprint_change",
+        "outcome": "retained_after_semantic_review",
+        "scope": [
+          "registry.py"
+        ],
+        "basis": "本轮wrapper全文与previous原始wrapper文本定向比较；其他来源指纹相同，复用原有记录。",
+        "runtime_executed": false
+      }
+    },
+    {
+      "claim_id": "C-STORE-001",
+      "statement": "Store.transaction是rows和sequence深拷贝快照；Exception时恢复并重抛，不提供SQL事务、持久化或并发锁。",
+      "evidence_type": "static_source/config/sql_as_marked",
+      "status": "confirmed_static_not_runtime",
+      "sources": [
+        {
+          "path": "store.py",
+          "sha256": "e8d26766d28a229ed2dce47fdce0487ce5e03777560c58ec3d79642ab5eab110",
+          "hash_mode": "text-lf",
+          "locator": "Store.transaction, TABLES"
+        },
+        {
+          "path": "schema.sql",
+          "sha256": "74c8492546575e19aa48afc9472a3e1121271b82e4f341a8b527e2348c458b12",
+          "hash_mode": "text-lf",
+          "locator": "首行说明及独立表定义"
+        }
+      ],
+      "targets": [
+        {
+          "kind": "analysis",
+          "path": "analysis.md",
+          "locator": "模块覆盖表或关键连接；C-STORE-001"
+        },
+        {
+          "kind": "chapter",
+          "path": "chapter.md",
+          "locator": "P43-05"
+        },
+        {
+          "kind": "chapter",
+          "path": "chapter.md",
+          "locator": "P43-07"
+        },
+        {
+          "kind": "chapter",
+          "path": "chapter.md",
+          "locator": "P43-10"
+        },
+        {
+          "kind": "figure",
+          "path": "flow.mmd",
+          "locator": "FIG-43 node PFAIL"
+        },
+        {
+          "kind": "figure",
+          "path": "flow.mmd",
+          "locator": "FIG-43 node CFAIL"
+        },
+        {
+          "kind": "figure",
+          "path": "flow.mmd",
+          "locator": "FIG-43 node P3"
+        },
+        {
+          "kind": "figure",
+          "path": "flow.mmd",
+          "locator": "FIG-43 node C1"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-10"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-16"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-17"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-24"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-34"
+        },
+        {
+          "kind": "chapter",
+          "path": "chapter.md",
+          "locator": "P43-11"
+        }
+      ]
+    },
+    {
+      "claim_id": "C-RES-001",
+      "statement": "居民注册拒绝空姓名/区域并初始化活动状态与积分；require_active供创建订单校验。",
+      "evidence_type": "static_source/config/sql_as_marked",
+      "status": "confirmed_static_not_runtime",
+      "sources": [
+        {
+          "path": "modules/residents/service.py",
+          "sha256": "0a12da178bc2553d2d6870f9f1d47c8e1007143e0dfa132a9bf59d3346ee20e6",
+          "hash_mode": "text-lf",
+          "locator": "register, require_active"
+        }
+      ],
+      "targets": [
+        {
+          "kind": "analysis",
+          "path": "analysis.md",
+          "locator": "模块覆盖表或关键连接；C-RES-001"
+        },
+        {
+          "kind": "chapter",
+          "path": "chapter.md",
+          "locator": "P43-02"
+        },
+        {
+          "kind": "figure",
+          "path": "flow.mmd",
+          "locator": "FIG-43 node P1"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-02"
+        }
+      ]
+    },
+    {
+      "claim_id": "C-CAT-001",
+      "statement": "目录只返回可售商品；下单拒绝缺失/不可售商品，freeze关闭可售标志。",
+      "evidence_type": "static_source/config/sql_as_marked",
+      "status": "confirmed_static_not_runtime",
+      "sources": [
+        {
+          "path": "modules/catalog/service.py",
+          "sha256": "716128fffb555e1799834f1d43cb9ac56e3ffbce7ecd660a17625fb887404044",
+          "hash_mode": "text-lf",
+          "locator": "list_saleable, require_saleable, freeze"
+        }
+      ],
+      "targets": [
+        {
+          "kind": "analysis",
+          "path": "analysis.md",
+          "locator": "模块覆盖表或关键连接；C-CAT-001"
+        },
+        {
+          "kind": "chapter",
+          "path": "chapter.md",
+          "locator": "P43-02"
+        },
+        {
+          "kind": "figure",
+          "path": "flow.mmd",
+          "locator": "FIG-43 node P2"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-04"
+        },
+        {
+          "kind": "chapter",
+          "path": "chapter.md",
+          "locator": "P43-11"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-33"
+        }
+      ]
+    },
+    {
+      "claim_id": "C-PRICE-001",
+      "statement": "subtotal校验正整数分单价后计算单价乘数量之和；数量校验位于cart.put，不在place重复执行。",
+      "evidence_type": "static_source/config/sql_as_marked",
+      "status": "confirmed_static_not_runtime",
+      "sources": [
+        {
+          "path": "modules/pricing/service.py",
+          "sha256": "e214b1b17647ad8361bfff8f8a1bfa1dc6653c26dcf0a812a6d90df9d7065284",
+          "hash_mode": "text-lf",
+          "locator": "subtotal"
+        },
+        {
+          "path": "modules/carts/service.py",
+          "sha256": "e39d14d8e996d5e2368b1252dfab92864362cc9d54f5ae52389d02bc3b8e3d09",
+          "hash_mode": "text-lf",
+          "locator": "put"
+        },
+        {
+          "path": "modules/orders/service.py",
+          "sha256": "dd2003646e5ed74471f4bd26f9cdca058b5cfb571558330d2b585c20934125ca",
+          "hash_mode": "text-lf",
+          "locator": "place",
+          "previous_sha256": "a137c2bb5059b50fcb570667e905bc378112e7cef70b04005ed12014a98e4a15"
+        }
+      ],
+      "targets": [
+        {
+          "kind": "analysis",
+          "path": "analysis.md",
+          "locator": "模块覆盖表或关键连接；C-PRICE-001"
+        },
+        {
+          "kind": "chapter",
+          "path": "chapter.md",
+          "locator": "P43-02"
+        },
+        {
+          "kind": "chapter",
+          "path": "chapter.md",
+          "locator": "P43-03"
+        },
+        {
+          "kind": "chapter",
+          "path": "chapter.md",
+          "locator": "P43-10"
+        },
+        {
+          "kind": "figure",
+          "path": "flow.mmd",
+          "locator": "FIG-43 node P2"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-03"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-06"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-27"
+        }
+      ],
+      "review": {
+        "initial_status": "needs_review_from_fingerprint_change",
+        "outcome": "retained_after_semantic_review",
+        "scope": [
+          "modules/orders/service.py"
+        ],
+        "basis": "本轮wrapper全文与previous原始wrapper文本定向比较；其他来源指纹相同，复用原有记录。",
+        "runtime_executed": false
+      }
+    },
+    {
+      "claim_id": "C-CART-001",
+      "statement": "购物车按居民/商品更新首条数量；创建订单读取但不清空购物车。",
+      "evidence_type": "static_source/config/sql_as_marked",
+      "status": "confirmed_static_not_runtime",
+      "sources": [
+        {
+          "path": "modules/carts/service.py",
+          "sha256": "e39d14d8e996d5e2368b1252dfab92864362cc9d54f5ae52389d02bc3b8e3d09",
+          "hash_mode": "text-lf",
+          "locator": "put, lines_for"
+        },
+        {
+          "path": "modules/orders/service.py",
+          "sha256": "dd2003646e5ed74471f4bd26f9cdca058b5cfb571558330d2b585c20934125ca",
+          "hash_mode": "text-lf",
+          "locator": "place",
+          "previous_sha256": "a137c2bb5059b50fcb570667e905bc378112e7cef70b04005ed12014a98e4a15"
+        }
+      ],
+      "targets": [
+        {
+          "kind": "analysis",
+          "path": "analysis.md",
+          "locator": "模块覆盖表或关键连接；C-CART-001"
+        },
+        {
+          "kind": "chapter",
+          "path": "chapter.md",
+          "locator": "P43-02"
+        },
+        {
+          "kind": "chapter",
+          "path": "chapter.md",
+          "locator": "P43-10"
+        },
+        {
+          "kind": "figure",
+          "path": "flow.mmd",
+          "locator": "FIG-43 node P1"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-01"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-27"
+        }
+      ],
+      "review": {
+        "initial_status": "needs_review_from_fingerprint_change",
+        "outcome": "retained_after_semantic_review",
+        "scope": [
+          "modules/orders/service.py"
+        ],
+        "basis": "本轮wrapper全文与previous原始wrapper文本定向比较；其他来源指纹相同，复用原有记录。",
+        "runtime_executed": false
+      }
+    },
+    {
+      "claim_id": "C-COUPON-001",
+      "statement": "优惠券可选，要求归属且活动；过期判断严格小于now，金额门槛可相等，抵扣=min(小计,discount_cents)，不消费券。",
+      "evidence_type": "static_source/config/sql_as_marked",
+      "status": "confirmed_static_not_runtime",
+      "sources": [
+        {
+          "path": "modules/coupons/service.py",
+          "sha256": "5eea21195ae55c360c5e0ccf57113f2c6feadf7e8652eb5927fc8c4696683a84",
+          "hash_mode": "text-lf",
+          "locator": "discount"
+        },
+        {
+          "path": "modules/orders/service.py",
+          "sha256": "dd2003646e5ed74471f4bd26f9cdca058b5cfb571558330d2b585c20934125ca",
+          "hash_mode": "text-lf",
+          "locator": "place金额计算",
+          "previous_sha256": "a137c2bb5059b50fcb570667e905bc378112e7cef70b04005ed12014a98e4a15"
+        }
+      ],
+      "targets": [
+        {
+          "kind": "analysis",
+          "path": "analysis.md",
+          "locator": "模块覆盖表或关键连接；C-COUPON-001"
+        },
+        {
+          "kind": "chapter",
+          "path": "chapter.md",
+          "locator": "P43-03"
+        },
+        {
+          "kind": "chapter",
+          "path": "chapter.md",
+          "locator": "P43-10"
+        },
+        {
+          "kind": "figure",
+          "path": "flow.mmd",
+          "locator": "FIG-43 node P2"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-07"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-08"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-09"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-27"
+        }
+      ],
+      "review": {
+        "initial_status": "needs_review_from_fingerprint_change",
+        "outcome": "retained_after_semantic_review",
+        "scope": [
+          "modules/orders/service.py"
+        ],
+        "basis": "本轮wrapper全文与previous原始wrapper文本定向比较；其他来源指纹相同，复用原有记录。",
+        "runtime_executed": false
+      }
+    },
+    {
+      "claim_id": "C-INV-001",
+      "statement": "reserve可用转预留，release预留转可用，consume只减少预留；库存缺失或不足会抛ValueError。",
+      "evidence_type": "static_source/config/sql_as_marked",
+      "status": "confirmed_static_not_runtime",
+      "sources": [
+        {
+          "path": "modules/inventory/service.py",
+          "sha256": "4b3263457d36a80b20eaff2317d0634ae4bc95a634ddf0764a34e084b51b6d64",
+          "hash_mode": "text-lf",
+          "locator": "stock, reserve, release, consume"
+        }
+      ],
+      "targets": [
+        {
+          "kind": "analysis",
+          "path": "analysis.md",
+          "locator": "模块覆盖表或关键连接；C-INV-001"
+        },
+        {
+          "kind": "chapter",
+          "path": "chapter.md",
+          "locator": "P43-04"
+        },
+        {
+          "kind": "chapter",
+          "path": "chapter.md",
+          "locator": "P43-06"
+        },
+        {
+          "kind": "figure",
+          "path": "flow.mmd",
+          "locator": "FIG-43 node P4"
+        },
+        {
+          "kind": "figure",
+          "path": "flow.mmd",
+          "locator": "FIG-43 node C3"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-01"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-10"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-12"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-16"
+        }
+      ]
+    },
+    {
+      "claim_id": "C-ORD-001",
+      "statement": "POST /orders映射place；创建先查活动居民和非空购物车，再查每个商品可售，所有商品必须恰属一个商户。",
+      "evidence_type": "static_source/config/sql_as_marked",
+      "status": "confirmed_static_not_runtime",
+      "sources": [
+        {
+          "path": "registry.py",
+          "sha256": "c5430f094049367f301d5a1397edf98587a19c42d4b1d39d99b09d9cf31a8af9",
+          "hash_mode": "text-lf",
+          "locator": "ROUTES[POST /orders]",
+          "previous_sha256": "fed5ae6a5ab24a6760d24c488337babda19dd36b9e035867c9019c61788d3389"
+        },
+        {
+          "path": "modules/orders/service.py",
+          "sha256": "dd2003646e5ed74471f4bd26f9cdca058b5cfb571558330d2b585c20934125ca",
+          "hash_mode": "text-lf",
+          "locator": "place前半段",
+          "previous_sha256": "a137c2bb5059b50fcb570667e905bc378112e7cef70b04005ed12014a98e4a15"
+        },
+        {
+          "path": "modules/residents/service.py",
+          "sha256": "0a12da178bc2553d2d6870f9f1d47c8e1007143e0dfa132a9bf59d3346ee20e6",
+          "hash_mode": "text-lf",
+          "locator": "require_active"
+        },
+        {
+          "path": "modules/catalog/service.py",
+          "sha256": "716128fffb555e1799834f1d43cb9ac56e3ffbce7ecd660a17625fb887404044",
+          "hash_mode": "text-lf",
+          "locator": "require_saleable"
+        }
+      ],
+      "targets": [
+        {
+          "kind": "analysis",
+          "path": "analysis.md",
+          "locator": "模块覆盖表或关键连接；C-ORD-001"
+        },
+        {
+          "kind": "chapter",
+          "path": "chapter.md",
+          "locator": "P43-01"
+        },
+        {
+          "kind": "chapter",
+          "path": "chapter.md",
+          "locator": "P43-02"
+        },
+        {
+          "kind": "figure",
+          "path": "flow.mmd",
+          "locator": "FIG-43 node P0"
+        },
+        {
+          "kind": "figure",
+          "path": "flow.mmd",
+          "locator": "FIG-43 node P1"
+        },
+        {
+          "kind": "figure",
+          "path": "flow.mmd",
+          "locator": "FIG-43 node P2"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-01"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-02"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-03"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-04"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-05"
+        }
+      ],
+      "review": {
+        "initial_status": "needs_review_from_fingerprint_change",
+        "outcome": "retained_after_semantic_review",
+        "scope": [
+          "registry.py",
+          "modules/orders/service.py"
+        ],
+        "basis": "本轮wrapper全文与previous原始wrapper文本定向比较；其他来源指纹相同，复用原有记录。",
+        "runtime_executed": false
+      }
+    },
+    {
+      "claim_id": "C-ORD-002",
+      "statement": "订单行复制当前商品ID/价格与购物车数量，形成小计再减券额；订单复制居民区域和单一商户。",
+      "evidence_type": "static_source/config/sql_as_marked",
+      "status": "confirmed_static_not_runtime",
+      "sources": [
+        {
+          "path": "modules/orders/service.py",
+          "sha256": "dd2003646e5ed74471f4bd26f9cdca058b5cfb571558330d2b585c20934125ca",
+          "hash_mode": "text-lf",
+          "locator": "place构造lines、amount及orders插入",
+          "previous_sha256": "a137c2bb5059b50fcb570667e905bc378112e7cef70b04005ed12014a98e4a15"
+        },
+        {
+          "path": "modules/pricing/service.py",
+          "sha256": "e214b1b17647ad8361bfff8f8a1bfa1dc6653c26dcf0a812a6d90df9d7065284",
+          "hash_mode": "text-lf",
+          "locator": "subtotal"
+        },
+        {
+          "path": "modules/coupons/service.py",
+          "sha256": "5eea21195ae55c360c5e0ccf57113f2c6feadf7e8652eb5927fc8c4696683a84",
+          "hash_mode": "text-lf",
+          "locator": "discount"
+        }
+      ],
+      "targets": [
+        {
+          "kind": "analysis",
+          "path": "analysis.md",
+          "locator": "模块覆盖表或关键连接；C-ORD-002"
+        },
+        {
+          "kind": "chapter",
+          "path": "chapter.md",
+          "locator": "P43-02"
+        },
+        {
+          "kind": "chapter",
+          "path": "chapter.md",
+          "locator": "P43-03"
+        },
+        {
+          "kind": "chapter",
+          "path": "chapter.md",
+          "locator": "P43-04"
+        },
+        {
+          "kind": "figure",
+          "path": "flow.mmd",
+          "locator": "FIG-43 node P2"
+        },
+        {
+          "kind": "figure",
+          "path": "flow.mmd",
+          "locator": "FIG-43 node P5"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-01"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-06"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-07"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-08"
+        }
+      ],
+      "review": {
+        "initial_status": "needs_review_from_fingerprint_change",
+        "outcome": "retained_after_semantic_review",
+        "scope": [
+          "modules/orders/service.py"
+        ],
+        "basis": "本轮wrapper全文与previous原始wrapper文本定向比较；其他来源指纹相同，复用原有记录。",
+        "runtime_executed": false
+      }
+    },
+    {
+      "claim_id": "C-ORD-003",
+      "statement": "创建的快照边界依次预留库存、写reserved/unpaid订单、issued账单、pending积分、order_created待投事件，返回订单ID。",
+      "evidence_type": "static_source/config/sql_as_marked",
+      "status": "confirmed_static_not_runtime",
+      "sources": [
+        {
+          "path": "modules/orders/service.py",
+          "sha256": "dd2003646e5ed74471f4bd26f9cdca058b5cfb571558330d2b585c20934125ca",
+          "hash_mode": "text-lf",
+          "locator": "place with repo.transaction",
+          "previous_sha256": "a137c2bb5059b50fcb570667e905bc378112e7cef70b04005ed12014a98e4a15"
+        },
+        {
+          "path": "modules/invoices/service.py",
+          "sha256": "766bbd0432a83c99eab85c5ff3f37972714b952093ac10d2bc382ec7efb32026",
+          "hash_mode": "text-lf",
+          "locator": "create"
+        },
+        {
+          "path": "modules/loyalty/service.py",
+          "sha256": "73b17841fbc9ca74c35e8c39596c2f50c542c460cd16cc8122edbda257be4268",
+          "hash_mode": "text-lf",
+          "locator": "prepare"
+        },
+        {
+          "path": "modules/outbox/service.py",
+          "sha256": "64b32fe0b68974c85e72f7c51a7f338684139ed2bfc21e0f7d0515f8c6334594",
+          "hash_mode": "text-lf",
+          "locator": "enqueue"
+        },
+        {
+          "path": "store.py",
+          "sha256": "e8d26766d28a229ed2dce47fdce0487ce5e03777560c58ec3d79642ab5eab110",
+          "hash_mode": "text-lf",
+          "locator": "transaction"
+        }
+      ],
+      "targets": [
+        {
+          "kind": "analysis",
+          "path": "analysis.md",
+          "locator": "模块覆盖表或关键连接；C-ORD-003"
+        },
+        {
+          "kind": "chapter",
+          "path": "chapter.md",
+          "locator": "P43-04"
+        },
+        {
+          "kind": "chapter",
+          "path": "chapter.md",
+          "locator": "P43-05"
+        },
+        {
+          "kind": "figure",
+          "path": "flow.mmd",
+          "locator": "FIG-43 node P3"
+        },
+        {
+          "kind": "figure",
+          "path": "flow.mmd",
+          "locator": "FIG-43 node P4"
+        },
+        {
+          "kind": "figure",
+          "path": "flow.mmd",
+          "locator": "FIG-43 node P5"
+        },
+        {
+          "kind": "figure",
+          "path": "flow.mmd",
+          "locator": "FIG-43 node P6"
+        },
+        {
+          "kind": "figure",
+          "path": "flow.mmd",
+          "locator": "FIG-43 node P7"
+        },
+        {
+          "kind": "figure",
+          "path": "flow.mmd",
+          "locator": "FIG-43 node P8"
+        },
+        {
+          "kind": "figure",
+          "path": "flow.mmd",
+          "locator": "FIG-43 node P9"
+        },
+        {
+          "kind": "figure",
+          "path": "flow.mmd",
+          "locator": "FIG-43 node PFAIL"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-01"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-10"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-11"
+        }
+      ],
+      "review": {
+        "initial_status": "needs_review_from_fingerprint_change",
+        "outcome": "retained_after_semantic_review",
+        "scope": [
+          "modules/orders/service.py"
+        ],
+        "basis": "本轮wrapper全文与previous原始wrapper文本定向比较；其他来源指纹相同，复用原有记录。",
+        "runtime_executed": false
+      }
+    },
+    {
+      "claim_id": "C-ORD-004",
+      "statement": "取消接受reserved或packing；在快照内整单逐行释放库存、置cancelled并记录时间、条件退款、作废账单、入队取消事件；shipped等状态拒绝。",
+      "evidence_type": "static_source/config/sql_as_marked",
+      "status": "confirmed_static_not_runtime",
+      "sources": [
+        {
+          "path": "modules/orders/service.py",
+          "sha256": "dd2003646e5ed74471f4bd26f9cdca058b5cfb571558330d2b585c20934125ca",
+          "hash_mode": "text-lf",
+          "locator": "cancel",
+          "previous_sha256": "a137c2bb5059b50fcb570667e905bc378112e7cef70b04005ed12014a98e4a15"
+        },
+        {
+          "path": "modules/inventory/service.py",
+          "sha256": "4b3263457d36a80b20eaff2317d0634ae4bc95a634ddf0764a34e084b51b6d64",
+          "hash_mode": "text-lf",
+          "locator": "release"
+        },
+        {
+          "path": "modules/invoices/service.py",
+          "sha256": "766bbd0432a83c99eab85c5ff3f37972714b952093ac10d2bc382ec7efb32026",
+          "hash_mode": "text-lf",
+          "locator": "void"
+        },
+        {
+          "path": "modules/outbox/service.py",
+          "sha256": "64b32fe0b68974c85e72f7c51a7f338684139ed2bfc21e0f7d0515f8c6334594",
+          "hash_mode": "text-lf",
+          "locator": "enqueue"
+        },
+        {
+          "path": "modules/picking/service.py",
+          "sha256": "fee0cddea17a1208bcfbe39b94a18c2a83f398dfe9dee0cc3e4a763e6230130a",
+          "hash_mode": "text-lf",
+          "locator": "complete"
+        }
+      ],
+      "targets": [
+        {
+          "kind": "analysis",
+          "path": "analysis.md",
+          "locator": "模块覆盖表或关键连接；C-ORD-004"
+        },
+        {
+          "kind": "chapter",
+          "path": "chapter.md",
+          "locator": "P43-06"
+        },
+        {
+          "kind": "chapter",
+          "path": "chapter.md",
+          "locator": "P43-07"
+        },
+        {
+          "kind": "figure",
+          "path": "flow.mmd",
+          "locator": "FIG-43 node C0"
+        },
+        {
+          "kind": "figure",
+          "path": "flow.mmd",
+          "locator": "FIG-43 node C1"
+        },
+        {
+          "kind": "figure",
+          "path": "flow.mmd",
+          "locator": "FIG-43 node C2"
+        },
+        {
+          "kind": "figure",
+          "path": "flow.mmd",
+          "locator": "FIG-43 node C3"
+        },
+        {
+          "kind": "figure",
+          "path": "flow.mmd",
+          "locator": "FIG-43 node C4"
+        },
+        {
+          "kind": "figure",
+          "path": "flow.mmd",
+          "locator": "FIG-43 node C5"
+        },
+        {
+          "kind": "figure",
+          "path": "flow.mmd",
+          "locator": "FIG-43 node C7"
+        },
+        {
+          "kind": "figure",
+          "path": "flow.mmd",
+          "locator": "FIG-43 node C8"
+        },
+        {
+          "kind": "figure",
+          "path": "flow.mmd",
+          "locator": "FIG-43 node C9"
+        },
+        {
+          "kind": "figure",
+          "path": "flow.mmd",
+          "locator": "FIG-43 node CFAIL"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-12"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-13"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-14"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-16"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-17"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-31"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-32"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-35"
+        },
+        {
+          "kind": "chapter",
+          "path": "chapter.md",
+          "locator": "P43-11"
+        }
+      ],
+      "review": {
+        "initial_status": "needs_review_from_fingerprint_change",
+        "outcome": "revised_after_semantic_review",
+        "scope": [
+          "modules/orders/service.py"
+        ],
+        "basis": "本轮wrapper全文与previous原始wrapper文本定向比较；其他来源指纹相同，复用原有记录。",
+        "runtime_executed": false,
+        "change": "orders.cancel唯一代码差异是允许packing；取消后续处理顺序未变。"
+      }
+    },
+    {
+      "claim_id": "C-ORD-005",
+      "statement": "cancel在状态改cancelled后，captured分支按total_cents调用refunds.issue，校验付款及正整数金额和余额；足额退款使payment_state=refunded。",
+      "evidence_type": "static_source/config/sql_as_marked",
+      "status": "confirmed_static_not_runtime",
+      "sources": [
+        {
+          "path": "modules/orders/service.py",
+          "sha256": "dd2003646e5ed74471f4bd26f9cdca058b5cfb571558330d2b585c20934125ca",
+          "hash_mode": "text-lf",
+          "locator": "cancel captured分支",
+          "previous_sha256": "a137c2bb5059b50fcb570667e905bc378112e7cef70b04005ed12014a98e4a15"
+        },
+        {
+          "path": "modules/refunds/service.py",
+          "sha256": "9f4a44678901facc1ac968e7d3429b9888b57517abeb08e262a523190a6ae332",
+          "hash_mode": "text-lf",
+          "locator": "issue"
+        },
+        {
+          "path": "modules/payments/service.py",
+          "sha256": "911c7b72c3a6d4321117376d3dae4bf587237a1ff84ad6441e161c45bacf9e8e",
+          "hash_mode": "text-lf",
+          "locator": "capture"
+        }
+      ],
+      "targets": [
+        {
+          "kind": "analysis",
+          "path": "analysis.md",
+          "locator": "模块覆盖表或关键连接；C-ORD-005"
+        },
+        {
+          "kind": "chapter",
+          "path": "chapter.md",
+          "locator": "P43-07"
+        },
+        {
+          "kind": "chapter",
+          "path": "chapter.md",
+          "locator": "P43-09"
+        },
+        {
+          "kind": "figure",
+          "path": "flow.mmd",
+          "locator": "FIG-43 node C5"
+        },
+        {
+          "kind": "figure",
+          "path": "flow.mmd",
+          "locator": "FIG-43 node C6"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-13"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-15"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-18"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-31"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-32"
+        }
+      ],
+      "review": {
+        "initial_status": "needs_review_from_fingerprint_change",
+        "outcome": "retained_after_semantic_review",
+        "scope": [
+          "modules/orders/service.py"
+        ],
+        "basis": "本轮wrapper全文与previous原始wrapper文本定向比较；其他来源指纹相同，复用原有记录。",
+        "runtime_executed": false
+      }
+    },
+    {
+      "claim_id": "C-ORD-006",
+      "statement": "维护入口由配置绑定，严格早于30分钟前且仍reserved的订单按ID取消，包括captured订单，然后限批投递事件；没有内置调度器或传输适配器。",
+      "evidence_type": "static_source/config/sql_as_marked",
+      "status": "confirmed_static_not_runtime",
+      "sources": [
+        {
+          "path": "project.json",
+          "sha256": "2c0af21d0be62ec16729efe828db19c0d1de29927952b98119e8d7bdf8ce95c7",
+          "hash_mode": "text-lf",
+          "locator": "job_handlers, reservation_minutes, outbox_batch, max_delivery_attempts"
+        },
+        {
+          "path": "jobs/runner.py",
+          "sha256": "e5ff87258ea422afd0976380bea8ab95128c1c7ecfd95d9ff0c25bf266b74377",
+          "hash_mode": "text-lf",
+          "locator": "task_registry, invoke"
+        },
+        {
+          "path": "modules/recovery/service.py",
+          "sha256": "7e994358c2bb3acf410b378d80996311d838544ac29e2d633e13bb1ed6fbaaca",
+          "hash_mode": "text-lf",
+          "locator": "run"
+        },
+        {
+          "path": "modules/outbox/service.py",
+          "sha256": "64b32fe0b68974c85e72f7c51a7f338684139ed2bfc21e0f7d0515f8c6334594",
+          "hash_mode": "text-lf",
+          "locator": "deliver_pending"
+        },
+        {
+          "path": "modules/notifications/service.py",
+          "sha256": "b3e675aa84c87ff63b74d9ed2e7e68f17ad90378c110c51f8f9219ef9bdf976c",
+          "hash_mode": "text-lf",
+          "locator": "send"
+        }
+      ],
+      "targets": [
+        {
+          "kind": "analysis",
+          "path": "analysis.md",
+          "locator": "模块覆盖表或关键连接；C-ORD-006"
+        },
+        {
+          "kind": "chapter",
+          "path": "chapter.md",
+          "locator": "P43-08"
+        },
+        {
+          "kind": "chapter",
+          "path": "chapter.md",
+          "locator": "P43-09"
+        },
+        {
+          "kind": "figure",
+          "path": "flow.mmd",
+          "locator": "FIG-43 node M0"
+        },
+        {
+          "kind": "figure",
+          "path": "flow.mmd",
+          "locator": "FIG-43 node M1"
+        },
+        {
+          "kind": "figure",
+          "path": "flow.mmd",
+          "locator": "FIG-43 node M2"
+        },
+        {
+          "kind": "figure",
+          "path": "flow.mmd",
+          "locator": "FIG-43 node M3"
+        },
+        {
+          "kind": "figure",
+          "path": "flow.mmd",
+          "locator": "FIG-43 node M4"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-19"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-20"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-21"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-22"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-23"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-24"
+        }
+      ]
+    },
+    {
+      "claim_id": "C-ORD-007",
+      "statement": "创建不清购物车/消费券/去重；取消不撤销pending积分或已有picks/packages，且取消入口没有调用人归属校验。",
+      "evidence_type": "static_source/config/sql_as_marked",
+      "status": "confirmed_static_not_runtime",
+      "sources": [
+        {
+          "path": "modules/orders/service.py",
+          "sha256": "dd2003646e5ed74471f4bd26f9cdca058b5cfb571558330d2b585c20934125ca",
+          "hash_mode": "text-lf",
+          "locator": "place, cancel完整读写范围",
+          "previous_sha256": "a137c2bb5059b50fcb570667e905bc378112e7cef70b04005ed12014a98e4a15"
+        },
+        {
+          "path": "modules/coupons/service.py",
+          "sha256": "5eea21195ae55c360c5e0ccf57113f2c6feadf7e8652eb5927fc8c4696683a84",
+          "hash_mode": "text-lf",
+          "locator": "discount"
+        },
+        {
+          "path": "modules/loyalty/service.py",
+          "sha256": "73b17841fbc9ca74c35e8c39596c2f50c542c460cd16cc8122edbda257be4268",
+          "hash_mode": "text-lf",
+          "locator": "prepare, grant"
+        },
+        {
+          "path": "registry.py",
+          "sha256": "c5430f094049367f301d5a1397edf98587a19c42d4b1d39d99b09d9cf31a8af9",
+          "hash_mode": "text-lf",
+          "locator": "无鉴权层的映射",
+          "previous_sha256": "fed5ae6a5ab24a6760d24c488337babda19dd36b9e035867c9019c61788d3389"
+        },
+        {
+          "path": "modules/picking/service.py",
+          "sha256": "fee0cddea17a1208bcfbe39b94a18c2a83f398dfe9dee0cc3e4a763e6230130a",
+          "hash_mode": "text-lf",
+          "locator": "complete写picks.done并改packing"
+        },
+        {
+          "path": "modules/packing/service.py",
+          "sha256": "20708fd703dc69aafa5a94d9804805b99a8fbf87da00f7977e5694c09b5dfce2",
+          "hash_mode": "text-lf",
+          "locator": "complete写packages.packed但不改订单状态"
+        }
+      ],
+      "targets": [
+        {
+          "kind": "analysis",
+          "path": "analysis.md",
+          "locator": "模块覆盖表或关键连接；C-ORD-007"
+        },
+        {
+          "kind": "chapter",
+          "path": "chapter.md",
+          "locator": "P43-10"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-25"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-26"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-27"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-31"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-35"
+        },
+        {
+          "kind": "figure",
+          "path": "flow.mmd",
+          "locator": "FIG-43 node C9"
+        }
+      ],
+      "review": {
+        "initial_status": "needs_review_from_fingerprint_change",
+        "outcome": "retained_and_extended_after_semantic_review",
+        "scope": [
+          "modules/orders/service.py",
+          "registry.py"
+        ],
+        "basis": "本轮wrapper全文与previous原始wrapper文本定向比较；其他来源指纹相同，复用原有记录。",
+        "runtime_executed": false
+      }
+    },
+    {
+      "claim_id": "C-ORD-008",
+      "statement": "券可使订单总额为0；capture未拒绝匹配的0金额，但取消captured零元订单时refunds正数校验失败并回滚取消。",
+      "evidence_type": "static_source/config/sql_as_marked",
+      "status": "confirmed_static_not_runtime",
+      "sources": [
+        {
+          "path": "modules/coupons/service.py",
+          "sha256": "5eea21195ae55c360c5e0ccf57113f2c6feadf7e8652eb5927fc8c4696683a84",
+          "hash_mode": "text-lf",
+          "locator": "discount返回min"
+        },
+        {
+          "path": "modules/payments/service.py",
+          "sha256": "911c7b72c3a6d4321117376d3dae4bf587237a1ff84ad6441e161c45bacf9e8e",
+          "hash_mode": "text-lf",
+          "locator": "capture金额比较"
+        },
+        {
+          "path": "modules/orders/service.py",
+          "sha256": "dd2003646e5ed74471f4bd26f9cdca058b5cfb571558330d2b585c20934125ca",
+          "hash_mode": "text-lf",
+          "locator": "cancel退款分支",
+          "previous_sha256": "a137c2bb5059b50fcb570667e905bc378112e7cef70b04005ed12014a98e4a15"
+        },
+        {
+          "path": "modules/refunds/service.py",
+          "sha256": "9f4a44678901facc1ac968e7d3429b9888b57517abeb08e262a523190a6ae332",
+          "hash_mode": "text-lf",
+          "locator": "issue正数判断"
+        },
+        {
+          "path": "store.py",
+          "sha256": "e8d26766d28a229ed2dce47fdce0487ce5e03777560c58ec3d79642ab5eab110",
+          "hash_mode": "text-lf",
+          "locator": "transaction"
+        }
+      ],
+      "targets": [
+        {
+          "kind": "analysis",
+          "path": "analysis.md",
+          "locator": "模块覆盖表或关键连接；C-ORD-008"
+        },
+        {
+          "kind": "chapter",
+          "path": "chapter.md",
+          "locator": "P43-09"
+        },
+        {
+          "kind": "figure",
+          "path": "flow.mmd",
+          "locator": "FIG-43 node C6"
+        },
+        {
+          "kind": "figure",
+          "path": "flow.mmd",
+          "locator": "FIG-43 node CFAIL"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-09"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-18"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-34"
+        }
+      ],
+      "review": {
+        "initial_status": "needs_review_from_fingerprint_change",
+        "outcome": "retained_after_semantic_review",
+        "scope": [
+          "modules/orders/service.py"
+        ],
+        "basis": "本轮wrapper全文与previous原始wrapper文本定向比较；其他来源指纹相同，复用原有记录。",
+        "runtime_executed": false
+      }
+    },
+    {
+      "claim_id": "C-PAY-001",
+      "statement": "本地付款仅允许reserved/unpaid且金额匹配，插payments并置captured；无支付网关。",
+      "evidence_type": "static_source/config/sql_as_marked",
+      "status": "confirmed_static_not_runtime",
+      "sources": [
+        {
+          "path": "modules/payments/service.py",
+          "sha256": "911c7b72c3a6d4321117376d3dae4bf587237a1ff84ad6441e161c45bacf9e8e",
+          "hash_mode": "text-lf",
+          "locator": "capture"
+        }
+      ],
+      "targets": [
+        {
+          "kind": "analysis",
+          "path": "analysis.md",
+          "locator": "模块覆盖表或关键连接；C-PAY-001"
+        },
+        {
+          "kind": "chapter",
+          "path": "chapter.md",
+          "locator": "P43-07"
+        },
+        {
+          "kind": "chapter",
+          "path": "chapter.md",
+          "locator": "P43-09"
+        },
+        {
+          "kind": "figure",
+          "path": "flow.mmd",
+          "locator": "FIG-43 node C5"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-13"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-18"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-28"
+        }
+      ]
+    },
+    {
+      "claim_id": "C-INVOICE-001",
+      "statement": "本地账单create应用层去重并写issued；void要求存在并置void；非税务接口。",
+      "evidence_type": "static_source/config/sql_as_marked",
+      "status": "confirmed_static_not_runtime",
+      "sources": [
+        {
+          "path": "modules/invoices/service.py",
+          "sha256": "766bbd0432a83c99eab85c5ff3f37972714b952093ac10d2bc382ec7efb32026",
+          "hash_mode": "text-lf",
+          "locator": "create, void"
+        }
+      ],
+      "targets": [
+        {
+          "kind": "analysis",
+          "path": "analysis.md",
+          "locator": "模块覆盖表或关键连接；C-INVOICE-001"
+        },
+        {
+          "kind": "chapter",
+          "path": "chapter.md",
+          "locator": "P43-04"
+        },
+        {
+          "kind": "chapter",
+          "path": "chapter.md",
+          "locator": "P43-07"
+        },
+        {
+          "kind": "figure",
+          "path": "flow.mmd",
+          "locator": "FIG-43 node P6"
+        },
+        {
+          "kind": "figure",
+          "path": "flow.mmd",
+          "locator": "FIG-43 node C7"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-01"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-12"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-17"
+        }
+      ]
+    },
+    {
+      "claim_id": "C-FULFILL-001",
+      "statement": "拣货将reserved/captured改packing并写done；包装要求packing及done拣货且无包装，写packed但不改订单状态。",
+      "evidence_type": "static_source/config/sql_as_marked",
+      "status": "confirmed_static_not_runtime",
+      "sources": [
+        {
+          "path": "modules/picking/service.py",
+          "sha256": "fee0cddea17a1208bcfbe39b94a18c2a83f398dfe9dee0cc3e4a763e6230130a",
+          "hash_mode": "text-lf",
+          "locator": "complete"
+        },
+        {
+          "path": "modules/packing/service.py",
+          "sha256": "20708fd703dc69aafa5a94d9804805b99a8fbf87da00f7977e5694c09b5dfce2",
+          "hash_mode": "text-lf",
+          "locator": "complete"
+        }
+      ],
+      "targets": [
+        {
+          "kind": "analysis",
+          "path": "analysis.md",
+          "locator": "模块覆盖表或关键连接；C-FULFILL-001"
+        },
+        {
+          "kind": "chapter",
+          "path": "chapter.md",
+          "locator": "P43-06"
+        },
+        {
+          "kind": "figure",
+          "path": "flow.mmd",
+          "locator": "FIG-43 node C2"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-14"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-31"
+        }
+      ]
+    },
+    {
+      "claim_id": "C-FULFILL-002",
+      "statement": "出库需packing与packed，在快照内消耗预留、置shipped、建in_transit运输单并入队order_shipped。",
+      "evidence_type": "static_source/config/sql_as_marked",
+      "status": "confirmed_static_not_runtime",
+      "sources": [
+        {
+          "path": "modules/shipping/service.py",
+          "sha256": "e05da7d83471ec46f3634d4b0777f2c36ea73aaae28a898d849ec0374c074677",
+          "hash_mode": "text-lf",
+          "locator": "dispatch"
+        },
+        {
+          "path": "modules/inventory/service.py",
+          "sha256": "4b3263457d36a80b20eaff2317d0634ae4bc95a634ddf0764a34e084b51b6d64",
+          "hash_mode": "text-lf",
+          "locator": "consume"
+        }
+      ],
+      "targets": [
+        {
+          "kind": "analysis",
+          "path": "analysis.md",
+          "locator": "模块覆盖表或关键连接；C-FULFILL-002"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-29"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-35"
+        },
+        {
+          "kind": "chapter",
+          "path": "chapter.md",
+          "locator": "P43-06"
+        },
+        {
+          "kind": "chapter",
+          "path": "chapter.md",
+          "locator": "P43-10"
+        }
+      ]
+    },
+    {
+      "claim_id": "C-DELIVERY-001",
+      "statement": "交付确认核运输单in_transit与区域、订单shipped，快照内置delivered并调用积分入账和结算生成。",
+      "evidence_type": "static_source/config/sql_as_marked",
+      "status": "confirmed_static_not_runtime",
+      "sources": [
+        {
+          "path": "modules/delivery/service.py",
+          "sha256": "71f81db95b134f355c74a30086b89b55d11945d7491a3f6de6afa5432e776456",
+          "hash_mode": "text-lf",
+          "locator": "confirm"
+        },
+        {
+          "path": "modules/loyalty/service.py",
+          "sha256": "73b17841fbc9ca74c35e8c39596c2f50c542c460cd16cc8122edbda257be4268",
+          "hash_mode": "text-lf",
+          "locator": "grant"
+        },
+        {
+          "path": "modules/settlements/service.py",
+          "sha256": "8fc0dcf0d5807c8bd6d7eadd3400bf78e010eb131819462de4037b7700eb91ca",
+          "hash_mode": "text-lf",
+          "locator": "accrue"
+        }
+      ],
+      "targets": [
+        {
+          "kind": "analysis",
+          "path": "analysis.md",
+          "locator": "模块覆盖表或关键连接；C-DELIVERY-001"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-29"
+        }
+      ]
+    },
+    {
+      "claim_id": "C-RETURN-001",
+      "statement": "退货申请仅delivered且原因非空，requested可审批为approved，不自动退款或回库。",
+      "evidence_type": "static_source/config/sql_as_marked",
+      "status": "confirmed_static_not_runtime",
+      "sources": [
+        {
+          "path": "modules/returns/service.py",
+          "sha256": "18ffdc0d974ff28b78be39df22c33fdc128f73a173f0c0562c76deee3023fa93",
+          "hash_mode": "text-lf",
+          "locator": "request, approve"
+        },
+        {
+          "path": "modules/refunds/service.py",
+          "sha256": "9f4a44678901facc1ac968e7d3429b9888b57517abeb08e262a523190a6ae332",
+          "hash_mode": "text-lf",
+          "locator": "issue许可条件"
+        }
+      ],
+      "targets": [
+        {
+          "kind": "analysis",
+          "path": "analysis.md",
+          "locator": "模块覆盖表或关键连接；C-RETURN-001"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-30"
+        }
+      ]
+    },
+    {
+      "claim_id": "C-REFUND-001",
+      "statement": "退款可由cancelled订单或approved退货触发，按首条付款余额记账；issue自身无快照边界，公开映射直接调用。",
+      "evidence_type": "static_source/config/sql_as_marked",
+      "status": "confirmed_static_not_runtime",
+      "sources": [
+        {
+          "path": "modules/refunds/service.py",
+          "sha256": "9f4a44678901facc1ac968e7d3429b9888b57517abeb08e262a523190a6ae332",
+          "hash_mode": "text-lf",
+          "locator": "issue"
+        },
+        {
+          "path": "registry.py",
+          "sha256": "c5430f094049367f301d5a1397edf98587a19c42d4b1d39d99b09d9cf31a8af9",
+          "hash_mode": "text-lf",
+          "locator": "ROUTES[POST /refunds]",
+          "previous_sha256": "fed5ae6a5ab24a6760d24c488337babda19dd36b9e035867c9019c61788d3389"
+        },
+        {
+          "path": "modules/orders/service.py",
+          "sha256": "dd2003646e5ed74471f4bd26f9cdca058b5cfb571558330d2b585c20934125ca",
+          "hash_mode": "text-lf",
+          "locator": "cancel调用顺序",
+          "previous_sha256": "a137c2bb5059b50fcb570667e905bc378112e7cef70b04005ed12014a98e4a15"
+        }
+      ],
+      "targets": [
+        {
+          "kind": "analysis",
+          "path": "analysis.md",
+          "locator": "模块覆盖表或关键连接；C-REFUND-001"
+        },
+        {
+          "kind": "chapter",
+          "path": "chapter.md",
+          "locator": "P43-07"
+        },
+        {
+          "kind": "figure",
+          "path": "flow.mmd",
+          "locator": "FIG-43 node C6"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-13"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-15"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-30"
+        }
+      ],
+      "review": {
+        "initial_status": "needs_review_from_fingerprint_change",
+        "outcome": "retained_after_semantic_review",
+        "scope": [
+          "registry.py",
+          "modules/orders/service.py"
+        ],
+        "basis": "本轮wrapper全文与previous原始wrapper文本定向比较；其他来源指纹相同，复用原有记录。",
+        "runtime_executed": false
+      }
+    },
+    {
+      "claim_id": "C-LOYALTY-001",
+      "statement": "创建pending积分=total_cents//100；delivered时grant将首条pending积分计入居民并改posted；取消未清理。",
+      "evidence_type": "static_source/config/sql_as_marked",
+      "status": "confirmed_static_not_runtime",
+      "sources": [
+        {
+          "path": "modules/loyalty/service.py",
+          "sha256": "73b17841fbc9ca74c35e8c39596c2f50c542c460cd16cc8122edbda257be4268",
+          "hash_mode": "text-lf",
+          "locator": "prepare, grant"
+        },
+        {
+          "path": "modules/orders/service.py",
+          "sha256": "dd2003646e5ed74471f4bd26f9cdca058b5cfb571558330d2b585c20934125ca",
+          "hash_mode": "text-lf",
+          "locator": "place, cancel",
+          "previous_sha256": "a137c2bb5059b50fcb570667e905bc378112e7cef70b04005ed12014a98e4a15"
+        },
+        {
+          "path": "modules/delivery/service.py",
+          "sha256": "71f81db95b134f355c74a30086b89b55d11945d7491a3f6de6afa5432e776456",
+          "hash_mode": "text-lf",
+          "locator": "confirm"
+        }
+      ],
+      "targets": [
+        {
+          "kind": "analysis",
+          "path": "analysis.md",
+          "locator": "模块覆盖表或关键连接；C-LOYALTY-001"
+        },
+        {
+          "kind": "chapter",
+          "path": "chapter.md",
+          "locator": "P43-04"
+        },
+        {
+          "kind": "chapter",
+          "path": "chapter.md",
+          "locator": "P43-10"
+        },
+        {
+          "kind": "figure",
+          "path": "flow.mmd",
+          "locator": "FIG-43 node P7"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-01"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-26"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-29"
+        }
+      ],
+      "review": {
+        "initial_status": "needs_review_from_fingerprint_change",
+        "outcome": "retained_after_semantic_review",
+        "scope": [
+          "modules/orders/service.py"
+        ],
+        "basis": "本轮wrapper全文与previous原始wrapper文本定向比较；其他来源指纹相同，复用原有记录。",
+        "runtime_executed": false
+      }
+    },
+    {
+      "claim_id": "C-SETTLE-001",
+      "statement": "交付时按订单总额生成商户pending结算；close按商户求和后置booked，非银行划转。",
+      "evidence_type": "static_source/config/sql_as_marked",
+      "status": "confirmed_static_not_runtime",
+      "sources": [
+        {
+          "path": "modules/settlements/service.py",
+          "sha256": "8fc0dcf0d5807c8bd6d7eadd3400bf78e010eb131819462de4037b7700eb91ca",
+          "hash_mode": "text-lf",
+          "locator": "accrue, close"
+        },
+        {
+          "path": "modules/delivery/service.py",
+          "sha256": "71f81db95b134f355c74a30086b89b55d11945d7491a3f6de6afa5432e776456",
+          "hash_mode": "text-lf",
+          "locator": "confirm"
+        }
+      ],
+      "targets": [
+        {
+          "kind": "analysis",
+          "path": "analysis.md",
+          "locator": "模块覆盖表或关键连接；C-SETTLE-001"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-29"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-30"
+        }
+      ]
+    },
+    {
+      "claim_id": "C-OUTBOX-001",
+      "statement": "投递选pending且attempts<上限，按ID限批；成功加次并sent，OSError只加次；返回尝试数，耗尽仍pending。",
+      "evidence_type": "static_source/config/sql_as_marked",
+      "status": "confirmed_static_not_runtime",
+      "sources": [
+        {
+          "path": "modules/outbox/service.py",
+          "sha256": "64b32fe0b68974c85e72f7c51a7f338684139ed2bfc21e0f7d0515f8c6334594",
+          "hash_mode": "text-lf",
+          "locator": "enqueue, deliver_pending"
+        },
+        {
+          "path": "project.json",
+          "sha256": "2c0af21d0be62ec16729efe828db19c0d1de29927952b98119e8d7bdf8ce95c7",
+          "hash_mode": "text-lf",
+          "locator": "outbox_batch=20, max_delivery_attempts=3"
+        }
+      ],
+      "targets": [
+        {
+          "kind": "analysis",
+          "path": "analysis.md",
+          "locator": "模块覆盖表或关键连接；C-OUTBOX-001"
+        },
+        {
+          "kind": "chapter",
+          "path": "chapter.md",
+          "locator": "P43-09"
+        },
+        {
+          "kind": "figure",
+          "path": "flow.mmd",
+          "locator": "FIG-43 node M4"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-21"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-22"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-23"
+        }
+      ]
+    },
+    {
+      "claim_id": "C-NOTIFY-001",
+      "statement": "通知仅格式化创建/取消/出库消息并调用传入transport，None抛OSError，无内置传输。",
+      "evidence_type": "static_source/config/sql_as_marked",
+      "status": "confirmed_static_not_runtime",
+      "sources": [
+        {
+          "path": "modules/notifications/service.py",
+          "sha256": "b3e675aa84c87ff63b74d9ed2e7e68f17ad90378c110c51f8f9219ef9bdf976c",
+          "hash_mode": "text-lf",
+          "locator": "TEMPLATES, send"
+        }
+      ],
+      "targets": [
+        {
+          "kind": "analysis",
+          "path": "analysis.md",
+          "locator": "模块覆盖表或关键连接；C-NOTIFY-001"
+        },
+        {
+          "kind": "chapter",
+          "path": "chapter.md",
+          "locator": "P43-09"
+        },
+        {
+          "kind": "figure",
+          "path": "flow.mmd",
+          "locator": "FIG-43 node M4"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-21"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-23"
+        }
+      ]
+    },
+    {
+      "claim_id": "C-RECOVERY-001",
+      "statement": "maintenance按配置动态分派到recovery.run；逐单快照取消后投递，单单异常中断后续，全批不原子。",
+      "evidence_type": "static_source/config/sql_as_marked",
+      "status": "confirmed_static_not_runtime",
+      "sources": [
+        {
+          "path": "project.json",
+          "sha256": "2c0af21d0be62ec16729efe828db19c0d1de29927952b98119e8d7bdf8ce95c7",
+          "hash_mode": "text-lf",
+          "locator": "job_handlers"
+        },
+        {
+          "path": "jobs/runner.py",
+          "sha256": "e5ff87258ea422afd0976380bea8ab95128c1c7ecfd95d9ff0c25bf266b74377",
+          "hash_mode": "text-lf",
+          "locator": "invoke"
+        },
+        {
+          "path": "modules/recovery/service.py",
+          "sha256": "7e994358c2bb3acf410b378d80996311d838544ac29e2d633e13bb1ed6fbaaca",
+          "hash_mode": "text-lf",
+          "locator": "run"
+        }
+      ],
+      "targets": [
+        {
+          "kind": "analysis",
+          "path": "analysis.md",
+          "locator": "模块覆盖表或关键连接；C-RECOVERY-001"
+        },
+        {
+          "kind": "chapter",
+          "path": "chapter.md",
+          "locator": "P43-08"
+        },
+        {
+          "kind": "chapter",
+          "path": "chapter.md",
+          "locator": "P43-09"
+        },
+        {
+          "kind": "figure",
+          "path": "flow.mmd",
+          "locator": "FIG-43 node M0"
+        },
+        {
+          "kind": "figure",
+          "path": "flow.mmd",
+          "locator": "FIG-43 node M1"
+        },
+        {
+          "kind": "figure",
+          "path": "flow.mmd",
+          "locator": "FIG-43 node M2"
+        },
+        {
+          "kind": "figure",
+          "path": "flow.mmd",
+          "locator": "FIG-43 node M3"
+        },
+        {
+          "kind": "figure",
+          "path": "flow.mmd",
+          "locator": "FIG-43 node M4"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-19"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-20"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-24"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-35"
+        }
+      ]
+    },
+    {
+      "claim_id": "C-RECALL-001",
+      "statement": "POST /catalog/recall映射apply；外层快照先冻结商品，再按ID升序整单取消含目标商品的reserved/packing订单；无匹配仍冻结并返回空列表，缺商品抛错，不自动投递。",
+      "evidence_type": "static_source_implementation_not_executed",
+      "status": "confirmed_static_not_runtime",
+      "sources": [
+        {
+          "path": "registry.py",
+          "sha256": "c5430f094049367f301d5a1397edf98587a19c42d4b1d39d99b09d9cf31a8af9",
+          "hash_mode": "text-lf",
+          "locator": "REVISION, ROUTES[POST /catalog/recall]"
+        },
+        {
+          "path": "modules/recalls/service.py",
+          "sha256": "dd1703c8c0a7b19b970ef9b020bbe50a341ce25405ed661fe36df3c90fa2f1e3",
+          "hash_mode": "text-lf",
+          "locator": "apply: freeze, affected, sorted, cancel, return"
+        },
+        {
+          "path": "modules/catalog/service.py",
+          "sha256": "716128fffb555e1799834f1d43cb9ac56e3ffbce7ecd660a17625fb887404044",
+          "hash_mode": "text-lf",
+          "locator": "freeze"
+        },
+        {
+          "path": "modules/orders/service.py",
+          "sha256": "dd2003646e5ed74471f4bd26f9cdca058b5cfb571558330d2b585c20934125ca",
+          "hash_mode": "text-lf",
+          "locator": "cancel逐行释放全部order.lines"
+        }
+      ],
+      "targets": [
+        {
+          "kind": "analysis",
+          "path": "analysis.md",
+          "locator": "M-RECALLS、关键连接8、P43-11蓝图"
+        },
+        {
+          "kind": "chapter",
+          "path": "chapter.md",
+          "locator": "P43-11"
+        },
+        {
+          "kind": "figure",
+          "path": "flow.mmd",
+          "locator": "FIG-43 node R0"
+        },
+        {
+          "kind": "figure",
+          "path": "flow.mmd",
+          "locator": "FIG-43 node R2"
+        },
+        {
+          "kind": "figure",
+          "path": "flow.mmd",
+          "locator": "FIG-43 node R3"
+        },
+        {
+          "kind": "figure",
+          "path": "flow.mmd",
+          "locator": "FIG-43 node R4"
+        },
+        {
+          "kind": "figure",
+          "path": "flow.mmd",
+          "locator": "FIG-43 node R5"
+        },
+        {
+          "kind": "figure",
+          "path": "flow.mmd",
+          "locator": "FIG-43 node R6"
+        },
+        {
+          "kind": "figure",
+          "path": "flow.mmd",
+          "locator": "FIG-43 node R7"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-32"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-33"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-35"
+        }
+      ],
+      "review": {
+        "outcome": "new_claim_reviewed",
+        "basis": "新增源全文及相同指纹catalog/orders调用机制；未运行。"
+      }
+    },
+    {
+      "claim_id": "C-RECALL-002",
+      "statement": "召回的外层Store快照包含冻结与全部逐单cancel；任一Exception传播时恢复整批rows和sequence，包括前序成功取消与商品冻结，区别于maintenance逐单保留已完成结果。",
+      "evidence_type": "static_source_implementation_not_executed",
+      "status": "confirmed_static_not_runtime",
+      "sources": [
+        {
+          "path": "modules/recalls/service.py",
+          "sha256": "dd1703c8c0a7b19b970ef9b020bbe50a341ce25405ed661fe36df3c90fa2f1e3",
+          "hash_mode": "text-lf",
+          "locator": "apply外层with transaction及无异常捕获"
+        },
+        {
+          "path": "modules/orders/service.py",
+          "sha256": "dd2003646e5ed74471f4bd26f9cdca058b5cfb571558330d2b585c20934125ca",
+          "hash_mode": "text-lf",
+          "locator": "cancel内层with transaction"
+        },
+        {
+          "path": "store.py",
+          "sha256": "e8d26766d28a229ed2dce47fdce0487ce5e03777560c58ec3d79642ab5eab110",
+          "hash_mode": "text-lf",
+          "locator": "transaction深拷贝rows/sequence、Exception恢复重抛"
+        },
+        {
+          "path": "modules/recovery/service.py",
+          "sha256": "7e994358c2bb3acf410b378d80996311d838544ac29e2d633e13bb1ed6fbaaca",
+          "hash_mode": "text-lf",
+          "locator": "run取消循环无外层transaction"
+        }
+      ],
+      "targets": [
+        {
+          "kind": "analysis",
+          "path": "analysis.md",
+          "locator": "新增召回链与Technical Review"
+        },
+        {
+          "kind": "chapter",
+          "path": "chapter.md",
+          "locator": "P43-11"
+        },
+        {
+          "kind": "figure",
+          "path": "flow.mmd",
+          "locator": "FIG-43 node R1"
+        },
+        {
+          "kind": "figure",
+          "path": "flow.mmd",
+          "locator": "FIG-43 node RFAIL"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-33"
+        },
+        {
+          "kind": "test",
+          "path": "test-plan.md",
+          "locator": "TP-34"
+        }
+      ],
+      "review": {
+        "outcome": "new_claim_reviewed",
+        "basis": "新增源与相同指纹Store/recovery原始wrapper返回联合静态核对；非运行结果。"
+      }
+    }
+  ],
+  "claims_manifest": "claims.json",
+  "artifact_claim_links": {
+    "analysis.md": [
+      "C-CONTEXT-001",
+      "C-STORE-001",
+      "C-RES-001",
+      "C-CAT-001",
+      "C-PRICE-001",
+      "C-CART-001",
+      "C-COUPON-001",
+      "C-INV-001",
+      "C-ORD-001",
+      "C-ORD-002",
+      "C-ORD-003",
+      "C-ORD-004",
+      "C-ORD-005",
+      "C-ORD-006",
+      "C-ORD-007",
+      "C-ORD-008",
+      "C-PAY-001",
+      "C-INVOICE-001",
+      "C-FULFILL-001",
+      "C-FULFILL-002",
+      "C-DELIVERY-001",
+      "C-RETURN-001",
+      "C-REFUND-001",
+      "C-LOYALTY-001",
+      "C-SETTLE-001",
+      "C-OUTBOX-001",
+      "C-NOTIFY-001",
+      "C-RECOVERY-001",
+      "C-RECALL-001",
+      "C-RECALL-002"
+    ],
+    "chapter.md": [
+      "C-CONTEXT-001",
+      "C-STORE-001",
+      "C-RES-001",
+      "C-CAT-001",
+      "C-PRICE-001",
+      "C-CART-001",
+      "C-COUPON-001",
+      "C-INV-001",
+      "C-ORD-001",
+      "C-ORD-002",
+      "C-ORD-003",
+      "C-ORD-004",
+      "C-ORD-005",
+      "C-ORD-006",
+      "C-ORD-007",
+      "C-ORD-008",
+      "C-PAY-001",
+      "C-INVOICE-001",
+      "C-FULFILL-001",
+      "C-FULFILL-002",
+      "C-REFUND-001",
+      "C-LOYALTY-001",
+      "C-OUTBOX-001",
+      "C-NOTIFY-001",
+      "C-RECOVERY-001",
+      "C-RECALL-001",
+      "C-RECALL-002"
+    ],
+    "flow.mmd": [
+      "C-STORE-001",
+      "C-RES-001",
+      "C-CAT-001",
+      "C-PRICE-001",
+      "C-CART-001",
+      "C-COUPON-001",
+      "C-INV-001",
+      "C-ORD-001",
+      "C-ORD-002",
+      "C-ORD-003",
+      "C-ORD-004",
+      "C-ORD-005",
+      "C-ORD-006",
+      "C-ORD-007",
+      "C-ORD-008",
+      "C-PAY-001",
+      "C-INVOICE-001",
+      "C-FULFILL-001",
+      "C-REFUND-001",
+      "C-LOYALTY-001",
+      "C-OUTBOX-001",
+      "C-NOTIFY-001",
+      "C-RECOVERY-001",
+      "C-RECALL-001",
+      "C-RECALL-002"
+    ],
+    "test-plan.md": [
+      "C-STORE-001",
+      "C-RES-001",
+      "C-CAT-001",
+      "C-PRICE-001",
+      "C-CART-001",
+      "C-COUPON-001",
+      "C-INV-001",
+      "C-ORD-001",
+      "C-ORD-002",
+      "C-ORD-003",
+      "C-ORD-004",
+      "C-ORD-005",
+      "C-ORD-006",
+      "C-ORD-007",
+      "C-ORD-008",
+      "C-PAY-001",
+      "C-INVOICE-001",
+      "C-FULFILL-001",
+      "C-FULFILL-002",
+      "C-DELIVERY-001",
+      "C-RETURN-001",
+      "C-REFUND-001",
+      "C-LOYALTY-001",
+      "C-SETTLE-001",
+      "C-OUTBOX-001",
+      "C-NOTIFY-001",
+      "C-RECOVERY-001",
+      "C-RECALL-001",
+      "C-RECALL-002"
+    ]
+  },
+  "completed_artifacts": [
+    {
+      "path": "analysis.md",
+      "status": "r2，保留既有画像并定向更新21模块/15入口与变化审查"
+    },
+    {
+      "path": "chapter.md",
+      "status": "4.3局部r2；保留无关正文；静态Technical/Academic Review"
+    },
+    {
+      "path": "flow.mmd",
+      "status": "FIG-43修改C2/C9并新增召回连接；仅图源，未渲染/查看/入稿"
+    },
+    {
+      "path": "test-plan.md",
+      "status": "35项后续计划；全部未执行"
+    },
+    {
+      "path": "claims.json",
+      "status": "保留28个ID、新增2个ID，逐条复核和来源/正文/图/测试关联"
+    },
+    {
+      "path": "checkpoint.json",
+      "status": "本轮接续记录及旧新基线"
+    },
+    {
+      "path": "inventory-current.json",
+      "status": "本轮唯一wrapper清单原样报告"
+    },
+    {
+      "path": "inventory-diff.json",
+      "status": "1新增/2变化/28同指纹/0删除"
+    },
+    {
+      "path": "read-01-changes.json",
+      "status": "本轮唯一3份项目全文读取原始返回"
+    },
+    {
+      "path": "read-scope.json",
+      "status": "区分当前wrapper读取、旧成果复用、Python缓存加载和模型缓存原文重读。"
+    }
+  ],
+  "phase_state": {
+    "Evidence": "先比较完整路径/指纹；3份新/变源全文核查，8份previous原始同指纹来源复用，其他旧充分记录恢复",
+    "Design": "仅更新4.3蓝图及新召回图/测试关联",
+    "Draft": "完成chapter r2局部修订及P43-11",
+    "Technical_Review": "接受packing、出库边界、整单召回、嵌套快照、维护差异核查完成；无业务执行",
+    "Academic_Review": "仅用本案例内置表达规则；未访问全局技能",
+    "Final": "本轮六份成果完成；图源交付，运行/导出查看/页面验收未完成"
+  },
+  "open_items": [
+    {
+      "id": "U-RUNTIME",
+      "scope": "本轮所有功能",
+      "issue": "无业务执行、实际测试、部署、性能或外部服务证据；测试计划可执行性需后续确认。",
+      "next": "在另获授权且环境可用时准备数据/桩与运行记录，不安装或运行本轮材料。"
+    },
+    {
+      "id": "U-DIAGRAM",
+      "scope": "flow.mmd",
+      "issue": "交付可编辑Mermaid源；未调用渲染器，未导出查看或入Word页面。",
+      "next": "后续选本地已有渲染器，核中文、交叉线、分支与目标页面。"
+    },
+    {
+      "id": "U-IDENTITY",
+      "scope": "取消及公开入口",
+      "issue": "未提供认证/调用人归属参数；不能声称居民只能取消本人订单。",
+      "next": "保留限制；若新材料新增鉴权再定向核查registry/orders及新入口。"
+    },
+    {
+      "id": "U-DATA",
+      "scope": "创建/取消输入",
+      "issue": "place不二次校验购物车数量；商品、券、库存初始化数据无统一校验入口。",
+      "next": "区分经cart.put的数据与直接污染数据；TP-27观察边界，不虚构增强校验。"
+    },
+    {
+      "id": "U-ZERO",
+      "scope": "零额付款取消",
+      "issue": "静态链可形成captured零元订单，cancel退款正数校验失败而回滚。",
+      "next": "TP-18后续复现；实现未变前不将该路径写为已支持。"
+    },
+    {
+      "id": "U-PENDING",
+      "scope": "取消积分/售后账目",
+      "issue": "取消不撤销pending积分；退货/退款无积分/结算冲销。packing取消或召回也保留已有picks/packages。",
+      "next": "保留已确认边界，后续变更需同时核loyalty/orders/delivery/returns/refunds/settlements。"
+    },
+    {
+      "id": "U-ATOMIC",
+      "scope": "内存与后台",
+      "issue": "仅单进程Exception快照恢复；公开refunds、packing、returns、settlement.close无自身快照；maintenance无全批事务。召回有外层整批内存快照；不将maintenance无全批边界误用于recalls，也不扩为数据库/并发保证。",
+      "next": "不写持久性、并发隔离、全批原子性或所有入口一致性保证。"
+    },
+    {
+      "id": "U-SQL",
+      "scope": "schema.sql",
+      "issue": "SQL为独立设计草稿，未执行，表名/行结构不同于Store。",
+      "next": "不能将SQL外键/唯一性迁移到内存实现结论；有运行库材料时另核。"
+    },
+    {
+      "id": "U-RECALL",
+      "scope": "新增召回入口",
+      "issue": "静态实现已核；无召回执行、调用方鉴权或通知送达证据，picks/packages与pending积分保留；不能推断外部召回流程完整。",
+      "next": "后续授权并具备环境时执行TP-31—35，尤其外层快照与维护对照。"
+    }
+  ],
+  "resume_protocol": [
+    "先读checkpoint.json与当前用户任务，沿用确认定位/大纲，不重启访谈。",
+    "用同一受信wrapper --inventory取得当前完整路径集合与text-lf指纹，保存新报告但不覆盖基线。该哈希磁盘读取量与模型内容阅读单独登记。",
+    "按完整相对路径比较新增、删除、相同、变化；元数据相同不等于内容未变。相同指纹且已有充分模块记录者直接复用，不机械通读。",
+    "新增/变化入口先定向--read；若路径失效，依据新增文件指纹找重命名候选，候选仍要核角色，不能仅按文件名service.py合并。",
+    "从entry_map、modules、key_connections和claims.json找受影响来源/主张/正文段/流程节点/测试计划；变化只是needs_review提示，不宣告主张错误或全稿失效。",
+    "通过wrapper重读变化材料及必要调用方/被调方；逐条判定原主张仍成立、修订或证据不足。先保留未变更原有结论范围。",
+    "根据新任务授权定向更新有关成果，保留稳定主张ID和旧基线/复核记录；语义核查后再登记新来源指纹，不能自动接受全部变化。",
+    "若只更新4.3，最小复核集合取变化源+相应链路，未变完整模块地图可直接恢复；若新任务扩展模块，先看其已存职责/入口/规则，再按差距读必要内容。",
+    "外层task.md为当前任务，project/task.md仅旧任务材料；先恢复本轮r2，previous为r1历史，不覆盖。"
+  ],
+  "next_minimal_read_set": {
+    "without_changes": [
+      "artifacts/checkpoint.json",
+      "artifacts/claims.json",
+      "artifacts/chapter.md",
+      "artifacts/flow.mmd",
+      "artifacts/test-plan.md"
+    ],
+    "first_action": "受信wrapper新清单与inventory-current.json比路径和text-lf指纹；无变化不再读取项目内容。",
+    "if_order_or_recall_changes": [
+      "变化的modules/orders/service.py或modules/recalls/service.py",
+      "registry.py仅当映射/版本变化",
+      "catalog.freeze、Store.transaction、inventory.release、refunds.issue以及履约状态仅在记录不足或接口变化时定向回查"
+    ],
+    "if_background_changes": [
+      "变化的project.json/jobs/runner.py/recovery及受影响连接；不要把packing可取消自动扩为maintenance筛选packing。"
+    ],
+    "rationale": "当前21模块/15入口地图、31份来源指纹、30项主张和关联可直接恢复；旧定位/大纲有效，无需访谈。"
+  },
+  "previous_checkpoint": {
+    "path": "../previous/checkpoint.json",
+    "checkpoint_id": "FIRST-SYNTHETIC-SHOP-1.0-R1",
+    "preserved": true
+  },
+  "current_task_source": {
+    "path": "../task.md",
+    "role": "本轮要求；project/task.md为旧任务材料"
+  },
+  "previous_inventory_baseline": {
+    "path": "../previous/inventory-baseline.json",
+    "report_status": "listed",
+    "files": [
+      {
+        "path": "README.md",
+        "bytes": 769,
+        "mtime_ns": 1793285969936604000,
+        "sha256": "4a1a988c9246b8778d392bccfe6fc5b77ebbfc69b365092a85eb4b5d18aa9be4",
+        "hash_mode": "text-lf"
+      },
+      {
+        "path": "app.py",
+        "bytes": 288,
+        "mtime_ns": 1793285969937136900,
+        "sha256": "9db2699d41808c4685544f373e260748974e54c1feefd44bdd6a5e9cc9425a96",
+        "hash_mode": "text-lf"
+      },
+      {
+        "path": "jobs/runner.py",
+        "bytes": 418,
+        "mtime_ns": 1793285969939500300,
+        "sha256": "e5ff87258ea422afd0976380bea8ab95128c1c7ecfd95d9ff0c25bf266b74377",
+        "hash_mode": "text-lf"
+      },
+      {
+        "path": "modules/carts/service.py",
+        "bytes": 649,
+        "mtime_ns": 1793285969944507000,
+        "sha256": "e39d14d8e996d5e2368b1252dfab92864362cc9d54f5ae52389d02bc3b8e3d09",
+        "hash_mode": "text-lf"
+      },
+      {
+        "path": "modules/catalog/service.py",
+        "bytes": 492,
+        "mtime_ns": 1793285969942499000,
+        "sha256": "716128fffb555e1799834f1d43cb9ac56e3ffbce7ecd660a17625fb887404044",
+        "hash_mode": "text-lf"
+      },
+      {
+        "path": "modules/coupons/service.py",
+        "bytes": 508,
+        "mtime_ns": 1793285969945507200,
+        "sha256": "5eea21195ae55c360c5e0ccf57113f2c6feadf7e8652eb5927fc8c4696683a84",
+        "hash_mode": "text-lf"
+      },
+      {
+        "path": "modules/delivery/service.py",
+        "bytes": 748,
+        "mtime_ns": 1793286016418181800,
+        "sha256": "71f81db95b134f355c74a30086b89b55d11945d7491a3f6de6afa5432e776456",
+        "hash_mode": "text-lf"
+      },
+      {
+        "path": "modules/inventory/service.py",
+        "bytes": 915,
+        "mtime_ns": 1793285969946507100,
+        "sha256": "4b3263457d36a80b20eaff2317d0634ae4bc95a634ddf0764a34e084b51b6d64",
+        "hash_mode": "text-lf"
+      },
+      {
+        "path": "modules/invoices/service.py",
+        "bytes": 524,
+        "mtime_ns": 1793285969948508100,
+        "sha256": "766bbd0432a83c99eab85c5ff3f37972714b952093ac10d2bc382ec7efb32026",
+        "hash_mode": "text-lf"
+      },
+      {
+        "path": "modules/loyalty/service.py",
+        "bytes": 691,
+        "mtime_ns": 1793286016422187900,
+        "sha256": "73b17841fbc9ca74c35e8c39596c2f50c542c460cd16cc8122edbda257be4268",
+        "hash_mode": "text-lf"
+      },
+      {
+        "path": "modules/notifications/service.py",
+        "bytes": 382,
+        "mtime_ns": 1793286016420188400,
+        "sha256": "b3e675aa84c87ff63b74d9ed2e7e68f17ad90378c110c51f8f9219ef9bdf976c",
+        "hash_mode": "text-lf"
+      },
+      {
+        "path": "modules/orders/service.py",
+        "bytes": 2468,
+        "mtime_ns": 1793285969946507100,
+        "sha256": "a137c2bb5059b50fcb570667e905bc378112e7cef70b04005ed12014a98e4a15",
+        "hash_mode": "text-lf"
+      },
+      {
+        "path": "modules/outbox/service.py",
+        "bytes": 745,
+        "mtime_ns": 1793286016421188500,
+        "sha256": "64b32fe0b68974c85e72f7c51a7f338684139ed2bfc21e0f7d0515f8c6334594",
+        "hash_mode": "text-lf"
+      },
+      {
+        "path": "modules/packing/service.py",
+        "bytes": 548,
+        "mtime_ns": 1793286016415708100,
+        "sha256": "20708fd703dc69aafa5a94d9804805b99a8fbf87da00f7977e5694c09b5dfce2",
+        "hash_mode": "text-lf"
+      },
+      {
+        "path": "modules/payments/service.py",
+        "bytes": 593,
+        "mtime_ns": 1793285969947508300,
+        "sha256": "911c7b72c3a6d4321117376d3dae4bf587237a1ff84ad6441e161c45bacf9e8e",
+        "hash_mode": "text-lf"
+      },
+      {
+        "path": "modules/picking/service.py",
+        "bytes": 446,
+        "mtime_ns": 1793285969949509900,
+        "sha256": "fee0cddea17a1208bcfbe39b94a18c2a83f398dfe9dee0cc3e4a763e6230130a",
+        "hash_mode": "text-lf"
+      },
+      {
+        "path": "modules/pricing/service.py",
+        "bytes": 314,
+        "mtime_ns": 1793285969943498500,
+        "sha256": "e214b1b17647ad8361bfff8f8a1bfa1dc6653c26dcf0a812a6d90df9d7065284",
+        "hash_mode": "text-lf"
+      },
+      {
+        "path": "modules/recovery/service.py",
+        "bytes": 702,
+        "mtime_ns": 1793286016423188700,
+        "sha256": "7e994358c2bb3acf410b378d80996311d838544ac29e2d633e13bb1ed6fbaaca",
+        "hash_mode": "text-lf"
+      },
+      {
+        "path": "modules/refunds/service.py",
+        "bytes": 986,
+        "mtime_ns": 1793286016419187500,
+        "sha256": "9f4a44678901facc1ac968e7d3429b9888b57517abeb08e262a523190a6ae332",
+        "hash_mode": "text-lf"
+      },
+      {
+        "path": "modules/residents/service.py",
+        "bytes": 482,
+        "mtime_ns": 1793285969942499000,
+        "sha256": "0a12da178bc2553d2d6870f9f1d47c8e1007143e0dfa132a9bf59d3346ee20e6",
+        "hash_mode": "text-lf"
+      },
+      {
+        "path": "modules/returns/service.py",
+        "bytes": 603,
+        "mtime_ns": 1793286016418181800,
+        "sha256": "18ffdc0d974ff28b78be39df22c33fdc128f73a173f0c0562c76deee3023fa93",
+        "hash_mode": "text-lf"
+      },
+      {
+        "path": "modules/settlements/service.py",
+        "bytes": 711,
+        "mtime_ns": 1793286016423188700,
+        "sha256": "8fc0dcf0d5807c8bd6d7eadd3400bf78e010eb131819462de4037b7700eb91ca",
+        "hash_mode": "text-lf"
+      },
+      {
+        "path": "modules/shipping/service.py",
+        "bytes": 825,
+        "mtime_ns": 1793286016417030900,
+        "sha256": "e05da7d83471ec46f3634d4b0777f2c36ea73aaae28a898d849ec0374c074677",
+        "hash_mode": "text-lf"
+      },
+      {
+        "path": "project.json",
+        "bytes": 221,
+        "mtime_ns": 1793285969937136900,
+        "sha256": "2c0af21d0be62ec16729efe828db19c0d1de29927952b98119e8d7bdf8ce95c7",
+        "hash_mode": "text-lf"
+      },
+      {
+        "path": "registry.py",
+        "bytes": 1268,
+        "mtime_ns": 1793285969938487400,
+        "sha256": "fed5ae6a5ab24a6760d24c488337babda19dd36b9e035867c9019c61788d3389",
+        "hash_mode": "text-lf"
+      },
+      {
+        "path": "schema.sql",
+        "bytes": 1656,
+        "mtime_ns": 1793285969940498400,
+        "sha256": "74c8492546575e19aa48afc9472a3e1121271b82e4f341a8b527e2348c458b12",
+        "hash_mode": "text-lf"
+      },
+      {
+        "path": "store.py",
+        "bytes": 1136,
+        "mtime_ns": 1793285969939500300,
+        "sha256": "e8d26766d28a229ed2dce47fdce0487ce5e03777560c58ec3d79642ab5eab110",
+        "hash_mode": "text-lf"
+      },
+      {
+        "path": "task.md",
+        "bytes": 1575,
+        "mtime_ns": 1793286016426062400,
+        "sha256": "48a332166f39c35505bb6c7a0a8c7c8fa258202f524163f8fe8c31d0c7647c7d",
+        "hash_mode": "text-lf"
+      },
+      {
+        "path": "thesis/outline.md",
+        "bytes": 253,
+        "mtime_ns": 1793286016426062400,
+        "sha256": "da81dac466f047b94470c558e53bfb6602fa893dbca0a7480ed1b471b8e6e8c6",
+        "hash_mode": "text-lf"
+      },
+      {
+        "path": "thesis/positioning.md",
+        "bytes": 532,
+        "mtime_ns": 1793286016424677800,
+        "sha256": "15ac46cfc6e87aec8f99b799fae1867e2c2c2d3c77b29b3cd2393be6fed8abc6",
+        "hash_mode": "text-lf"
+      }
+    ],
+    "excluded": [],
+    "skipped": [],
+    "findings": [],
+    "default_excluded_names": [
+      ".git",
+      ".mypy_cache",
+      ".pytest_cache",
+      ".tox",
+      ".venv",
+      "__pycache__",
+      "build",
+      "dist",
+      "node_modules",
+      "venv"
+    ],
+    "scope_note": "本次无实际排除/跳过；非原子快照，不保证并发替换隔离。"
+  },
+  "previous_reading_measurement": {
+    "inventory_calls": 1,
+    "inventory_hash_disk_reads": 30,
+    "inventory_hash_bytes": 22448,
+    "inventory_model_content_reads": 0,
+    "content_reader_batches": 5,
+    "content_reader_unique_paths": 30,
+    "content_reader_file_events": 30,
+    "content_reader_bytes": 22448,
+    "repeated_project_content_reads": 0,
+    "distinction": "清单哈希在磁盘读字节，不构成模型内容理解；30份模型全文阅读来自5批 --read 的文本返回。规则文件和自生成日志另计，不伪装项目内容读。",
+    "log": "../read-log.jsonl"
+  },
+  "change_review": {
+    "comparison_report": "inventory-diff.json",
+    "diff": {
+      "added": [
+        "modules/recalls/service.py"
+      ],
+      "deleted": [],
+      "changed": [
+        "modules/orders/service.py",
+        "registry.py"
+      ],
+      "unchanged": [
+        "README.md",
+        "app.py",
+        "jobs/runner.py",
+        "modules/carts/service.py",
+        "modules/catalog/service.py",
+        "modules/coupons/service.py",
+        "modules/delivery/service.py",
+        "modules/inventory/service.py",
+        "modules/invoices/service.py",
+        "modules/loyalty/service.py",
+        "modules/notifications/service.py",
+        "modules/outbox/service.py",
+        "modules/packing/service.py",
+        "modules/payments/service.py",
+        "modules/picking/service.py",
+        "modules/pricing/service.py",
+        "modules/recovery/service.py",
+        "modules/refunds/service.py",
+        "modules/residents/service.py",
+        "modules/returns/service.py",
+        "modules/settlements/service.py",
+        "modules/shipping/service.py",
+        "project.json",
+        "schema.sql",
+        "store.py",
+        "task.md",
+        "thesis/outline.md",
+        "thesis/positioning.md"
+      ]
+    },
+    "initial_affected_claim_ids": [
+      "C-CONTEXT-001",
+      "C-PRICE-001",
+      "C-CART-001",
+      "C-COUPON-001",
+      "C-ORD-001",
+      "C-ORD-002",
+      "C-ORD-003",
+      "C-ORD-004",
+      "C-ORD-005",
+      "C-ORD-007",
+      "C-ORD-008",
+      "C-REFUND-001",
+      "C-LOYALTY-001"
+    ],
+    "semantic_results": {
+      "C-CONTEXT-001": "retained_after_semantic_review",
+      "C-STORE-001": "inherited_unchanged_fingerprint",
+      "C-RES-001": "inherited_unchanged_fingerprint",
+      "C-CAT-001": "inherited_unchanged_fingerprint",
+      "C-PRICE-001": "retained_after_semantic_review",
+      "C-CART-001": "retained_after_semantic_review",
+      "C-COUPON-001": "retained_after_semantic_review",
+      "C-INV-001": "inherited_unchanged_fingerprint",
+      "C-ORD-001": "retained_after_semantic_review",
+      "C-ORD-002": "retained_after_semantic_review",
+      "C-ORD-003": "retained_after_semantic_review",
+      "C-ORD-004": "revised_after_semantic_review",
+      "C-ORD-005": "retained_after_semantic_review",
+      "C-ORD-006": "inherited_unchanged_fingerprint",
+      "C-ORD-007": "retained_and_extended_after_semantic_review",
+      "C-ORD-008": "retained_after_semantic_review",
+      "C-PAY-001": "inherited_unchanged_fingerprint",
+      "C-INVOICE-001": "inherited_unchanged_fingerprint",
+      "C-FULFILL-001": "inherited_unchanged_fingerprint",
+      "C-FULFILL-002": "inherited_unchanged_fingerprint",
+      "C-DELIVERY-001": "inherited_unchanged_fingerprint",
+      "C-RETURN-001": "inherited_unchanged_fingerprint",
+      "C-REFUND-001": "retained_after_semantic_review",
+      "C-LOYALTY-001": "retained_after_semantic_review",
+      "C-SETTLE-001": "inherited_unchanged_fingerprint",
+      "C-OUTBOX-001": "inherited_unchanged_fingerprint",
+      "C-NOTIFY-001": "inherited_unchanged_fingerprint",
+      "C-RECOVERY-001": "inherited_unchanged_fingerprint",
+      "C-RECALL-001": "new_claim_reviewed",
+      "C-RECALL-002": "new_claim_reviewed"
+    },
+    "revised_original_claim_ids": [
+      "C-ORD-004",
+      "C-ORD-007"
+    ],
+    "retained_after_review_count": 11,
+    "new_claim_ids": [
+      "C-RECALL-001",
+      "C-RECALL-002"
+    ],
+    "source_review_completed_before_new_baseline": true,
+    "content_read_scope": [
+      "modules/orders/service.py",
+      "registry.py",
+      "modules/recalls/service.py"
+    ],
+    "previous_output_reuse_scope": [
+      "store.py",
+      "modules/catalog/service.py",
+      "modules/inventory/service.py",
+      "modules/refunds/service.py",
+      "modules/picking/service.py",
+      "modules/packing/service.py",
+      "modules/shipping/service.py",
+      "modules/recovery/service.py"
+    ],
+    "not_rechecked": "其余同指纹材料不重复全文阅读；没有核全文其他章节、运行/图像/页面。",
+    "artifact_scope": [
+      "P43-01",
+      "P43-06",
+      "P43-08",
+      "P43-10",
+      "P43-11",
+      "FIG-43 C2/C9/R0-RFAIL",
+      "TP-14/20/31-35",
+      "画像、主张与checkpoint"
+    ]
+  },
+  "read_scope_manifest": "read-scope.json",
+  "verification": {
+    "report": "verification.json",
+    "status": "passed",
+    "scope": "成果结构与人工静态语义复核；不是运行正确性验证。",
+    "runtime_tests_executed": false
+  }
+}

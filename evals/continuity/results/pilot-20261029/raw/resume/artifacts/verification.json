@@ -1,0 +1,31 @@
+{
+  "status": "passed",
+  "errors": [],
+  "checks": [
+    "JSON可解析及稳定主张ID一致",
+    "30项主张来源指纹与当前清单一致",
+    "正文/图节点/测试关联定位存在",
+    "35项测试计划连续编号且未执行",
+    "模块/测试表格连续，新增正文分段",
+    "r1无关正文段落P43-02/03/04/05/07/09已在前一次差异核对确认保留"
+  ],
+  "counts": {
+    "claims": 30,
+    "modules": 21,
+    "public_function_routes": 15,
+    "test_plans_not_executed": 35,
+    "current_wrapper_content_paths": 3,
+    "old_cache_fulltext_sources_shown_to_model": 8
+  },
+  "wrapper_log_actions": [
+    "inventory",
+    "content_read"
+  ],
+  "not_done": [
+    "业务执行/导入/功能测试",
+    "Mermaid渲染/导出查看",
+    "正式稿页面验收",
+    "网络/安装/SQL/部署/性能/外部服务联调"
+  ],
+  "scope": "成果结构与人工静态语义复核；不是运行正确性验证。"
+}

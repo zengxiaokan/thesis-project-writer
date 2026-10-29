@@ -1,0 +1,235 @@
+{
+  "task": "核实并修订 input.md 的相关工作段落",
+  "date": "2026-10-29",
+  "scope": {
+    "question": "所列三篇原文能否支持 RAG 正确性保证、跨论文统一排名，以及上下文位置研究空白三项主张？",
+    "role": "为相关工作提供方法依据和评价边界，不确认项目实现或实验效果。",
+    "local_materials_read": [
+      "input.md",
+      "literature-workflow.md"
+    ],
+    "source_boundary": "仅定向核验输入给出的三个 arXiv 标识符及其同版本官方 PDF。未使用其他本地材料、示例、技能或二手来源。",
+    "reading_method": "按主张定位后局部阅读 PDF 提取文本；未声称通读全文。",
+    "page_convention": "以下页码均为 PDF 页序，从 1 起；书目日期来自指定版本的 arXiv 摘要页。"
+  },
+  "access": {
+    "successful_urls": [
+      "https://arxiv.org/abs/2005.11401v4",
+      "https://arxiv.org/pdf/2005.11401v4",
+      "https://arxiv.org/abs/2307.03172v3",
+      "https://arxiv.org/pdf/2307.03172v3",
+      "https://arxiv.org/abs/1706.03762v7",
+      "https://arxiv.org/pdf/1706.03762v7"
+    ],
+    "failed_urls": [],
+    "other_failed_or_limited_operations": [
+      {
+        "operation": "PDF 文本 find",
+        "target": "https://arxiv.org/pdf/2005.11401v4",
+        "pattern": "Table 4",
+        "result": "未匹配；随后 find Factuality 返回表4文字。不能将未匹配视为原文无此内容。"
+      },
+      {
+        "operation": "PDF screenshot",
+        "targets": [
+          "2005.11401v4 PDF 页8（调用两次）",
+          "2307.03172v3 PDF 页5",
+          "1706.03762v7 PDF 页6、9"
+        ],
+        "result": "工具仅向当前执行环境返回引用字符串，未呈现可视图像；未据此宣称完成图像审读，表图判断依据为已返回的文本及图注。"
+      }
+    ]
+  },
+  "sources": [
+    {
+      "id": "[1]",
+      "title": "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks",
+      "authors_verified": [
+        "Patrick Lewis",
+        "Ethan Perez",
+        "Aleksandra Piktus",
+        "Fabio Petroni",
+        "Vladimir Karpukhin",
+        "Naman Goyal",
+        "Heinrich Küttler",
+        "Mike Lewis",
+        "Wen-tau Yih",
+        "Tim Rocktäschel",
+        "Sebastian Riedel",
+        "Douwe Kiela"
+      ],
+      "arxiv_id": "2005.11401",
+      "version_read": "v4",
+      "first_submitted": "2020-05-22",
+      "version_date": "2021-04-12",
+      "publication_status_verified": "arXiv 摘要页注明 Accepted at NeurIPS 2020；未另查会议出版记录。",
+      "bibliography_verified": true,
+      "full_text_accessible": true,
+      "full_text_url": "https://arxiv.org/pdf/2005.11401v4",
+      "total_pdf_pages": 19,
+      "read_ranges": [
+        "摘要；§1 与§2相关段落，PDF 页1—4：检索器、生成器、文档条件和训练设定。",
+        "§3.1—3.3、§4.1—4.3，PDF 页4—6；表1、表2文字：任务、EM、BART比较和人工事实性评价。",
+        "表4文字，PDF 页8：人工评价并非全部判为良好。",
+        "附录B相关段落，PDF 页17：人工标注说明；附录D相关段落，PDF 页18：开放域QA划分与TriviaQA的不同测试集。"
+      ],
+      "self_written_summary": "原文比较的是具体检索与生成组合的任务表现；事实性改善是相对结论，测试集和人工评判均有条件。",
+      "limits": [
+        "未复现模型或重新判分。",
+        "EM 的具体归一化与实现代码未追溯，正文仅使用原文明示的指标名称。",
+        "未核对全部附录或原始标注，未将论文结果迁移为项目结果。"
+      ]
+    },
+    {
+      "id": "[2]",
+      "title": "Lost in the Middle: How Language Models Use Long Contexts",
+      "authors_verified": [
+        "Nelson F. Liu",
+        "Kevin Lin",
+        "John Hewitt",
+        "Ashwin Paranjape",
+        "Michele Bevilacqua",
+        "Fabio Petroni",
+        "Percy Liang"
+      ],
+      "arxiv_id": "2307.03172",
+      "version_read": "v3",
+      "first_submitted": "2023-07-06",
+      "version_date": "2023-11-20",
+      "publication_status_verified": "arXiv 摘要页注明 Accepted for publication in TACL, 2023；未另查正式出版日期、卷期或页码。",
+      "bibliography_verified": true,
+      "full_text_accessible": true,
+      "full_text_url": "https://arxiv.org/pdf/2307.03172v3",
+      "total_pdf_pages": 18,
+      "read_ranges": [
+        "摘要与导论返回的相关段落，PDF 页1—3：位置研究问题和任务边界。",
+        "§2.1，PDF 页3：2655个段落型长答案问题、一个含答案文档加干扰文档、改变文档位置、accuracy判分。",
+        "§2.2返回的部分模型说明，PDF 页4—5；§2.3、图5文字与表1文字，PDF 页5：10/20/30文档位置实验及结果。",
+        "§3.1—3.2，PDF 页6，以及图7返回的图注片段，PDF 页7：合成UUID键值检索和模型差异。"
+      ],
+      "self_written_summary": "论文直接操控相关信息的位置，并观察问答表现变化；合成任务中的模型差异限制了笼统的位置效应断言。",
+      "limits": [
+        "未阅读全文的§4、§5和附录；find 返回的其他命中片段未作为新增结论的完整依据。",
+        "未读原始数据和评分代码，未检验现有模型能否复现这些结果。",
+        "正文只概述所测模型与任务，不推广至所有长上下文系统。"
+      ]
+    },
+    {
+      "id": "[3]",
+      "title": "Attention Is All You Need",
+      "authors_verified": [
+        "Ashish Vaswani",
+        "Noam Shazeer",
+        "Niki Parmar",
+        "Jakob Uszkoreit",
+        "Llion Jones",
+        "Aidan N. Gomez",
+        "Lukasz Kaiser",
+        "Illia Polosukhin"
+      ],
+      "arxiv_id": "1706.03762",
+      "version_read": "v7",
+      "first_submitted": "2017-06-12",
+      "version_date": "2023-08-02",
+      "publication_status_verified": "PDF 页1标有 NIPS 2017 会议名称；未另查出版记录。",
+      "bibliography_verified": true,
+      "full_text_accessible": true,
+      "full_text_url": "https://arxiv.org/pdf/1706.03762v7",
+      "total_pdf_pages": 15,
+      "read_ranges": [
+        "摘要；§1—2及§3开头返回的段落，PDF 页1—2：Transformer与自注意力。",
+        "§3.5，PDF 页6：位置编码目的与两种编码的比较说明。",
+        "§6.1—6.2相关段落及表3(E)文字，PDF 页8—9：机器翻译任务下的位置编码替换实验。"
+      ],
+      "self_written_summary": "位置编码是本篇架构设计及消融的一部分；这与第二篇操控答案文档位置的实验问题不同。",
+      "limits": [
+        "只核对相关节页，不据此断言全文不存在某项研究。",
+        "未把原文关于长度外推的可能性解释为已验证的长上下文鲁棒性。",
+        "未进行该领域全面文献检索。"
+      ]
+    }
+  ],
+  "changes": [
+    {
+      "id": "C1",
+      "original_claim": "RAG 已彻底消除事实错误，接入即可保证项目答案正确。",
+      "action": "改为特定任务、相对BART基线的事实性改善，保留项目仍需验证的限定。",
+      "support": [
+        {
+          "source": "[1]",
+          "location": "§2；§3.2—3.3；§4.2—4.3，PDF 页2—6；表4，PDF 页8",
+          "interpretation": "方法与评价均有指定条件；改善与正确性保证之间缺少推论依据。"
+        }
+      ],
+      "support_status": "原主张不支持；收窄后的研究概述支持。",
+      "boundary": "不确认本项目是否已接入检索，也不报告项目正确率。"
+    },
+    {
+      "id": "C2",
+      "original_claim": "将[1]的EM与[2]的accuracy统一排名，证明路线整体更优。",
+      "action": "解释指标和上下文设置差异，删除跨论文直接优劣排名。",
+      "support": [
+        {
+          "source": "[1]",
+          "location": "§3、§3.1，PDF 页4；表1，PDF 页6；附录D，PDF 页18",
+          "interpretation": "开放域QA报告EM，并区分测试划分。"
+        },
+        {
+          "source": "[2]",
+          "location": "§2.1，PDF 页3",
+          "interpretation": "受控上下文与特定问题子集；以输出包含标注答案判分。"
+        }
+      ],
+      "support_status": "不可比性判断是基于已核对设置的综合推论。",
+      "boundary": "未建立统一对照；不计算分数差值，不断言两文全部结果均不可比较。"
+    },
+    {
+      "id": "C3",
+      "original_claim": "[3]摘要未谈位置影响，故原文和整个领域均无研究，本项目填补空白。",
+      "action": "删除否定性推断与领域空白主张；将[3]用于位置编码背景，将直接位置效应证据归于[2]。",
+      "support": [
+        {
+          "source": "[3]",
+          "location": "§3.5，PDF 页6；§6.2与表3(E)，PDF 页8—9",
+          "interpretation": "支持序列位置编码背景及翻译消融，不支持按摘要排除全文内容。"
+        },
+        {
+          "source": "[2]",
+          "location": "§2.1—2.3与图5，PDF 页3—5；§3.1—3.2，PDF 页6",
+          "interpretation": "已有直接相关研究，足以反驳整个领域无人研究位置影响。"
+        }
+      ],
+      "support_status": "原主张不支持且有直接反例。",
+      "boundary": "并不声称已找到所有位置研究，也不确认项目有何创新。"
+    },
+    {
+      "id": "C4",
+      "original_claim": "无：为避免将位置效应写成普遍规律而加入限定。",
+      "action": "指出合成键值检索中有模型接近完美。",
+      "support": [
+        {
+          "source": "[2]",
+          "location": "§3.2，PDF 页6；图7返回图注，PDF 页7",
+          "interpretation": "任务和模型之间存在差异，因此正文使用所测条件与通常等限定。"
+        }
+      ],
+      "support_status": "支持。",
+      "boundary": "未据此否认多文档问答实验中的位置影响。"
+    }
+  ],
+  "unresolved": [
+    "项目是否已实现检索增强、使用何种数据和模型、真实回答质量及对照结果均无输入证据，本轮不确认。",
+    "未进一步核验EM具体判分实现；这不妨碍指出两文已明确不同的实验口径。",
+    "正式发表版本与本轮arXiv版本之间的内容差异未逐项比对；参考文献明确链接所读版本。",
+    "范围仅为三篇已知论文的定向核验，不构成系统综述，也不能确立研究饱和或项目创新空白。"
+  ],
+  "review": {
+    "numbered_references_checked": true,
+    "version_links_match_read_pdfs": true,
+    "project_results_added": false,
+    "broad_field_absence_claim_removed": true,
+    "quotations_copied": false,
+    "note": "正文使用自写概述；审计记录不复制全文。"
+  }
+}
+

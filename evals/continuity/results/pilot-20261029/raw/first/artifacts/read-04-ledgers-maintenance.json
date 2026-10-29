@@ -1,0 +1,46 @@
+{
+  "files": [
+    {
+      "path": "modules/payments/service.py",
+      "text": "\"\"\"Synthetic local payment ledger, no payment gateway.\"\"\"\ndef capture(repo, order_id, amount_cents):\n    with repo.transaction():\n        order = repo.get(\"orders\", order_id)\n        if order is None or order[\"status\"] != \"reserved\" or order[\"payment_state\"] != \"unpaid\":\n            raise ValueError(\"payment not allowed\")\n        if amount_cents != order[\"total_cents\"]:\n            raise ValueError(\"amount mismatch\")\n        row = repo.insert(\"payments\", {\"order_id\": order_id, \"amount_cents\": amount_cents, \"refunded_cents\": 0})\n        order[\"payment_state\"] = \"captured\"\n    return row\n",
+      "sha256_text_lf": "911c7b72c3a6d4321117376d3dae4bf587237a1ff84ad6441e161c45bacf9e8e",
+      "bytes": 593
+    },
+    {
+      "path": "modules/invoices/service.py",
+      "text": "\"\"\"Synthetic invoice record, not a fiscal invoice integration.\"\"\"\ndef create(repo, order_id, amount_cents):\n    if repo.find(\"invoices\", lambda row: row[\"order_id\"] == order_id):\n        raise ValueError(\"invoice exists\")\n    return repo.insert(\"invoices\", {\"order_id\": order_id, \"amount_cents\": amount_cents, \"status\": \"issued\"})\n\ndef void(repo, order_id):\n    rows = repo.find(\"invoices\", lambda row: row[\"order_id\"] == order_id)\n    if not rows:\n        raise ValueError(\"invoice missing\")\n    rows[0][\"status\"] = \"void\"\n",
+      "sha256_text_lf": "766bbd0432a83c99eab85c5ff3f37972714b952093ac10d2bc382ec7efb32026",
+      "bytes": 524
+    },
+    {
+      "path": "modules/loyalty/service.py",
+      "text": "\"\"\"Synthetic delivery-triggered points posting, amount measured in cents.\"\"\"\ndef prepare(repo, order_id, resident_id, amount_cents):\n    return repo.insert(\"loyalty\", {\"order_id\": order_id, \"resident_id\": resident_id, \"points\": amount_cents // 100, \"status\": \"pending\"})\n\ndef grant(repo, order_id):\n    order = repo.get(\"orders\", order_id)\n    rows = repo.find(\"loyalty\", lambda row: row[\"order_id\"] == order_id and row[\"status\"] == \"pending\")\n    if order[\"status\"] != \"delivered\" or not rows:\n        raise ValueError(\"points posting rejected\")\n    row = rows[0]\n    resident = repo.get(\"residents\", row[\"resident_id\"])\n    resident[\"points\"] += row[\"points\"]\n    row[\"status\"] = \"posted\"\n",
+      "sha256_text_lf": "73b17841fbc9ca74c35e8c39596c2f50c542c460cd16cc8122edbda257be4268",
+      "bytes": 691
+    },
+    {
+      "path": "modules/refunds/service.py",
+      "text": "\"\"\"Synthetic local refund ledger; caller controls transaction.\"\"\"\ndef issue(repo, order_id, amount_cents):\n    order = repo.get(\"orders\", order_id)\n    approved = repo.find(\"returns\", lambda row: row[\"order_id\"] == order_id and row[\"status\"] == \"approved\")\n    if order is None or (order[\"status\"] != \"cancelled\" and not approved):\n        raise ValueError(\"refund not allowed\")\n    payments = repo.find(\"payments\", lambda row: row[\"order_id\"] == order_id)\n    if not payments or type(amount_cents) is not int or amount_cents <= 0:\n        raise ValueError(\"payment or amount invalid\")\n    payment = payments[0]\n    if amount_cents > payment[\"amount_cents\"] - payment[\"refunded_cents\"]:\n        raise ValueError(\"refund exceeds captured balance\")\n    payment[\"refunded_cents\"] += amount_cents\n    if payment[\"refunded_cents\"] == payment[\"amount_cents\"]:\n        order[\"payment_state\"] = \"refunded\"\n    return repo.insert(\"refunds\", {\"order_id\": order_id, \"amount_cents\": amount_cents})\n",
+      "sha256_text_lf": "9f4a44678901facc1ac968e7d3429b9888b57517abeb08e262a523190a6ae332",
+      "bytes": 986
+    },
+    {
+      "path": "modules/outbox/service.py",
+      "text": "\"\"\"Synthetic pending notification queue with a bounded attempt count.\"\"\"\nfrom modules.notifications.service import send\n\ndef enqueue(repo, kind, order_id):\n    return repo.insert(\"outbox\", {\"kind\": kind, \"order_id\": order_id, \"status\": \"pending\", \"attempts\": 0})\n\ndef deliver_pending(repo, limit, max_attempts, transport):\n    eligible = repo.find(\"outbox\", lambda row: row[\"status\"] == \"pending\" and row[\"attempts\"] < max_attempts)\n    selected = sorted(eligible, key=lambda row: row[\"id\"])[:limit]\n    for event in selected:\n        try:\n            send(event, transport)\n        except OSError:\n            event[\"attempts\"] += 1\n        else:\n            event[\"attempts\"] += 1\n            event[\"status\"] = \"sent\"\n    return len(selected)\n",
+      "sha256_text_lf": "64b32fe0b68974c85e72f7c51a7f338684139ed2bfc21e0f7d0515f8c6334594",
+      "bytes": 745
+    },
+    {
+      "path": "modules/notifications/service.py",
+      "text": "\"\"\"Synthetic formatter; a caller-supplied transport is required.\"\"\"\nTEMPLATES = {\"order_created\": \"\u8ba2\u5355\u5df2\u521b\u5efa\", \"order_cancelled\": \"\u8ba2\u5355\u5df2\u53d6\u6d88\", \"order_shipped\": \"\u8ba2\u5355\u5df2\u51fa\u5e93\"}\n\ndef send(event, transport):\n    if transport is None:\n        raise OSError(\"transport unavailable\")\n    transport.send({\"order_id\": event[\"order_id\"], \"message\": TEMPLATES[event[\"kind\"]]})\n",
+      "sha256_text_lf": "b3e675aa84c87ff63b74d9ed2e7e68f17ad90378c110c51f8f9219ef9bdf976c",
+      "bytes": 382
+    },
+    {
+      "path": "modules/recovery/service.py",
+      "text": "\"\"\"Synthetic maintenance handler; configuration binds this entry.\"\"\"\nfrom modules.orders.service import cancel\nfrom modules.outbox.service import deliver_pending\n\ndef run(repo, config, now, transport=None):\n    cutoff = now - config[\"reservation_minutes\"] * 60\n    expired = repo.find(\"orders\", lambda row: row[\"status\"] == \"reserved\" and row[\"created_at\"] < cutoff)\n    cancelled = []\n    for order in sorted(expired, key=lambda row: row[\"id\"]):\n        cancel(repo, order[\"id\"], now)\n        cancelled.append(order[\"id\"])\n    attempted = deliver_pending(repo, config[\"outbox_batch\"], config[\"max_delivery_attempts\"], transport)\n    return {\"cancelled\": cancelled, \"notification_attempts\": attempted}\n",
+      "sha256_text_lf": "7e994358c2bb3acf410b378d80996311d838544ac29e2d633e13bb1ed6fbaaca",
+      "bytes": 702
+    }
+  ]
+}

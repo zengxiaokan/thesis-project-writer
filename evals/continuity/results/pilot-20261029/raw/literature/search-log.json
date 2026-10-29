@@ -1,0 +1,311 @@
+{
+  "date": "2026-10-29",
+  "question": "所列三篇原文能否支持 RAG 正确性保证、跨论文统一排名，以及上下文位置研究空白三项主张？",
+  "scope": {
+    "objects": [
+      "RAG事实性与正确性边界",
+      "EM与accuracy的可比性",
+      "上下文位置研究及空白断言"
+    ],
+    "languages": "三篇英文原文；中文修订",
+    "publication_types": "官方arXiv指定版本预印本",
+    "time_range": "输入指定的v4/v3/v7，不设置领域覆盖年限",
+    "platforms": [
+      "arXiv"
+    ],
+    "rationale": "已知标识符，直接核对官方摘要页和同版本PDF。",
+    "query_filters": "未使用搜索引擎关键词检索、结果过滤或排序；find为文内定向定位。",
+    "local_reads": [
+      "input.md",
+      "literature-workflow.md"
+    ]
+  },
+  "actual_operations": [
+    {
+      "sequence": 1,
+      "date": "2026-10-29",
+      "platform": "arXiv via web tool",
+      "mode": "定向核验",
+      "operation": "open",
+      "url": "https://arxiv.org/abs/2005.11401v4",
+      "exact_argument": null,
+      "status": "success",
+      "result": "书目、版本日期、摘要与接收说明"
+    },
+    {
+      "sequence": 2,
+      "date": "2026-10-29",
+      "platform": "arXiv via web tool",
+      "mode": "定向核验",
+      "operation": "open",
+      "url": "https://arxiv.org/abs/2307.03172v3",
+      "exact_argument": null,
+      "status": "success",
+      "result": "书目、版本日期、摘要与接收说明"
+    },
+    {
+      "sequence": 3,
+      "date": "2026-10-29",
+      "platform": "arXiv via web tool",
+      "mode": "定向核验",
+      "operation": "open",
+      "url": "https://arxiv.org/abs/1706.03762v7",
+      "exact_argument": null,
+      "status": "success",
+      "result": "书目、版本日期与摘要"
+    },
+    {
+      "sequence": 4,
+      "date": "2026-10-29",
+      "platform": "arXiv via web tool",
+      "mode": "定向核验",
+      "operation": "click",
+      "url": "https://arxiv.org/abs/2005.11401v4",
+      "exact_argument": "View PDF（链接18）",
+      "status": "success",
+      "result": "https://arxiv.org/pdf/2005.11401v4；返回PDF文本及页数"
+    },
+    {
+      "sequence": 5,
+      "date": "2026-10-29",
+      "platform": "arXiv via web tool",
+      "mode": "定向核验",
+      "operation": "click",
+      "url": "https://arxiv.org/abs/2307.03172v3",
+      "exact_argument": "View PDF（链接13）",
+      "status": "success",
+      "result": "https://arxiv.org/pdf/2307.03172v3；返回PDF元数据"
+    },
+    {
+      "sequence": 6,
+      "date": "2026-10-29",
+      "platform": "arXiv via web tool",
+      "mode": "定向核验",
+      "operation": "click",
+      "url": "https://arxiv.org/abs/1706.03762v7",
+      "exact_argument": "View PDF（链接14）",
+      "status": "success",
+      "result": "https://arxiv.org/pdf/1706.03762v7；返回PDF元数据"
+    },
+    {
+      "sequence": 7,
+      "date": "2026-10-29",
+      "platform": "arXiv via web tool",
+      "mode": "定向核验",
+      "operation": "find",
+      "url": "https://arxiv.org/pdf/2307.03172v3",
+      "exact_argument": "3.1",
+      "status": "success",
+      "result": "定位合成检索实验设置"
+    },
+    {
+      "sequence": 8,
+      "date": "2026-10-29",
+      "platform": "arXiv via web tool",
+      "mode": "定向核验",
+      "operation": "find",
+      "url": "https://arxiv.org/pdf/2307.03172v3",
+      "exact_argument": "accuracy",
+      "status": "success",
+      "result": "返回若干命中片段；后续定向打开§2.1核对判分"
+    },
+    {
+      "sequence": 9,
+      "date": "2026-10-29",
+      "platform": "arXiv via web tool",
+      "mode": "定向核验",
+      "operation": "find",
+      "url": "https://arxiv.org/pdf/2307.03172v3",
+      "exact_argument": "U-shaped",
+      "status": "success",
+      "result": "定位位置效应及边界片段"
+    },
+    {
+      "sequence": 10,
+      "date": "2026-10-29",
+      "platform": "arXiv via web tool",
+      "mode": "定向核验",
+      "operation": "find",
+      "url": "https://arxiv.org/pdf/1706.03762v7",
+      "exact_argument": "Positional Encoding",
+      "status": "success",
+      "result": "返回§3.5全文相关段落"
+    },
+    {
+      "sequence": 11,
+      "date": "2026-10-29",
+      "platform": "arXiv via web tool",
+      "mode": "定向核验",
+      "operation": "find",
+      "url": "https://arxiv.org/pdf/1706.03762v7",
+      "exact_argument": "6.1",
+      "status": "success",
+      "result": "定位机器翻译结果"
+    },
+    {
+      "sequence": 12,
+      "date": "2026-10-29",
+      "platform": "arXiv via web tool",
+      "mode": "定向核验",
+      "operation": "open",
+      "url": "https://arxiv.org/pdf/2307.03172v3",
+      "exact_argument": "lineno=160",
+      "status": "success",
+      "result": "阅读§2.1、任务构造和accuracy定义"
+    },
+    {
+      "sequence": 13,
+      "date": "2026-10-29",
+      "platform": "arXiv via web tool",
+      "mode": "定向核验",
+      "operation": "open",
+      "url": "https://arxiv.org/pdf/2307.03172v3",
+      "exact_argument": "lineno=330",
+      "status": "success",
+      "result": "阅读§2.3、图5和表1的提取文本"
+    },
+    {
+      "sequence": 14,
+      "date": "2026-10-29",
+      "platform": "arXiv via web tool",
+      "mode": "定向核验",
+      "operation": "open",
+      "url": "https://arxiv.org/pdf/1706.03762v7",
+      "exact_argument": "lineno=340",
+      "status": "success",
+      "result": "阅读§6.1—6.2及表3(E)提取文本"
+    },
+    {
+      "sequence": 15,
+      "date": "2026-10-29",
+      "platform": "arXiv via web tool",
+      "mode": "定向核验",
+      "operation": "find",
+      "url": "https://arxiv.org/pdf/2005.11401v4",
+      "exact_argument": "Figure 4:",
+      "status": "success",
+      "result": "定位到附录B人工评价界面及相邻附录D；不是主文表4"
+    },
+    {
+      "sequence": 16,
+      "date": "2026-10-29",
+      "platform": "arXiv via web tool",
+      "mode": "定向核验",
+      "operation": "find",
+      "url": "https://arxiv.org/pdf/2005.11401v4",
+      "exact_argument": "Table 4",
+      "status": "no_match",
+      "result": "文本未匹配，未推断原文不存在该表"
+    },
+    {
+      "sequence": 17,
+      "date": "2026-10-29",
+      "platform": "arXiv via web tool",
+      "mode": "定向核验",
+      "operation": "find",
+      "url": "https://arxiv.org/pdf/2005.11401v4",
+      "exact_argument": "Factuality",
+      "status": "success",
+      "result": "返回事实性评价方法与主文表4文字，补足上次定位"
+    },
+    {
+      "sequence": 18,
+      "date": "2026-10-29",
+      "platform": "arXiv via web tool",
+      "mode": "定向核验",
+      "operation": "open",
+      "url": "https://arxiv.org/pdf/2307.03172v3",
+      "exact_argument": "lineno=410",
+      "status": "success",
+      "result": "阅读§3.1—3.2与图7返回图注片段"
+    },
+    {
+      "sequence": 19,
+      "date": "2026-10-29",
+      "platform": "arXiv via web tool",
+      "mode": "定向核验",
+      "operation": "open",
+      "url": "https://arxiv.org/pdf/1706.03762v7",
+      "exact_argument": "lineno=60",
+      "status": "success",
+      "result": "阅读导论、背景与架构开头相关段落"
+    },
+    {
+      "sequence": 20,
+      "date": "2026-10-29",
+      "platform": "arXiv via web tool",
+      "mode": "定向核验",
+      "operation": "screenshot",
+      "url": "https://arxiv.org/pdf/2005.11401v4",
+      "exact_argument": "pageno=7",
+      "status": "metadata_only",
+      "result": "仅返回引用字符串，未得到可视图像；不计为视觉阅读"
+    },
+    {
+      "sequence": 21,
+      "date": "2026-10-29",
+      "platform": "arXiv via web tool",
+      "mode": "定向核验",
+      "operation": "screenshot",
+      "url": "https://arxiv.org/pdf/2307.03172v3",
+      "exact_argument": "pageno=4",
+      "status": "metadata_only",
+      "result": "仅返回引用字符串，未得到可视图像；不计为视觉阅读"
+    },
+    {
+      "sequence": 22,
+      "date": "2026-10-29",
+      "platform": "arXiv via web tool",
+      "mode": "定向核验",
+      "operation": "screenshot",
+      "url": "https://arxiv.org/pdf/1706.03762v7",
+      "exact_argument": "pageno=5",
+      "status": "metadata_only",
+      "result": "仅返回引用字符串，未得到可视图像；不计为视觉阅读"
+    },
+    {
+      "sequence": 23,
+      "date": "2026-10-29",
+      "platform": "arXiv via web tool",
+      "mode": "定向核验",
+      "operation": "screenshot",
+      "url": "https://arxiv.org/pdf/1706.03762v7",
+      "exact_argument": "pageno=8",
+      "status": "metadata_only",
+      "result": "仅返回引用字符串，未得到可视图像；不计为视觉阅读"
+    },
+    {
+      "sequence": 24,
+      "date": "2026-10-29",
+      "platform": "arXiv via web tool",
+      "mode": "定向核验",
+      "operation": "screenshot",
+      "url": "https://arxiv.org/pdf/2005.11401v4",
+      "exact_argument": "pageno=7（重试）",
+      "status": "metadata_only",
+      "result": "检查工具返回类型为字符串，仍无可视图像"
+    }
+  ],
+  "selection": {
+    "considered_items": [
+      "arXiv:2005.11401v4",
+      "arXiv:2307.03172v3",
+      "arXiv:1706.03762v7"
+    ],
+    "included": "三项均与待修主张相关，分别用于RAG、直接位置研究和Transformer背景；[3]不再用于领域空白论断。",
+    "excluded": "未执行额外候选文献筛选，也未访问结果页、引用追溯或二手解读。",
+    "versions_and_duplicates": "每个arXiv标识符只计一项工作；未把修订年份当作首发年份；未读其他版本，不声称完成版本差异核对。"
+  },
+  "stop_reason": "已取得足以修订这段文字的方法、评分、结果及限定依据；在三篇指定文献范围内停止，不代表领域检索饱和。",
+  "next_steps_not_performed": [
+    "若需定量比较，另行统一数据、输入和判分并开展对照。",
+    "若需正式出版书目，定向核对出版方记录及版本差异。",
+    "若需项目创新判断，补充项目实现与评测证据并扩大针对性文献检索。"
+  ],
+  "exported_records": [
+    "artifacts/revision.md",
+    "artifacts/verification.json",
+    "artifacts/search-log.json"
+  ]
+}
+

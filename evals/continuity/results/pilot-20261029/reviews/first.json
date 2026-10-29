@@ -1,0 +1,420 @@
+{
+  "schema_version": 1,
+  "review_id": "batch3-first-independent-v1",
+  "candidate": "single_candidate_first_session",
+  "source_revision": "synthetic-shop-1.0",
+  "source_root": "C:/Users/13671/.codex/visualizations/2026/10/28/01a182cf-e7e0-79b3-8535-f72c94173f77/batch3-runtime/first/project",
+  "artifact_root": "C:/Users/13671/.codex/visualizations/2026/10/28/01a182cf-e7e0-79b3-8535-f72c94173f77/batch3-runtime/first/artifacts",
+  "assessment_method": "逐一静态阅读20个模块及入口、配置、Store、SQL和已确认定位/大纲；将实际条件、调用顺序、状态/数据变化与analysis、4.3、Mermaid图源、测试计划和claims/checkpoint对照。另独立计算text-lf SHA-256核来源登记。未执行或导入业务，未渲染Mermaid，未修改原始产物；计数不作为理解充分的证明。",
+  "overall": {
+    "status": "满足（含1项低风险定位精度问题）",
+    "modules_satisfied": 20,
+    "critical_connections_satisfied": 6,
+    "critical_errors_found": 0,
+    "material_omissions_found": 0,
+    "conclusion": "首轮实际输出展开了20模块规则与六条关键链，4.3解释顺序、状态、异常和内存/本地账目边界；不是仅按文件数宣称覆盖。图源和测试计划与首轮规则一致，checkpoint可供选择性接续。此结论只覆盖静态机制及接续材料，不证明运行成功。"
+  },
+  "modules": [
+    {
+      "module_id": "residents",
+      "status": "满足",
+      "source": "modules/residents/service.py:register L2-5; require_active L7-11",
+      "output": "analysis.md:L27; chapter.md:P43-02; claims:C-RES-001",
+      "verified": "姓名/区域strip非空；active条件；未作身份认证"
+    },
+    {
+      "module_id": "catalog",
+      "status": "满足",
+      "source": "modules/catalog/service.py:list_saleable L2-3; require_saleable L5-9; freeze L11-15",
+      "output": "analysis.md:L28; chapter.md:P43-02; TP-04; C-CAT-001",
+      "verified": "仅列可售；缺失/停售拒绝；freeze只置saleable=False"
+    },
+    {
+      "module_id": "pricing",
+      "status": "满足",
+      "source": "modules/pricing/service.py:subtotal L2-6",
+      "output": "analysis.md:L29; chapter.md:P43-03; TP-06; C-PRICE-001",
+      "verified": "type is int且单价>0，乘数量求和；数量不在此复核，无税费引擎主张"
+    },
+    {
+      "module_id": "carts",
+      "status": "满足",
+      "source": "modules/carts/service.py:put L2-9; lines_for L11-12",
+      "output": "analysis.md:L30; chapter.md:P43-02/P43-10; TP-03/27; C-CART-001",
+      "verified": "正整数数量，居民/商品更新首行或插入；place读取而不清空"
+    },
+    {
+      "module_id": "coupons",
+      "status": "满足",
+      "source": "modules/coupons/service.py:discount L2-10",
+      "output": "analysis.md:L31; chapter.md:P43-03; TP-07/08/09; C-COUPON-001",
+      "verified": "归属/active/期限/门槛；expires_at==now和小计==门槛可用；min封顶；不消费券"
+    },
+    {
+      "module_id": "inventory",
+      "status": "满足",
+      "source": "modules/inventory/service.py:stock/reserve/release/consume L2-26",
+      "output": "analysis.md:L32; chapter.md:P43-04/P43-06; TP-10/16/29; C-INV-001",
+      "verified": "预留available减/reserved加；释放相反；出库只减reserved；缺失/不足异常"
+    },
+    {
+      "module_id": "orders",
+      "status": "满足",
+      "source": "modules/orders/service.py:place L13-35; cancel L37-52",
+      "output": "analysis.md:L33/L65-66; chapter.md:P43-02至P43-07/P43-10; flow:P0-P9/C0-C9",
+      "verified": "校验链与单商户/金额先行；快照内预留、订单、账单、积分、事件；首轮仅reserved取消；captured条件退款、作废与入队"
+    },
+    {
+      "module_id": "payments",
+      "status": "满足",
+      "source": "modules/payments/service.py:capture L2-11",
+      "output": "analysis.md:L34; chapter.md:P43-07/P43-09; TP-13/18/28; C-PAY-001",
+      "verified": "reserved/unpaid且金额相等，写本地payment并captured；无网关；识别零金额边界"
+    },
+    {
+      "module_id": "invoices",
+      "status": "满足",
+      "source": "modules/invoices/service.py:create L2-5; void L7-11",
+      "output": "analysis.md:L35; chapter.md:P43-04/P43-07; TP-01/12/17; C-INVOICE-001",
+      "verified": "本地应用层按订单去重issued；缺失拒绝void；未宣称真实税务开票"
+    },
+    {
+      "module_id": "picking",
+      "status": "满足",
+      "source": "modules/picking/service.py:complete L2-9",
+      "output": "analysis.md:L36/L67; chapter.md:P43-06; TP-14/29; C-FULFILL-001",
+      "verified": "reserved/captured才写done并改packing"
+    },
+    {
+      "module_id": "packing",
+      "status": "满足",
+      "source": "modules/packing/service.py:complete L2-9",
+      "output": "analysis.md:L37/L67; TP-29; C-FULFILL-001",
+      "verified": "packing且done拣货、无既有包裹，建packed；订单仍packing"
+    },
+    {
+      "module_id": "shipping",
+      "status": "满足",
+      "source": "modules/shipping/service.py:dispatch L5-16",
+      "output": "analysis.md:L38/L67; TP-29; C-FULFILL-002",
+      "verified": "packing+packed才consume，改shipped、建in_transit并入队出库事件"
+    },
+    {
+      "module_id": "delivery",
+      "status": "满足",
+      "source": "modules/delivery/service.py:confirm L5-17",
+      "output": "analysis.md:L39/L68; TP-29; C-DELIVERY-001",
+      "verified": "运输单in_transit/区域匹配且订单shipped；二者delivered，触发积分和结算"
+    },
+    {
+      "module_id": "returns",
+      "status": "满足",
+      "source": "modules/returns/service.py:request L2-6; approve L8-13",
+      "output": "analysis.md:L40/L69; TP-30; C-RETURN-001",
+      "verified": "delivered+非空原因写requested，另行批准approved；未宣称自动退款或回库"
+    },
+    {
+      "module_id": "refunds",
+      "status": "满足",
+      "source": "modules/refunds/service.py:issue L2-16",
+      "output": "analysis.md:L41/L69; chapter.md:P43-07/P43-09; TP-15/18/30; C-REFUND-001",
+      "verified": "cancelled或approved退货；正整数且不超首条本地付款余额；退尽refunded；调用方控制transaction"
+    },
+    {
+      "module_id": "notifications",
+      "status": "满足",
+      "source": "modules/notifications/service.py:TEMPLATES L2; send L4-7",
+      "output": "analysis.md:L42/L71; chapter.md:P43-09; TP-21/23; C-NOTIFY-001",
+      "verified": "三模板；transport None抛OSError，未声称真实发送"
+    },
+    {
+      "module_id": "outbox",
+      "status": "满足",
+      "source": "modules/outbox/service.py:enqueue L4-5; deliver_pending L7-18",
+      "output": "analysis.md:L43/L71; chapter.md:P43-09; TP-21/22/23; C-OUTBOX-001",
+      "verified": "pending且attempts低于上限，按ID限批；OSError加次数留pending，成功加次数sent；返回选中数"
+    },
+    {
+      "module_id": "loyalty",
+      "status": "满足",
+      "source": "modules/loyalty/service.py:prepare L2-3; grant L5-13",
+      "output": "analysis.md:L44/L68; chapter.md:P43-04/P43-10; TP-26/29; C-LOYALTY-001",
+      "verified": "总额分//100准备pending，交付后居民加分posted；识别取消未清pending"
+    },
+    {
+      "module_id": "settlements",
+      "status": "满足",
+      "source": "modules/settlements/service.py:accrue L2-6; close L8-13",
+      "output": "analysis.md:L45/L68; TP-29/30; C-SETTLE-001",
+      "verified": "交付后商家pending；close汇总并booked，仅本地记账"
+    },
+    {
+      "module_id": "recovery",
+      "status": "满足",
+      "source": "modules/recovery/service.py:run L5-13",
+      "output": "analysis.md:L46/L70; chapter.md:P43-08/P43-09; flow:M0-M4; TP-19/20/24; C-RECOVERY-001",
+      "verified": "配置惰性绑定；reserved且created_at严格早于cutoff，按ID逐单cancel，再投outbox；无调度频率/成功证据"
+    }
+  ],
+  "nonmodule_materials": [
+    {
+      "path": "app.py",
+      "status": "满足",
+      "source": "application L5-7",
+      "output": "analysis.md:L53/L70; checkpoint.entry_map",
+      "verified": "revision/routes/tasks/repository汇集；不作HTTP服务"
+    },
+    {
+      "path": "registry.py",
+      "status": "满足",
+      "source": "REVISION L15; ROUTES L16-31",
+      "output": "analysis.md:L54; checkpoint.entry_map.public_route_mapping",
+      "verified": "14条函数映射与synthetic-shop-1.0实际一致"
+    },
+    {
+      "path": "project.json",
+      "status": "满足",
+      "source": "L3-7",
+      "output": "analysis.md:L58/L70-71; chapter.md:P43-08/P43-09",
+      "verified": "CNY-cents、30分钟、maintenance字符串、batch20、attempts3"
+    },
+    {
+      "path": "jobs/runner.py",
+      "status": "满足",
+      "source": "task_registry L4-5; invoke L7-10",
+      "output": "analysis.md:L55/L70; checkpoint.entry_map.background",
+      "verified": "split模块:函数及importlib惰性导入，而非scheduler"
+    },
+    {
+      "path": "store.py",
+      "status": "满足",
+      "source": "TABLES L5-7; Store.transaction L26-33",
+      "output": "analysis.md:L17/L56; chapter.md:P43-05/P43-07; C-STORE-001",
+      "verified": "16列表；rows/sequence深拷贝；Exception恢复重抛；无SQL执行/锁/持久化"
+    },
+    {
+      "path": "schema.sql",
+      "status": "满足",
+      "source": "L1-16",
+      "output": "analysis.md:L17/L57; checkpoint.open_items U-SQL",
+      "verified": "独立15表设计草稿；外键/UNIQUE未转称内存有效约束"
+    },
+    {
+      "path": "thesis/positioning.md",
+      "status": "满足",
+      "source": "L3-5",
+      "output": "analysis.md:L5/L60; checkpoint.confirmed_positioning",
+      "verified": "沿用已确认本科社区订货配送及静态材料/Markdown边界"
+    },
+    {
+      "path": "thesis/outline.md",
+      "status": "满足",
+      "source": "L3-9",
+      "output": "analysis.md:L61/L75-88; checkpoint.outline",
+      "verified": "本轮仅4.3；4.1/4.2/4.4职责被保持"
+    }
+  ],
+  "critical_connections": [
+    {
+      "id": "entry-maintenance",
+      "status": "满足",
+      "source": "app.application → task_registry; project.json:job_handlers.maintenance → jobs.runner.invoke → recovery.run",
+      "output": "analysis.md:L46/L53-55/L70; chapter.md:P43-08; flow:M0; checkpoint.entry_map.background",
+      "verified": "动态入口无遗漏；配置存在与实际运行、频率/调度成功明确分开"
+    },
+    {
+      "id": "order-place",
+      "status": "满足",
+      "source": "orders.place L13-35; Store.transaction L26-33及被调模块",
+      "output": "analysis.md:L65; chapter.md:P43-02至P43-05; flow:P0-PFAIL; TP-01至11",
+      "verified": "主体、非空购物车、商品可售/价格快照、单商户、金额优惠、快照内写入链及恢复均解释"
+    },
+    {
+      "id": "order-cancel",
+      "status": "满足",
+      "source": "orders.cancel L37-52; inventory.release; refunds.issue; invoices.void; outbox.enqueue",
+      "output": "analysis.md:L66; chapter.md:P43-06/P43-07; flow:C0-CFAIL; TP-12至18",
+      "verified": "仅reserved；先释放/改cancelled，captured才本地退款；作废/入队；没有仓内撤销或外部支付主张"
+    },
+    {
+      "id": "maintenance-outbox",
+      "status": "满足",
+      "source": "recovery.run L5-13; outbox.deliver_pending L7-18; notifications.send L4-7; project.json L4-7",
+      "output": "analysis.md:L70-71; chapter.md:P43-08/P43-09; flow:M0-M4; TP-19至24",
+      "verified": "created_at严格小于now-30*60；仅reserved但不筛payment_state；20/3与transport失败；单单异常中断而非全批原子"
+    },
+    {
+      "id": "fulfilment",
+      "status": "满足",
+      "source": "picking.complete; packing.complete; shipping.dispatch; delivery.confirm; loyalty.grant; settlements.accrue",
+      "output": "analysis.md:L67-68/L73; chapter.md:P43-06; TP-29",
+      "verified": "付款预留→packing；packed不改订单；dispatch消耗预留→shipped；区匹配交付后本地积分/结算"
+    },
+    {
+      "id": "after-sales",
+      "status": "满足",
+      "source": "returns.request/approve; refunds.issue; payments.capture",
+      "output": "analysis.md:L69; TP-30; C-RETURN-001/C-REFUND-001",
+      "verified": "申请、批准、退款分步；本地余额；未宣称自动实物回库"
+    }
+  ],
+  "chapter_and_boundary_checks": [
+    {
+      "id": "validation-and-order",
+      "status": "满足",
+      "output": "chapter.md:P43-02至P43-05",
+      "source": "orders.place L13-35",
+      "verified": "先校验后快照；顺序、输入、结果和失败恢复可复述，不只是功能列举"
+    },
+    {
+      "id": "pricing-snapshot",
+      "status": "满足",
+      "output": "chapter.md:P43-02/P43-03/P43-10",
+      "source": "orders.place L20-31; pricing.subtotal; coupons.discount",
+      "verified": "快照价格/单商户/整数分/折扣封顶；券到期相等可用；无税率、运费或外部定价推断；缺数量二次校验已记录"
+    },
+    {
+      "id": "cancel-state-v1",
+      "status": "满足",
+      "output": "chapter.md:P43-06; flow:C2; TP-14/20",
+      "source": "orders.cancel L42-43; recovery.run L7",
+      "verified": "只reserved；packing/shipped/delivered不允许；未把付款状态等同取消资格"
+    },
+    {
+      "id": "local-financial-records",
+      "status": "满足",
+      "output": "chapter.md:P43-07/P43-09; analysis.md:L34-35/L41/L45",
+      "source": "payments.capture; refunds.issue; invoices.create/void; settlements.close",
+      "verified": "本地付款、退款、账单及booked均未升级成外部资金/税务行为"
+    },
+    {
+      "id": "maintenance-time-and-failure",
+      "status": "满足",
+      "output": "chapter.md:P43-08/P43-09",
+      "source": "recovery.run; project.json; outbox.deliver_pending; notifications.send",
+      "verified": "创建时间而非付款时间；严格早于；配置30分钟；transport边界及尝试数正确"
+    },
+    {
+      "id": "evidence-strength",
+      "status": "满足",
+      "output": "chapter.md:P43-05/P43-09/P43-10; test-plan.md:L1-9/L46; flow.mmd:L2",
+      "source": "Store.transaction; README.md; thesis/positioning.md",
+      "verified": "不声称持久数据库事务、并发隔离、实际HTTP/认证/部署、测试通过、性能或可靠调度"
+    },
+    {
+      "id": "extra-boundaries",
+      "status": "满足",
+      "output": "chapter.md:P43-09/P43-10; TP-18/25/26/27",
+      "source": "coupons.discount; payments.capture; refunds.issue; orders.place/cancel",
+      "verified": "零元captured取消失败回滚、取消pending积分残留、无归属/幂等和未清购物车/券均有源支持"
+    }
+  ],
+  "figure_and_test_plan": [
+    {
+      "id": "figure-content",
+      "status": "满足",
+      "output": "flow.mmd:P0-PFAIL/C0-CFAIL/M0-M4",
+      "source": "orders.place/cancel; Store.transaction; recovery.run; outbox.deliver_pending",
+      "verified": "正常分支与异常分支、先后顺序和首轮reserved判断一致；维护复用取消，无另造算法",
+      "limit": "仅审图源内容；未渲染、导出或检验页面。M1/M4使用当前配置数值作为摘要，正文已解释配置来源。"
+    },
+    {
+      "id": "test-plan-substance",
+      "status": "满足",
+      "output": "test-plan.md:L7-9; TP-01至30",
+      "source": "实际规则及异常边界如上",
+      "verified": "夹具、固定时间、金额/积分可算；检查rows与sequence且异常后重新取引用；覆盖条件边界、事务失败注入、已付/未付取消、零元、后台和传输失败",
+      "limit": "全为计划；未执行、未确认可执行性，无通过数量/率。"
+    }
+  ],
+  "checkpoint_checks": [
+    {
+      "criterion": "已确认定位/目标章节与材料类型边界",
+      "status": "满足",
+      "output": "checkpoint.confirmed_positioning/outline/evidence_scope"
+    },
+    {
+      "criterion": "当前修订、全路径/指纹/定位/内容阅读状态",
+      "status": "满足",
+      "output": "checkpoint.source_revision/sources/reading_measurement",
+      "verification": "独立按text-lf计算30份来源SHA-256全部吻合；claims全部来源指纹吻合，无未知来源或缺失目标文件。"
+    },
+    {
+      "criterion": "全部模块与职责",
+      "status": "满足",
+      "output": "checkpoint.modules[20]; analysis.md:L27-46",
+      "verification": "以实际模块规则审查为依据；没有按service.py basename去重。"
+    },
+    {
+      "criterion": "注册/配置入口及跨模块连接",
+      "status": "满足",
+      "output": "checkpoint.entry_map/key_connections; analysis.md:L65-73"
+    },
+    {
+      "criterion": "产物状态",
+      "status": "满足",
+      "output": "checkpoint.completed_artifacts/phase_state/open_items",
+      "verification": "图源/渲染和测试计划/执行状态分开。"
+    },
+    {
+      "criterion": "稳定claim_id映射来源及产物位置",
+      "status": "满足（定位精度有低风险问题）",
+      "output": "claims.claims[28]; checkpoint.current_claims/artifact_claim_links",
+      "verification": "逐条检查主张与源符号及对应P43、FIG节点、TP内容；稳定ID可用。analysis目标均使用笼统模板，详见OBS-01。"
+    },
+    {
+      "criterion": "未决/限制与具体接续动作",
+      "status": "满足",
+      "output": "checkpoint.open_items/resume_protocol/next_minimal_read_set",
+      "verification": "目录/指纹新增删除变化先提示复核，沿图谱定向读后语义判定；未把文件变化直接判原主张错误，不重开访谈。"
+    }
+  ],
+  "reading_measurement": {
+    "status": "满足",
+    "records": "first/read-log.jsonl；artifacts/inventory-baseline.json；read-01-positioning.json至read-05-fulfilment.json",
+    "verified": "日志区分1次清单哈希磁盘读取30文件/22448字节与5批完整文本返回30个唯一全路径；保存的read JSON均有text正文，非只有哈希。模块机制输出逐条回源支持，不能单由日志和数量认定理解。",
+    "inventory_hash_disk_reads": 30,
+    "inventory_hash_bytes": 22448,
+    "content_return_unique_paths": 30,
+    "content_return_batches": 5,
+    "content_return_file_events": 30,
+    "repeated_content_return_paths": 0,
+    "source_unchanged_record": "source-unchanged.json报告same_paths/same_bytes/same_mtime=true；本评审另核登记指纹。"
+  },
+  "issues": [
+    {
+      "id": "OBS-01",
+      "severity": "low",
+      "type": "artifact_locator_precision",
+      "status": "部分",
+      "location": "claims.json:全部28条claims的analysis.md target.locator（如C-CONTEXT-001.targets[0]为“模块覆盖表或关键连接；C-CONTEXT-001”）；checkpoint.artifact_claim_links中相应映射",
+      "evidence": "analysis.md:L79的C-CONTEXT-001实际在4.3蓝图，而不是该locator所称模块覆盖/关键连接；其事实内容在L5/L15/L53-54。其他analysis目标也未给具体表行、连接编号或稳定段ID。",
+      "impact": "人工可搜索恢复，chapter/figure/test定位仍具体，没有造成首轮业务事实错误；但新会话或自动跳转需重新搜索，analysis关联较难直接定位。",
+      "suggested_fix": "后续维护时可为analysis表行/连接/段落加稳定ID并写入准确locator；本评审不修饰原始产物。"
+    }
+  ],
+  "research_design_deviations": [
+    {
+      "id": "LIMIT-COMPARISON",
+      "severity": "research_design_limit",
+      "status": "未执行",
+      "requirement": "grading_policy.comparison要求记录无技能/原规范/当前/候选四条件实际结果",
+      "observed": "本轮仅单候选连续案例；四条件没有执行。",
+      "interpretation": "不得生成组间差值、增益或优越性结论；本报告只给该候选首轮的逐项结果。"
+    },
+    {
+      "id": "LIMIT-SCALE",
+      "severity": "external_validity_limit",
+      "observed": "首轮20业务模块，但所有项目来源总计22448字节；父任务说明续轮为23210字节（本首轮尚未独立核验续轮）。",
+      "interpretation": "这是结构、入口发现及跨会话接续的小型合成试点，未施加大上下文容量压力，不能推为生产规模、真实跨组织迁移或稳定可靠性结论。"
+    },
+    {
+      "id": "LIMIT-STATIC",
+      "severity": "evidence_limit",
+      "observed": "未执行业务，未渲染Mermaid，未取得运行测试/部署/外部系统证据。",
+      "interpretation": "静态机制、计划一致性和checkpoint质量可评，运行正确性与页面质量不在结论范围。"
+    }
+  ],
+  "resume_review_pending": "续轮尚未提供；待同一评审根据V1规则与本次阅读理解核新增/变更及正文/图/测试/claims/checkpoint同步，不提前认定续轮成功。"
+}
+

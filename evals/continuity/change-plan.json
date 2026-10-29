@@ -1,0 +1,110 @@
+{
+  "schema_version": 1,
+  "visibility": "evaluator_only_do_not_copy_into_initial_input",
+  "material_kind": "internal_synthetic_static_fixture",
+  "from_revision": "synthetic-shop-1.0",
+  "to_revision": "synthetic-shop-1.1",
+  "purpose": "连续任务：初次画像/写节/checkpoint后，修改一处业务条件并增加一个模块，换会话进行目录差异与选择性复核。此JSON不是首轮输入。",
+  "modifications": [
+    {
+      "path": "modules/orders/service.py",
+      "kind": "modify",
+      "role": "existing_business_condition",
+      "replacements": [
+        {
+          "before": "if order[\"status\"] != \"reserved\":",
+          "after": "if order[\"status\"] not in (\"reserved\", \"packing\"):"
+        }
+      ]
+    },
+    {
+      "path": "registry.py",
+      "kind": "modify",
+      "role": "entry_registration_and_revision",
+      "replacements": [
+        {
+          "before": "from modules.residents import service as residents",
+          "after": "from modules.recalls import service as recalls\nfrom modules.residents import service as residents"
+        },
+        {
+          "before": "REVISION = \"synthetic-shop-1.0\"",
+          "after": "REVISION = \"synthetic-shop-1.1\""
+        },
+        {
+          "before": "    \"POST /residents\": residents.register,",
+          "after": "    \"POST /catalog/recall\": recalls.apply,\n    \"POST /residents\": residents.register,"
+        }
+      ]
+    }
+  ],
+  "new_files": [
+    {
+      "path": "modules/recalls/service.py",
+      "kind": "add",
+      "content": "\"\"\"Synthetic product recall; static fixture, no executed recall evidence.\"\"\"\nfrom modules.catalog.service import freeze\nfrom modules.orders.service import cancel\n\ndef apply(repo, product_id, now):\n    with repo.transaction():\n        freeze(repo, product_id)\n        affected = repo.find(\"orders\", lambda row: row[\"status\"] in (\"reserved\", \"packing\") and any(line[\"product_id\"] == product_id for line in row[\"lines\"]))\n        cancelled = []\n        for order in sorted(affected, key=lambda row: row[\"id\"]):\n            cancel(repo, order[\"id\"], now)\n            cancelled.append(order[\"id\"])\n    return {\"product_id\": product_id, \"cancelled\": cancelled}\n"
+    }
+  ],
+  "expected_path_delta": {
+    "modified_existing_source_paths": 2,
+    "added_source_paths": 1,
+    "deleted_source_paths": 0,
+    "total_changed_source_paths": 3,
+    "modified_existing_business_modules": 1,
+    "new_business_modules": 1
+  },
+  "expected_review_targets": [
+    {
+      "artifact": "chapter.md",
+      "area": "4.3 订单取消的允许状态与调用来源",
+      "why": "由reserved放宽为reserved或packing，新召回入口能够取消含目标商品的整个符合状态订单"
+    },
+    {
+      "artifact": "flow.mmd",
+      "area": "取消条件判断与新召回调用",
+      "why": "条件节点与正文同步；只改与取消相关的流向"
+    },
+    {
+      "artifact": "test-plan.md",
+      "area": "取消与召回计划",
+      "why": "补packing允许、shipped/delivered拒绝、商品下架与整单取消、异常回滚预期；不得写成已通过"
+    },
+    {
+      "artifact": "analysis.md",
+      "area": "模块覆盖与入口/连接",
+      "why": "新增recalls、/catalog/recall和freeze/cancel连接，初始20变21"
+    },
+    {
+      "artifact": "claims.json",
+      "area": "受影响主张来源与关联产物",
+      "why": "更新orders与registry基线并加入recalls，不改无关主张事实"
+    },
+    {
+      "artifact": "checkpoint.json",
+      "area": "版本/路径指纹/模块/接续项",
+      "why": "记录实际3个源码路径变化与有选择的内容复核"
+    }
+  ],
+  "unchanged_areas": [
+    "modules/catalog/service.py 的freeze规则",
+    "modules/inventory/service.py 的预留/释放/消耗计数",
+    "modules/payments/service.py 的本地支付限制",
+    "modules/recovery/service.py 的reserved-only超时选择与严格早于截止时刻",
+    "配送与售后原有状态链"
+  ],
+  "important_limits": [
+    "orders.cancel的新状态允许规则不改变recovery只选择reserved的事实；packing订单不会因此自动超时取消",
+    "召回匹配任意一行目标商品，取消整个订单；不是只删除单个订单行",
+    "取消源码没有清理既有picks/packages记录，不能宣称完整仓内撤销",
+    "这是合成静态材料，计划的预期不能升级为真实运行结果"
+  ],
+  "resume_user_task": "上次定位已确认。项目已更新，请先利用上次checkpoint比较目录与来源基线，复核必要内容，更新受影响的4.3、图、测试计划、画像和接续记录。不要重开访谈，不要重写无关章节。明确新增材料与复核范围；本文仍为静态材料的实现说明。",
+  "checkpoint_advice": {
+    "positioning": "已确认选题/层次/目标章节、材料类型与运行边界",
+    "revision": "registry.py修订值及已读基线",
+    "module_coverage": "完整相对路径+模块职责+阅读状态；不能按同名service.py去重",
+    "entrypoints": "注册映射、配置任务与到业务处理器的关键连接",
+    "sources": "每个已读来源相对路径、SHA-256、用途、可定位的规则/符号；inventory/hash扫描与内容阅读分别记录",
+    "artifacts_and_claims": "产物、完成状态、稳定主张ID及正文/流程图/测试计划位置",
+    "open_issues_and_next_action": "未决项与下一会话先比较目录/指纹再复核的步骤"
+  }
+}

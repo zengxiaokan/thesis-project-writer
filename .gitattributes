@@ -3,3 +3,5 @@
 # Raw evaluation outputs and grades retain original bytes, including line endings.
 evals/difficult/results/**/outputs/*.md -text -whitespace
 evals/difficult/results/**/grades/*.json -text -whitespace
+evals/**/results/**/raw/** -text -whitespace
+evals/**/results/**/reviews/** -text -whitespace

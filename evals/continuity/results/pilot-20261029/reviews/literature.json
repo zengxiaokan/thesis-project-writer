@@ -1,0 +1,285 @@
+{
+  "schema_version": 1,
+  "case_id": "literature-known-sources-forward-01",
+  "assessment_kind": "independent_agent_forward_case_review_only",
+  "review_date": "2026-10-29",
+  "reviewer": {
+    "kind": "independent_automated_subagent",
+    "human_review": false
+  },
+  "scope": {
+    "task": "只读审查修订正文及两份核验记录；独立访问三篇指定版本官方原文。",
+    "input_file": "C:/Users/13671/.codex/visualizations/2026/10/28/01a182cf-e7e0-79b3-8535-f72c94173f77/thesis-batch3/evals/literature/case/input.md",
+    "grading_file": "C:/Users/13671/.codex/visualizations/2026/10/28/01a182cf-e7e0-79b3-8535-f72c94173f77/thesis-batch3/evals/literature/case/grading.json",
+    "artifact_directory": "C:/Users/13671/.codex/visualizations/2026/10/28/01a182cf-e7e0-79b3-8535-f72c94173f77/batch3-runtime/literature/artifacts",
+    "reviewed_files": [
+      "revision.md",
+      "verification.json",
+      "search-log.json"
+    ],
+    "excluded": [
+      "其他评测与公开示例",
+      "父会话材料",
+      "原运行完整工具转录"
+    ],
+    "original_artifacts_modified": false,
+    "note": "评审结论来自待审输出与本次实际打开的原文，不把自报已读视为独立验证。"
+  },
+  "score": {
+    "total": 10,
+    "max_points": 10,
+    "per_item_scale": "0—2"
+  },
+  "items": [
+    {
+      "id": "attribution",
+      "score": 2,
+      "output_locations": [
+        "revision.md:1（第一段）",
+        "verification.json $.changes[0]",
+        "verification.json $.sources[0].limits",
+        "verification.json $.unresolved[0]"
+      ],
+      "reason": "正文将RAG限定为论文任务中的相对事实性改善，明确这不构成彻底消错；项目即使引入检索仍需自身验证。未新增项目接入、数据或实验结果。",
+      "independently_checked_evidence": [
+        "E1"
+      ],
+      "actual_failure": null,
+      "uncertainty": "未核项目实现与回答质量；待审输出也明确不作确认。"
+    },
+    {
+      "id": "comparability",
+      "score": 2,
+      "output_locations": [
+        "revision.md:3（第二段）",
+        "verification.json $.changes[1]",
+        "verification.json $.sources[0].limits[1]",
+        "verification.json $.unresolved[1]"
+      ],
+      "reason": "正文具体区分开放域QA的EM与受控多文档问答的答案包含判分，并说明含答案文档和干扰文档的构造；未建立跨文献榜单或捏造统一对照结果。所述差异有原文依据。",
+      "independently_checked_evidence": [
+        "E2",
+        "E3"
+      ],
+      "actual_failure": null,
+      "uncertainty": "EM归一化与原始评分代码未追溯，已如实登记；这不妨碍已核实任务设置差异下停止直接排名。"
+    },
+    {
+      "id": "absence_claim",
+      "score": 2,
+      "output_locations": [
+        "revision.md:5（第三段）",
+        "verification.json $.changes[2]",
+        "verification.json $.changes[3]",
+        "verification.json $.sources[2].limits",
+        "search-log.json $.stop_reason"
+      ],
+      "reason": "正文不再由摘要缺项推断全文未做；把Transformer位置编码用于架构背景，并引用文献[2]作为位置影响已有研究的直接反例。领域空白与项目填补空白两项结论均删除，同时保留模型和任务边界。",
+      "independently_checked_evidence": [
+        "E3",
+        "E4",
+        "E5"
+      ],
+      "actual_failure": null,
+      "uncertainty": "只覆盖给定三篇论文，不构成领域全面检索；输出明确这一边界。"
+    },
+    {
+      "id": "traceability",
+      "score": 2,
+      "output_locations": [
+        "revision.md:9、11、13（参考文献）",
+        "verification.json $.scope.reading_method",
+        "verification.json $.scope.page_convention",
+        "verification.json $.sources[*].read_ranges",
+        "verification.json $.changes[*].support",
+        "verification.json $.access.other_failed_or_limited_operations",
+        "search-log.json $.actual_operations",
+        "search-log.json $.selection"
+      ],
+      "reason": "版本、书目、节页与修改关系可逐项复查。独立核对的关键节页与输出记录相符，未发现伪造位置或来源内容。访问成功、局部阅读、find未匹配与截图未获得图像被分别记录，未将整页返回写成全文精读。",
+      "independently_checked_evidence": [
+        "E1",
+        "E2",
+        "E3",
+        "E4",
+        "E5",
+        "E6"
+      ],
+      "actual_failure": null,
+      "uncertainty": "24项操作是产物中整理的记录，未取得原运行逐条原始工具转录，无法证明日志完整性或每次阅读行为的真实性；本项分数评价的是记录可追溯性与本次抽查内容相符程度。"
+    },
+    {
+      "id": "usable_revision",
+      "score": 2,
+      "output_locations": [
+        "revision.md:1、3、5（三段正文）",
+        "revision.md:7—13（参考文献）",
+        "verification.json $.unresolved"
+      ],
+      "reason": "三段围绕检索增强的事实性边界、评价条件与信息位置组织论证，连接清楚，必要限制有实际意义，核验过程置于记录中。正文可用于后续相关工作写作，未把有限材料包装为领域全貌。",
+      "independently_checked_evidence": [
+        "E1",
+        "E2",
+        "E3",
+        "E4",
+        "E5"
+      ],
+      "actual_failure": null,
+      "uncertainty": "这是一段局部相关工作修订，不是完整相关工作章节或正式出版书目的验收。"
+    }
+  ],
+  "independent_source_checks": [
+    {
+      "id": "E1",
+      "source": "[1]",
+      "version": "2005.11401v4",
+      "url": "https://arxiv.org/pdf/2005.11401v4",
+      "access": "success",
+      "actually_read_locations": [
+        "PDF第2页 §2开头",
+        "PDF第5页 §3.3的人类评价定义",
+        "PDF第6页 §4.2—4.3相关段落",
+        "PDF第8页 表4文本"
+      ],
+      "finding": "方法将检索材料作为条件；事实性结论依赖具体任务、基线及评价，表4也含双方均不佳的判定，支持撤销无条件正确保证。",
+      "method": "官方PDF提取文本的定向打开/find；未复现实验或审读原始标注。"
+    },
+    {
+      "id": "E2",
+      "source": "[1]",
+      "version": "2005.11401v4",
+      "url": "https://arxiv.org/pdf/2005.11401v4",
+      "access": "success",
+      "actually_read_locations": [
+        "PDF第4页 §3.1",
+        "PDF第6页 表1与表2文字",
+        "PDF第17页 附录B相关段落",
+        "PDF第18页 附录D开头"
+      ],
+      "finding": "§3.1明确开放域QA数据与EM；表1区分TQA测试口径。没有获得与文献[2]统一的对照。",
+      "method": "局部文本核对；未追溯EM实现。"
+    },
+    {
+      "id": "E3",
+      "source": "[2]",
+      "version": "2307.03172v3",
+      "url": "https://arxiv.org/pdf/2307.03172v3",
+      "access": "success",
+      "actually_read_locations": [
+        "PDF第3页 §2.1（含判分句）",
+        "PDF第5页 §2.3与图5文字"
+      ],
+      "finding": "输入包含一个含答案文档及干扰文档，以输出包含标注答案判分，并操控相关文档位置；确有直接的位置研究。",
+      "method": "官方PDF局部文本阅读；不将图注阅读视为曲线图像审读。"
+    },
+    {
+      "id": "E4",
+      "source": "[2]",
+      "version": "2307.03172v3",
+      "url": "https://arxiv.org/pdf/2307.03172v3",
+      "access": "success",
+      "actually_read_locations": [
+        "PDF第6页 §3.2",
+        "PDF第7页 图7返回图注"
+      ],
+      "finding": "合成键值检索的模型表现存在差异，支持正文避免将中间位置下降写成所有模型和任务的普遍定律。",
+      "method": "局部提取文本与图注核对。"
+    },
+    {
+      "id": "E5",
+      "source": "[3]",
+      "version": "1706.03762v7",
+      "url": "https://arxiv.org/pdf/1706.03762v7",
+      "access": "success",
+      "actually_read_locations": [
+        "PDF第1页摘要与会议标识",
+        "PDF第6页 §3.5",
+        "PDF第8—9页 §6.2与表3(E)文本"
+      ],
+      "finding": "位置编码服务于序列顺序表示；编码替换的评价属于英德翻译。不能用摘要缺项排除全文内容或推断领域不存在研究。",
+      "method": "局部文本核对；未据此断言全文没有其他位置相关讨论。"
+    },
+    {
+      "id": "E6",
+      "source": "[1]—[3]",
+      "urls": [
+        "https://arxiv.org/abs/2005.11401v4",
+        "https://arxiv.org/abs/2307.03172v3",
+        "https://arxiv.org/abs/1706.03762v7"
+      ],
+      "access": "all_success",
+      "actually_read_locations": [
+        "三篇摘要页的题名、作者与提交/版本日期",
+        "前两篇摘要页的接收说明"
+      ],
+      "finding": "v4/v3/v7、首发年份与修订日期均与修订参考文献及verification记录一致。第三篇PDF首页会议标识也与记录一致。",
+      "method": "官方摘要页定向打开与find。"
+    }
+  ],
+  "record_consistency": {
+    "json_parsing": "verification.json与search-log.json均可解析",
+    "operation_sequence": "24项，序号1—24连续且无重复",
+    "read_vs_access": "scope明确局部文本阅读；sources分别列阅读节页与未读部分；没有将全文可访问等同全文已读。",
+    "failure_reporting": "search-log第16项find未匹配与verification中的同一限制对应；第20—24项的5次截图受限与verification所列对象和次数对应。",
+    "claim_mapping": "changes C1—C4分别映射正文三段及相应来源；所核对关键位置均存在且支持收窄后的表述。",
+    "caveat": "上述自洽检查不能证明search-log是完整、未经遗漏的原始工具日志，也不能独立复现原运行的截图返回形态。"
+  },
+  "outcomes": {
+    "substantive_failures_found": [],
+    "partial_or_unperformed_items": [
+      {
+        "item": "原运行图像审读",
+        "status": "产物自报未完成",
+        "location": "verification.json $.access.other_failed_or_limited_operations[1]; search-log.json $.actual_operations[19:24]",
+        "independent_verification": "本次未重做截图调用；只核对记录对象/次数自洽与相关文本内容。"
+      },
+      {
+        "item": "EM代码、原始数据、模型复现、项目评测、领域全面检索",
+        "status": "未执行",
+        "location": "verification.json $.sources[*].limits; $.unresolved",
+        "independent_verification": "均不作为本次已验证成果。"
+      }
+    ],
+    "runner_reported_access_limits": [
+      {
+        "location": "search-log.json $.actual_operations[15]",
+        "result": "Table 4文本find无匹配；后续Factuality定位补足。",
+        "status": "self_report_only"
+      },
+      {
+        "location": "search-log.json $.actual_operations[19:24]",
+        "result": "截图仅返回引用字符串，未获取可视图像。",
+        "status": "self_report_only"
+      }
+    ],
+    "reviewer_actual_access_failures": [],
+    "reviewer_limited_operations": [
+      {
+        "operation": "find",
+        "url": "https://arxiv.org/pdf/2005.11401v4",
+        "argument": "D Further",
+        "result": "本次文本未匹配；随后定向打开第18页成功读取附录D开头。未将未匹配解释为内容不存在。"
+      }
+    ]
+  },
+  "artifact_fingerprints_before_review_write": [
+    {
+      "file": "revision.md",
+      "sha256": "AF09E48BD6ED1A066F27F6F7EA3793A16D3A361EB0512797E6541A3AAA988302"
+    },
+    {
+      "file": "search-log.json",
+      "sha256": "87003FD3849DB463BF0F5E0BD42970EB080557BAFED439DA4BA0BA64CAF71AB2"
+    },
+    {
+      "file": "verification.json",
+      "sha256": "57C5D858F4F760F98840140D5AB5AB57322429B5F13E31044D29F738F475C511"
+    }
+  ],
+  "conclusion": "10/10。三项推论越界均已纠正，关键来源支持与记录自洽性通过本次独立定向核查；未发现实质错误。",
+  "limitations": [
+    "这是三篇已知来源的单次前向案例审查，不是盲评、人类评审、重复实验或系统综述。",
+    "不能证明原运行工具日志完整性、全部声明的实际阅读行为或截图受限现象。",
+    "不能据此推导相对旧版的能力增益、外部迁移能力或运行稳定性。"
+  ]
+}

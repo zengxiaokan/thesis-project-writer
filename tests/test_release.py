@@ -25,10 +25,12 @@ class ReleaseTests(unittest.TestCase):
                              "scripts/check_evidence_changes.py", "scripts/audit_common.py",
                              "references/consistency-checks.md", "references/evidence-changes.md",
                              "examples/readonly-checks/base/evidence/claims.json",
-                             "examples/readonly-checks/observation.json"):
+                             "examples/readonly-checks/observation.json", "scripts/inventory_sources.py",
+                             "references/literature-workflow.md", "references/large-materials-and-resume.md",
+                             "examples/literature-synthesis/reading-matrix.json"):
                 self.assertIn("thesis-project-writer/" + required, names)
             self.assertFalse(any("workspace/" in name or ".github/" in name or "__pycache__" in name
-                                 or "evals/difficult/" in name for name in names))
+                                 or ("/evals/" in name and not name.endswith("/evals/evals.json")) for name in names))
             self.assertTrue(all(info.date_time == (1980, 1, 1, 0, 0, 0) for info in archive.infolist()))
             self.assertIsNone(archive.testzip())
 

@@ -1,0 +1,11 @@
+test_identity_metadata_cannot_be_placed_in_runner_copy (test_prepare.InputIsolationTests) ... ok
+test_no_skill_condition_has_no_injected_rule_file (test_prepare.InputIsolationTests) ... ok
+test_repeated_output_is_rejected_without_overwriting (test_prepare.InputIsolationTests) ... ok
+test_runner_copy_contains_only_raw_inputs_and_selected_rules (test_prepare.InputIsolationTests) ... ok
+test_actual_short_quote_is_accepted (test_summary.RatingEvidenceTests) ... ok
+test_missing_or_invented_quote_is_rejected (test_summary.RatingEvidenceTests) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.323s
+
+OK

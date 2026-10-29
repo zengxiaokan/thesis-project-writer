@@ -1,0 +1,45 @@
+{
+  "date": "2026-10-29",
+  "model": "inherited from this Codex session; no model or reasoning override",
+  "replicates": {
+    "initial_analysis": 1,
+    "fresh_agent_continuation": 1,
+    "literature_forward_check": 1
+  },
+  "comparison": "No no-skill baseline, no randomized comparison, no effect-size or variance claim.",
+  "agents": {
+    "first": "batch3_first_writer",
+    "resume": "batch3_resume_writer",
+    "literature": "batch3_literature_writer"
+  },
+  "context": "Each writer created with fork_turns=none; no parent turn history. Rules/task paths supplied explicitly.",
+  "continuity_allowed": [
+    "runtime rules/",
+    "runtime task.md",
+    "project through material_reader.py only",
+    "resume previous/ artifacts",
+    "write artifacts/ and external read log"
+  ],
+  "continuity_unavailable_by_instruction": [
+    "grading.json",
+    "change-plan.json",
+    "other eval outputs",
+    "network",
+    "business execution",
+    "installed skills",
+    "real thesis"
+  ],
+  "literature_allowed": [
+    "input.md",
+    "literature-workflow.md",
+    "official primary paper sources",
+    "write artifacts/"
+  ],
+  "literature_case_status": "Known three-paper forward check, not an external held-out literature set.",
+  "isolation": "Instructional read protocol and logs plus before/after source snapshots; no OS-enforced confinement.",
+  "handoff_observation": "All first artifacts, including source caches, were copied into previous/. Resume displayed eight unchanged cached source texts and two old diff excerpts in addition to three logged current files. Old artifact reads were not uniformly instrumented; supplemental self-report retained. Future replay instructions now omit raw source caches; this run is not relabeled as following that revised protocol.",
+  "previous_copy_unchanged": true,
+  "instrumentation_fix": "During first-run development, reject an existing external log with nlink != 1 and linked/reparse log leaf. Actual runtime logs are new regular single-link files. Event contents/meaning unchanged.",
+  "diagram_scope": "Mermaid source text reviewed only; not rendered or checked on formal paper pages.",
+  "test_scope": "Static implementation analysis and planned tests only; no synthetic business code executed."
+}

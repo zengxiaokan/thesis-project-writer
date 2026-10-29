@@ -1,0 +1,257 @@
+{
+  "schema_version": 1,
+  "tool": "inventory_sources",
+  "root": "C:\\Users\\13671\\.codex\\visualizations\\2026\\10\\28\\01a182cf-e7e0-79b3-8535-f72c94173f77\\batch3-runtime\\resume\\project",
+  "status": "listed",
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 769,
+      "mtime_ns": 1793285969936604000,
+      "sha256": "4a1a988c9246b8778d392bccfe6fc5b77ebbfc69b365092a85eb4b5d18aa9be4",
+      "hash_mode": "text-lf"
+    },
+    {
+      "path": "app.py",
+      "bytes": 288,
+      "mtime_ns": 1793285969937136900,
+      "sha256": "9db2699d41808c4685544f373e260748974e54c1feefd44bdd6a5e9cc9425a96",
+      "hash_mode": "text-lf"
+    },
+    {
+      "path": "jobs/runner.py",
+      "bytes": 418,
+      "mtime_ns": 1793285969939500300,
+      "sha256": "e5ff87258ea422afd0976380bea8ab95128c1c7ecfd95d9ff0c25bf266b74377",
+      "hash_mode": "text-lf"
+    },
+    {
+      "path": "modules/carts/service.py",
+      "bytes": 649,
+      "mtime_ns": 1793285969944507000,
+      "sha256": "e39d14d8e996d5e2368b1252dfab92864362cc9d54f5ae52389d02bc3b8e3d09",
+      "hash_mode": "text-lf"
+    },
+    {
+      "path": "modules/catalog/service.py",
+      "bytes": 492,
+      "mtime_ns": 1793285969942499000,
+      "sha256": "716128fffb555e1799834f1d43cb9ac56e3ffbce7ecd660a17625fb887404044",
+      "hash_mode": "text-lf"
+    },
+    {
+      "path": "modules/coupons/service.py",
+      "bytes": 508,
+      "mtime_ns": 1793285969945507200,
+      "sha256": "5eea21195ae55c360c5e0ccf57113f2c6feadf7e8652eb5927fc8c4696683a84",
+      "hash_mode": "text-lf"
+    },
+    {
+      "path": "modules/delivery/service.py",
+      "bytes": 748,
+      "mtime_ns": 1793286016418181800,
+      "sha256": "71f81db95b134f355c74a30086b89b55d11945d7491a3f6de6afa5432e776456",
+      "hash_mode": "text-lf"
+    },
+    {
+      "path": "modules/inventory/service.py",
+      "bytes": 915,
+      "mtime_ns": 1793285969946507100,
+      "sha256": "4b3263457d36a80b20eaff2317d0634ae4bc95a634ddf0764a34e084b51b6d64",
+      "hash_mode": "text-lf"
+    },
+    {
+      "path": "modules/invoices/service.py",
+      "bytes": 524,
+      "mtime_ns": 1793285969948508100,
+      "sha256": "766bbd0432a83c99eab85c5ff3f37972714b952093ac10d2bc382ec7efb32026",
+      "hash_mode": "text-lf"
+    },
+    {
+      "path": "modules/loyalty/service.py",
+      "bytes": 691,
+      "mtime_ns": 1793286016422187900,
+      "sha256": "73b17841fbc9ca74c35e8c39596c2f50c542c460cd16cc8122edbda257be4268",
+      "hash_mode": "text-lf"
+    },
+    {
+      "path": "modules/notifications/service.py",
+      "bytes": 382,
+      "mtime_ns": 1793286016420188400,
+      "sha256": "b3e675aa84c87ff63b74d9ed2e7e68f17ad90378c110c51f8f9219ef9bdf976c",
+      "hash_mode": "text-lf"
+    },
+    {
+      "path": "modules/orders/service.py",
+      "bytes": 2485,
+      "mtime_ns": 1793286889310742500,
+      "sha256": "dd2003646e5ed74471f4bd26f9cdca058b5cfb571558330d2b585c20934125ca",
+      "hash_mode": "text-lf"
+    },
+    {
+      "path": "modules/outbox/service.py",
+      "bytes": 745,
+      "mtime_ns": 1793286016421188500,
+      "sha256": "64b32fe0b68974c85e72f7c51a7f338684139ed2bfc21e0f7d0515f8c6334594",
+      "hash_mode": "text-lf"
+    },
+    {
+      "path": "modules/packing/service.py",
+      "bytes": 548,
+      "mtime_ns": 1793286016415708100,
+      "sha256": "20708fd703dc69aafa5a94d9804805b99a8fbf87da00f7977e5694c09b5dfce2",
+      "hash_mode": "text-lf"
+    },
+    {
+      "path": "modules/payments/service.py",
+      "bytes": 593,
+      "mtime_ns": 1793285969947508300,
+      "sha256": "911c7b72c3a6d4321117376d3dae4bf587237a1ff84ad6441e161c45bacf9e8e",
+      "hash_mode": "text-lf"
+    },
+    {
+      "path": "modules/picking/service.py",
+      "bytes": 446,
+      "mtime_ns": 1793285969949509900,
+      "sha256": "fee0cddea17a1208bcfbe39b94a18c2a83f398dfe9dee0cc3e4a763e6230130a",
+      "hash_mode": "text-lf"
+    },
+    {
+      "path": "modules/pricing/service.py",
+      "bytes": 314,
+      "mtime_ns": 1793285969943498500,
+      "sha256": "e214b1b17647ad8361bfff8f8a1bfa1dc6653c26dcf0a812a6d90df9d7065284",
+      "hash_mode": "text-lf"
+    },
+    {
+      "path": "modules/recalls/service.py",
+      "bytes": 655,
+      "mtime_ns": 1793286889314236200,
+      "sha256": "dd1703c8c0a7b19b970ef9b020bbe50a341ce25405ed661fe36df3c90fa2f1e3",
+      "hash_mode": "text-lf"
+    },
+    {
+      "path": "modules/recovery/service.py",
+      "bytes": 702,
+      "mtime_ns": 1793286016423188700,
+      "sha256": "7e994358c2bb3acf410b378d80996311d838544ac29e2d633e13bb1ed6fbaaca",
+      "hash_mode": "text-lf"
+    },
+    {
+      "path": "modules/refunds/service.py",
+      "bytes": 986,
+      "mtime_ns": 1793286016419187500,
+      "sha256": "9f4a44678901facc1ac968e7d3429b9888b57517abeb08e262a523190a6ae332",
+      "hash_mode": "text-lf"
+    },
+    {
+      "path": "modules/residents/service.py",
+      "bytes": 482,
+      "mtime_ns": 1793285969942499000,
+      "sha256": "0a12da178bc2553d2d6870f9f1d47c8e1007143e0dfa132a9bf59d3346ee20e6",
+      "hash_mode": "text-lf"
+    },
+    {
+      "path": "modules/returns/service.py",
+      "bytes": 603,
+      "mtime_ns": 1793286016418181800,
+      "sha256": "18ffdc0d974ff28b78be39df22c33fdc128f73a173f0c0562c76deee3023fa93",
+      "hash_mode": "text-lf"
+    },
+    {
+      "path": "modules/settlements/service.py",
+      "bytes": 711,
+      "mtime_ns": 1793286016423188700,
+      "sha256": "8fc0dcf0d5807c8bd6d7eadd3400bf78e010eb131819462de4037b7700eb91ca",
+      "hash_mode": "text-lf"
+    },
+    {
+      "path": "modules/shipping/service.py",
+      "bytes": 825,
+      "mtime_ns": 1793286016417030900,
+      "sha256": "e05da7d83471ec46f3634d4b0777f2c36ea73aaae28a898d849ec0374c074677",
+      "hash_mode": "text-lf"
+    },
+    {
+      "path": "project.json",
+      "bytes": 221,
+      "mtime_ns": 1793285969937136900,
+      "sha256": "2c0af21d0be62ec16729efe828db19c0d1de29927952b98119e8d7bdf8ce95c7",
+      "hash_mode": "text-lf"
+    },
+    {
+      "path": "registry.py",
+      "bytes": 1358,
+      "mtime_ns": 1793286889312740600,
+      "sha256": "c5430f094049367f301d5a1397edf98587a19c42d4b1d39d99b09d9cf31a8af9",
+      "hash_mode": "text-lf"
+    },
+    {
+      "path": "schema.sql",
+      "bytes": 1656,
+      "mtime_ns": 1793285969940498400,
+      "sha256": "74c8492546575e19aa48afc9472a3e1121271b82e4f341a8b527e2348c458b12",
+      "hash_mode": "text-lf"
+    },
+    {
+      "path": "store.py",
+      "bytes": 1136,
+      "mtime_ns": 1793285969939500300,
+      "sha256": "e8d26766d28a229ed2dce47fdce0487ce5e03777560c58ec3d79642ab5eab110",
+      "hash_mode": "text-lf"
+    },
+    {
+      "path": "task.md",
+      "bytes": 1575,
+      "mtime_ns": 1793286016426062400,
+      "sha256": "48a332166f39c35505bb6c7a0a8c7c8fa258202f524163f8fe8c31d0c7647c7d",
+      "hash_mode": "text-lf"
+    },
+    {
+      "path": "thesis/outline.md",
+      "bytes": 253,
+      "mtime_ns": 1793286016426062400,
+      "sha256": "da81dac466f047b94470c558e53bfb6602fa893dbca0a7480ed1b471b8e6e8c6",
+      "hash_mode": "text-lf"
+    },
+    {
+      "path": "thesis/positioning.md",
+      "bytes": 532,
+      "mtime_ns": 1793286016424677800,
+      "sha256": "15ac46cfc6e87aec8f99b799fae1867e2c2c2d3c77b29b3cd2393be6fed8abc6",
+      "hash_mode": "text-lf"
+    }
+  ],
+  "excluded": [],
+  "skipped": [],
+  "findings": [],
+  "coverage": {
+    "files_listed": 31,
+    "metadata_only": false,
+    "hash_mode": "text-lf",
+    "content_hash_attempts": 31,
+    "content_hash_reads": 31,
+    "content_hash_bytes": 23210,
+    "default_excluded_names": [
+      ".git",
+      ".mypy_cache",
+      ".pytest_cache",
+      ".tox",
+      ".venv",
+      "__pycache__",
+      "build",
+      "dist",
+      "node_modules",
+      "venv"
+    ],
+    "explicit_excluded_directories": [],
+    "business_modules_assessed": false,
+    "model_content_reads_measured": false,
+    "limits": [
+      "Paths, metadata and hashes do not establish business coverage or understanding.",
+      "Hashing reads file bytes; metadata listing and model content reads are different activities.",
+      "Default directory names are configurable exclusion hints, not verified third-party classifications.",
+      "Read-only checks do not guarantee unchanged access times or atomic isolation against concurrent replacements."
+    ]
+  }
+}

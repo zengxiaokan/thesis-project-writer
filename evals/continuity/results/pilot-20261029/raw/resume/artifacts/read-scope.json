@@ -1,0 +1,112 @@
+{
+  "current_project_access_method": "全部仅通过受信material_reader.py；没有直接读project源码。",
+  "wrapper_inventory": {
+    "calls": 1,
+    "files_hash_read": 31,
+    "bytes_hash_read": 23210,
+    "not_model_source_reading": true
+  },
+  "wrapper_current_content_reads": [
+    {
+      "path": "modules/orders/service.py",
+      "reason": "完整路径/指纹比较后的变化源或新增入口定向复核",
+      "bytes": 2485
+    },
+    {
+      "path": "registry.py",
+      "reason": "完整路径/指纹比较后的变化源或新增入口定向复核",
+      "bytes": 1358
+    },
+    {
+      "path": "modules/recalls/service.py",
+      "reason": "完整路径/指纹比较后的变化源或新增入口定向复核",
+      "bytes": 655
+    }
+  ],
+  "wrapper_current_content_read_paths_count": 3,
+  "wrapper_current_content_read_bytes": 4498,
+  "model_previous_source_cache_rereads": [
+    {
+      "path": "store.py",
+      "reason": "确认transaction按调用层各自保存rows/sequence，异常重抛，使召回外层可恢复前序成功取消。",
+      "current_inventory_hash_matches_previous": true
+    },
+    {
+      "path": "modules/catalog/service.py",
+      "reason": "确认freeze只将saleable=False，缺商品抛错，并理解冻结对后续place的影响。",
+      "current_inventory_hash_matches_previous": true
+    },
+    {
+      "path": "modules/inventory/service.py",
+      "reason": "确认packing尚保留的库存可由release恢复，整单循环释放每一行，不补造其他库存逻辑。",
+      "current_inventory_hash_matches_previous": true
+    },
+    {
+      "path": "modules/refunds/service.py",
+      "reason": "确认召回复用cancel时仍有余额、正整数及零元失败边界，错误会传播到外层。",
+      "current_inventory_hash_matches_previous": true
+    },
+    {
+      "path": "modules/picking/service.py",
+      "reason": "确认拣货将reserved/captured改packing且写done，从而判断新取消资格。",
+      "current_inventory_hash_matches_previous": true
+    },
+    {
+      "path": "modules/packing/service.py",
+      "reason": "确认包装仅写packed记录且订单仍packing，以及cancel不会清理该记录。",
+      "current_inventory_hash_matches_previous": true
+    },
+    {
+      "path": "modules/shipping/service.py",
+      "reason": "确认出库才消耗预留并改shipped；已取消订单即使留有包装也不满足dispatch前置。",
+      "current_inventory_hash_matches_previous": true
+    },
+    {
+      "path": "modules/recovery/service.py",
+      "reason": "确认维护筛选仍仅reserved，且无整批transaction，用于与召回外层快照比较。",
+      "current_inventory_hash_matches_previous": true
+    }
+  ],
+  "model_previous_source_cache_reread_paths_count": 8,
+  "model_previous_source_cache_original_source_bytes": 6050,
+  "python_loaded_previous_cache_files": [
+    "previous/read-01-positioning.json",
+    "previous/read-02-core.json",
+    "previous/read-03-order-chain.json",
+    "previous/read-04-ledgers-maintenance.json",
+    "previous/read-05-fulfilment.json"
+  ],
+  "python_loaded_previous_cache_file_count": 5,
+  "python_loaded_previous_cache_json_bytes": 32362,
+  "cache_parse_scope": "Python映射构建解析5份旧JSON，其中包含全部30份旧来源文本（原始来源字节22448）；模型仅收到上列8份源文本。另在diff中显示旧orders和registry的变化片段，而非全文。其余旧缓存文本虽被Python加载，没有向模型输出；不得据wrapper的3份声明全部模型源码阅读只有3份。",
+  "previous_old_source_diff_excerpts_shown_to_model": [
+    {
+      "path": "modules/orders/service.py",
+      "scope": "取消状态判断的统一差异片段"
+    },
+    {
+      "path": "registry.py",
+      "scope": "新增导入/召回路由/REVISION的统一差异片段"
+    }
+  ],
+  "previous_formal_artifacts_directly_read": [
+    "previous/checkpoint.json",
+    "previous/analysis.md",
+    "previous/chapter.md",
+    "previous/flow.mmd",
+    "previous/test-plan.md",
+    "previous/claims.json",
+    "previous/inventory-baseline.json"
+  ],
+  "previous_build_artifacts_py": {
+    "content_read": false,
+    "only_filename_and_size_listed": true
+  },
+  "read_event_counts_for_previous_artifacts": "没有单独计数；若多次读取仍如实列为复用，不把文件集合当事件次数。",
+  "runtime_executed": false,
+  "network_used": false,
+  "source_roots_preserved": [
+    "previous",
+    "project"
+  ]
+}

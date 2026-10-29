@@ -30,6 +30,10 @@ jobs:
         run: python -B -m unittest discover -s evals/difficult -p test_*.py -v
       - name: Validate archived anonymous rating evidence
         run: python -B evals/difficult/summarize.py evals/difficult/results/pilot-20261029
+      - name: Continuity instrumentation checks
+        run: python -B -m unittest discover -s evals/continuity -p test_*.py -v
+      - name: Validate archived continuity evidence
+        run: python -B evals/continuity/summarize.py evals/continuity/results/pilot-20261029
       - name: Verify release contents and deterministic archive
         run: python -B scripts/build_release.py --check
       - name: Replay actual initialization observations

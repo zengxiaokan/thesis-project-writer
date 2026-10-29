@@ -1,0 +1,40 @@
+{
+  "added": [
+    "modules/recalls/service.py"
+  ],
+  "deleted": [],
+  "changed": [
+    "modules/orders/service.py",
+    "registry.py"
+  ],
+  "unchanged": [
+    "README.md",
+    "app.py",
+    "jobs/runner.py",
+    "modules/carts/service.py",
+    "modules/catalog/service.py",
+    "modules/coupons/service.py",
+    "modules/delivery/service.py",
+    "modules/inventory/service.py",
+    "modules/invoices/service.py",
+    "modules/loyalty/service.py",
+    "modules/notifications/service.py",
+    "modules/outbox/service.py",
+    "modules/packing/service.py",
+    "modules/payments/service.py",
+    "modules/picking/service.py",
+    "modules/pricing/service.py",
+    "modules/recovery/service.py",
+    "modules/refunds/service.py",
+    "modules/residents/service.py",
+    "modules/returns/service.py",
+    "modules/settlements/service.py",
+    "modules/shipping/service.py",
+    "project.json",
+    "schema.sql",
+    "store.py",
+    "task.md",
+    "thesis/outline.md",
+    "thesis/positioning.md"
+  ]
+}

@@ -1,0 +1,243 @@
+{
+  "schema_version": 1,
+  "visibility": "evaluator_only_not_available_to_running_agent",
+  "material_kind": "internal_synthetic_static_fixture",
+  "scope": "20模块连续任务的内部留出试点；不是生产项目规模或真实跨组织迁移的证明。不得把静态校验或计划当成业务测试。",
+  "initial_revision": "synthetic-shop-1.0",
+  "resumed_revision": "synthetic-shop-1.1",
+  "expected_module_counts": {
+    "initial": 20,
+    "resumed": 21
+  },
+  "modules": [
+    {
+      "module_id": "residents",
+      "path": "modules/residents/service.py",
+      "minimum_supported_relation": "登记要求姓名/配送区非空；active检查是本地业务条件，不是身份认证。"
+    },
+    {
+      "module_id": "catalog",
+      "path": "modules/catalog/service.py",
+      "minimum_supported_relation": "只列saleable商品；require_saleable拒绝缺失或停售；freeze仅将saleable置False。"
+    },
+    {
+      "module_id": "pricing",
+      "path": "modules/pricing/service.py",
+      "minimum_supported_relation": "正整数分计价，按单价乘数量求和；不能推断税率或外部定价服务。"
+    },
+    {
+      "module_id": "carts",
+      "path": "modules/carts/service.py",
+      "minimum_supported_relation": "正整数数量；按居民/商品更新或插入；orders调用lines_for，未实现清空购物车。"
+    },
+    {
+      "module_id": "coupons",
+      "path": "modules/coupons/service.py",
+      "minimum_supported_relation": "所属居民/active/截止时间/最低金额；到期时刻等于now仍可用；折扣封顶subtotal。"
+    },
+    {
+      "module_id": "inventory",
+      "path": "modules/inventory/service.py",
+      "minimum_supported_relation": "reserve使available减/reserved加；release相反；consume只减reserved。"
+    },
+    {
+      "module_id": "orders",
+      "path": "modules/orders/service.py",
+      "minimum_supported_relation": "place校验主体/购物车/商品/单商户，计算金额后预留库存并建订单/发票/待发积分/通知；cancel初始仅reserved并释放库存，已收款条件退款、作废发票与入队通知。"
+    },
+    {
+      "module_id": "payments",
+      "path": "modules/payments/service.py",
+      "minimum_supported_relation": "仅reserved+unpaid且金额相等时写本地收款记录，订单变captured；无支付网关。"
+    },
+    {
+      "module_id": "invoices",
+      "path": "modules/invoices/service.py",
+      "minimum_supported_relation": "本地按订单查重建issued，void改状态；不构成真实税务开票。"
+    },
+    {
+      "module_id": "picking",
+      "path": "modules/picking/service.py",
+      "minimum_supported_relation": "reserved且captured后建done拣货记录，订单改packing。"
+    },
+    {
+      "module_id": "packing",
+      "path": "modules/packing/service.py",
+      "minimum_supported_relation": "packing且有done拣货、无现成包裹才建packed包裹；订单仍packing。"
+    },
+    {
+      "module_id": "shipping",
+      "path": "modules/shipping/service.py",
+      "minimum_supported_relation": "packing且有packed包裹；consume预留库存，订单shipped，运单in_transit，并入队通知。"
+    },
+    {
+      "module_id": "delivery",
+      "path": "modules/delivery/service.py",
+      "minimum_supported_relation": "运单in_transit/区域匹配/订单shipped；双方变delivered，触发积分与商家记账。"
+    },
+    {
+      "module_id": "returns",
+      "path": "modules/returns/service.py",
+      "minimum_supported_relation": "delivered且原因非空才能requested，再单独approved；申请不自动退款/入库。"
+    },
+    {
+      "module_id": "refunds",
+      "path": "modules/refunds/service.py",
+      "minimum_supported_relation": "cancelled或approved退货；正整数金额且不超本地收款剩余额；全额后payment_state refunded，调用者管理transaction。"
+    },
+    {
+      "module_id": "notifications",
+      "path": "modules/notifications/service.py",
+      "minimum_supported_relation": "三个模板；需要调用方传transport，无transport抛OSError；不能宣称真实发送。"
+    },
+    {
+      "module_id": "outbox",
+      "path": "modules/outbox/service.py",
+      "minimum_supported_relation": "pending且attempts低于上限，按ID取batch；OSError后累加attempts保留pending，成功后sent。"
+    },
+    {
+      "module_id": "loyalty",
+      "path": "modules/loyalty/service.py",
+      "minimum_supported_relation": "下单prepare pending，按实付分整除100；交付后grant居民积分并置posted。"
+    },
+    {
+      "module_id": "settlements",
+      "path": "modules/settlements/service.py",
+      "minimum_supported_relation": "交付后为商家记pending账；close汇总并booked，不代表银行汇款。"
+    },
+    {
+      "module_id": "recovery",
+      "path": "modules/recovery/service.py",
+      "minimum_supported_relation": "配置经惰性导入绑定的后台入口；只选reserved且created_at严格早于cutoff，逐单cancel后投递outbox。"
+    }
+  ],
+  "required_nonmodule_materials": [
+    "app.py",
+    "registry.py",
+    "project.json",
+    "jobs/runner.py",
+    "store.py",
+    "schema.sql",
+    "thesis/positioning.md",
+    "thesis/outline.md"
+  ],
+  "critical_connections": [
+    {
+      "id": "entry-maintenance",
+      "paths": [
+        "app.py",
+        "jobs/runner.py",
+        "project.json",
+        "modules/recovery/service.py"
+      ],
+      "required": "app汇集task_registry；config的maintenance字符串经jobs.invoke惰性导入recovery.run；不能仅扫描静态import而遗漏；没有实际调度频率、运行或成功证据"
+    },
+    {
+      "id": "order-place",
+      "paths": [
+        "modules/orders/service.py",
+        "modules/residents/service.py",
+        "modules/carts/service.py",
+        "modules/catalog/service.py",
+        "modules/pricing/service.py",
+        "modules/coupons/service.py",
+        "modules/inventory/service.py",
+        "modules/invoices/service.py",
+        "modules/loyalty/service.py",
+        "modules/outbox/service.py",
+        "store.py"
+      ],
+      "required": "居民有效、购物车非空、商品可售/快照单价、单商户、优惠门槛；内存transaction中库存预留/订单reserved+unpaid/issued发票/pending积分/通知入队"
+    },
+    {
+      "id": "order-cancel",
+      "paths": [
+        "modules/orders/service.py",
+        "modules/inventory/service.py",
+        "modules/refunds/service.py",
+        "modules/invoices/service.py",
+        "modules/outbox/service.py"
+      ],
+      "required": "初始仅reserved；释放库存、cancelled；仅captured时本地全额退款、void发票、order_cancelled入队；无仓内/外部支付撤销证据"
+    },
+    {
+      "id": "maintenance-outbox",
+      "paths": [
+        "modules/recovery/service.py",
+        "modules/orders/service.py",
+        "modules/outbox/service.py",
+        "modules/notifications/service.py",
+        "project.json"
+      ],
+      "required": "过期reserved取消后投递消息，30分钟来自配置，created_at严格小于cutoff；批量20与attempts小于3；缺transport意味着可失败，不得说已通知"
+    },
+    {
+      "id": "fulfilment",
+      "paths": [
+        "modules/picking/service.py",
+        "modules/packing/service.py",
+        "modules/shipping/service.py",
+        "modules/delivery/service.py",
+        "modules/inventory/service.py",
+        "modules/loyalty/service.py",
+        "modules/settlements/service.py"
+      ],
+      "required": "paid reserved→packing；packed包裹不改订单状态；dispatch才consume并shipped；区匹配确认后delivered与本地积分/结算记账"
+    },
+    {
+      "id": "after-sales",
+      "paths": [
+        "modules/returns/service.py",
+        "modules/refunds/service.py",
+        "modules/payments/service.py"
+      ],
+      "required": "退货申请/批准和退款为不同步骤；退款余额来自本地payment；不推断自动实物回库"
+    }
+  ],
+  "allowed_initial_chapter_facts": [
+    "4.3先业务校验再在内存Store.transaction中写入；异常时恢复rows和sequence快照，未实现持久数据库事务或并发锁",
+    "下单复制商品当前价格，限制单商户；金额为整数分subtotal减折扣，折扣仅封顶不代表含税或运费引擎",
+    "初始cancel只接收reserved状态；packing/shipped/delivered均不满足条件",
+    "取消已captured订单调用本地退款账本；未收款订单不退款；没有外部支付或税务接口证据",
+    "后台过期依据created_at而非付款时间；配置reservation_minutes为30且比较严格小于截止时刻",
+    "源码可支持机制说明和测试计划预期，不能证明运行、成功率、性能、安全、部署或可靠调度"
+  ],
+  "resume_required_findings": [
+    "通过目录与来源基线比较发现新增modules/recalls/service.py，模块数20→21；registry新增POST /catalog/recall并修订为1.1",
+    "orders.cancel现允许reserved或packing，按需更新4.3相关主张/流程图判断与测试预期",
+    "recalls先freeze目标商品，再找含目标商品任意订单行且状态reserved或packing的订单，调用cancel取消整单",
+    "recovery源码未变且仍只选reserved；不能把packing允许取消写成packing也自动超时",
+    "cancel未清除已存在picks/packages，不能宣称完整仓内撤销；freeze未改变其自身实现",
+    "复核orders/registry/recalls及需要确认的直接依赖或已记录边界，保留无关章节/原有主张；不重开选题访谈",
+    "checkpoint与claims更新实际来源指纹/修订/覆盖/关联产物；文件变化只提示需复核，不直接判所有关联主张错误"
+  ],
+  "critical_errors": [
+    "把schema.sql说成Store执行的数据库，声称SQL约束实际生效、持久化数据库事务或并发一致性已保证",
+    "虚构实际HTTP服务/身份认证/部署/支付网关/通知传输/真实测试结果或性能结论",
+    "首轮说packing也允许取消；续轮说packing会被recovery自动过期取消",
+    "把退款或booked当成外部资金移动；把取消当成删除拣货/包裹或退货自动回库",
+    "按service.py basename去重、遗漏自有模块或配置惰性导入的后台入口",
+    "新会话未发现新增模块/入口；未同步正文/图/计划中的旧条件",
+    "用文件数、哈希扫描或目录清单代替正文所需的业务机制阅读与论证"
+  ],
+  "reading_measurement": {
+    "separate": "目录枚举、计算指纹所需磁盘读取与模型可见的内容读取分别记录，不能把工具全盘hash算作模型全量重读。",
+    "initial": "覆盖每个自有模块的实际规则与关键入口/连接。每次内容读取留完整相对路径，不能只记同名文件。",
+    "resume": "允许目录清单与全量指纹比较；内容读取应围绕变化及直接相关规则/未决项。再次通读20个未变模块是重复读取观察项；不机械设文件数量质量分。",
+    "interpretation": "少读不等于理解更好；若漏掉后台入口、源条件、图表或新模块即按具体失败报告。该小型合成试点不能代表生产规模。"
+  },
+  "checkpoint_requirements": [
+    "已确认定位/目标章节与材料类型边界",
+    "当前修订号、来源相对路径/指纹/定位/内容阅读状态",
+    "全模块覆盖及业务职责，允许同名service.py但必须全路径",
+    "注册和配置入口，以及跨模块连接",
+    "正文/图/测试计划等产物完成状态",
+    "稳定claim_id到来源及产物位置的映射",
+    "未决项/限制与下一会话如何比较目录和变更来源的具体动作"
+  ],
+  "grading_policy": {
+    "method": "按实际输出逐项记录满足/部分/缺失及产物位置；关键错误引用原文并指向源文件或规则。事实正确但只列功能的段落不能判机制解释充分。",
+    "comparison": "记录无技能/原规范/当前/候选各组实际结果；两组都完成的项目如实记未显示增益；保留原始输出。",
+    "limits": "不以字数、目录/文件数量、规则条数、脚本通过率替代论文质量；单次小样本结果不支持稳定优越或大规模可靠性结论。"
+  }
+}

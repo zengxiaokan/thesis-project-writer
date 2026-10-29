@@ -1,0 +1,46 @@
+%% FIG-43 订单创建与取消；来源/指纹/节点映射见claims.json
+%% 内容已按synthetic-shop-1.0静态核对；仅交付图源，未渲染/导出查看/入正式页面。
+%% 实线为正常控制流；虚线为边界内异常。M2复用取消子流程，不代表另有取消算法。
+flowchart TB
+  subgraph PLACE[创建订单 place]
+    P0["调用创建：resident_id、now、可选coupon_id"] --> P1{"居民活动且购物车非空？"}
+    P1 -- 否 --> PREFAIL["抛出异常；尚未进入写入边界"]
+    P1 -- 是 --> P2{"商品全部可售、恰属一个商户、正整数分单价及券条件满足？"}
+    P2 -- 否 --> PREFAIL
+    P2 -- 是 --> P3["保存全部内存表和序号的深拷贝快照"]
+    P3 --> P4["逐行reserve：available减数量，reserved加数量；缺库存或不足抛错"]
+    P4 --> P5["写订单reserved / unpaid；保存金额、区域、时间及订单行"]
+    P5 --> P6["创建本地账单issued"]
+    P6 --> P7["准备积分pending，points等于总额整除100"]
+    P7 --> P8["入队order_created：pending，attempts为0"]
+    P8 --> P9["正常退出快照边界，返回订单ID"]
+    P4 -. Exception .-> PFAIL["恢复rows和sequence快照，重抛异常"]
+    P5 -. Exception .-> PFAIL
+    P6 -. Exception .-> PFAIL
+    P7 -. Exception .-> PFAIL
+    P8 -. Exception .-> PFAIL
+  end
+  subgraph CANCEL[取消订单 cancel]
+    C0["调用取消：order_id、now"] --> C1["保存全部内存表和序号的深拷贝快照"]
+    C1 --> C2{"订单存在且status为reserved？"}
+    C2 -- 否 --> CFAIL["恢复rows和sequence快照，重抛异常"]
+    C2 -- 是 --> C3["逐行release：检查预留充足，reserved减数量，available加数量"]
+    C3 --> C4["订单改cancelled，记录cancelled_at"]
+    C4 --> C5{"payment_state为captured？"}
+    C5 -- 是 --> C6["按总额记本地退款：正整数、付款存在且余额足；退尽改refunded"]
+    C5 -- 否 --> C7["本地账单置void"]
+    C6 --> C7
+    C7 --> C8["入队order_cancelled：pending，attempts为0"]
+    C8 --> C9["正常退出快照边界，返回cancelled"]
+    C3 -. Exception .-> CFAIL
+    C6 -. Exception .-> CFAIL
+    C7 -. Exception .-> CFAIL
+    C8 -. Exception .-> CFAIL
+  end
+  subgraph MAINTENANCE[配置维护入口的取消连接]
+    M0["显式调用maintenance：配置经jobs.runner.invoke分派；无内置调度器"] --> M1["筛选reserved且created_at严格早于now减30分钟；不筛付款状态"]
+    M1 --> M2["按订单ID升序逐单复用cancel子流程"]
+    M2 -- 全部正常完成或无到期订单 --> M3["开始事件投递阶段"]
+    M2 -- 某单抛错 --> MFAIL["本次维护中断；前序成功取消保留；跳过后续投递"]
+    M3 --> M4["选pending且attempts少于3，按ID最多20项；传输成功改sent，OSError仅加次数"]
+  end

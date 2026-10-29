@@ -27,7 +27,7 @@ def release_files(root):
     result = {Path(name) for name in ROOT_FILES}
     for folder, suffixes in SOURCE_GROUPS.items():
         for path in (root / folder).rglob("*"):
-            if folder == "evals" and "difficult" in path.relative_to(root / folder).parts:
+            if folder == "evals" and path.relative_to(root / folder) != Path("evals.json"):
                 continue
             if path.is_file() and "__pycache__" not in path.parts and path.suffix in suffixes:
                 result.add(path.relative_to(root))

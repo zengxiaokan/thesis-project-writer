@@ -1,0 +1,415 @@
+{
+  "schema_version": 1,
+  "review_id": "batch3-resume-independent-v1",
+  "candidate": "single_candidate_continuous_case",
+  "prior_review": "C:/Users/13671/.codex/visualizations/2026/10/28/01a182cf-e7e0-79b3-8535-f72c94173f77/batch3-runtime/first-review.json",
+  "from_revision": "synthetic-shop-1.0",
+  "to_revision": "synthetic-shop-1.1",
+  "source_root": "C:/Users/13671/.codex/visualizations/2026/10/28/01a182cf-e7e0-79b3-8535-f72c94173f77/batch3-runtime/resume/project",
+  "artifact_root": "C:/Users/13671/.codex/visualizations/2026/10/28/01a182cf-e7e0-79b3-8535-f72c94173f77/batch3-runtime/resume/artifacts",
+  "review_method": "同一评审沿用首轮逐模块理解，定向静态阅读3份新增/变更源码及Store/recovery等直接规则，并核对实际差异、全文产物和登记；独立计算text-lf指纹及正文/主张保留情况。不执行业务或导入，不渲染Mermaid，不改首轮评审及原始产物。",
+  "overall": {
+    "content_status": "满足",
+    "reading_measurement_status": "部分",
+    "critical_errors_found": 0,
+    "material_business_omissions_found": 0,
+    "required_resume_findings_satisfied": 7,
+    "module_coverage": "21/21规则有来源支持；其中19个旧模块源码未变、orders修订、recalls新增。不能据模块计数单独评价理解。",
+    "conclusion": "发现新增入口和取消条件后，正文、图源、计划与来源登记实际同步；整单召回、嵌套内存恢复、维护仍reserved-only及仓内记录残留均解释正确。读取范围虽补充披露，但旧缓存向模型显示范围未被统一reader自动计量，若只取3份wrapper统计会低估本轮源码内容阅读。"
+  },
+  "verified_source_delta": {
+    "method": "独立比较first/project与resume/project的完整相对路径及text-lf SHA-256，并核当前checkpoint/claims",
+    "current_files": 31,
+    "current_bytes": 23210,
+    "previous_files": 30,
+    "previous_bytes": 22448,
+    "added": [
+      "modules/recalls/service.py"
+    ],
+    "changed": [
+      "modules/orders/service.py",
+      "registry.py"
+    ],
+    "deleted": [],
+    "unchanged_count": 28,
+    "checkpoint_hash_mismatches": [],
+    "claims_source_hash_mismatches": [],
+    "actual_module_directories": 21,
+    "module_map_missing_or_extra": []
+  },
+  "resume_required_findings": [
+    {
+      "id": "RF-01",
+      "status": "满足",
+      "requirement": "发现新增模块/入口及20→21、修订1.1",
+      "source": "registry.py:L2/L16/L18; modules/recalls/service.py:L5-13",
+      "output": "analysis.md:L7/L17/L49/L57; inventory-diff.json; checkpoint.source_revision/modules/entry_map",
+      "verified": "当前实际21模块、15条函数映射；新增POST /catalog/recall→recalls.apply。"
+    },
+    {
+      "id": "RF-02",
+      "status": "满足",
+      "requirement": "cancel接受reserved或packing并同步正文图计划",
+      "source": "modules/orders/service.py:cancel L42-43",
+      "output": "chapter.md:P43-01/P43-06; flow.mmd:C2; test-plan.md:TP-14/31/35; claims:C-ORD-004",
+      "verified": "旧packing拒绝预期已替换，shipped/delivered仍拒绝；取消后续顺序未被无故改写。"
+    },
+    {
+      "id": "RF-03",
+      "status": "满足",
+      "requirement": "先freeze，再找含目标商品任一行的reserved/packing订单并取消整单",
+      "source": "modules/recalls/service.py:apply L6-13; orders.cancel L44-51; catalog.freeze L11-15（未变）",
+      "output": "chapter.md:P43-11第一段; flow.mmd:R0-R7; test-plan.md:TP-32/33; analysis.md:L49/L76; C-RECALL-001",
+      "verified": "匹配any行但cancel循环全部order.lines；同单其他商品也释放；ID升序返回；无匹配仍冻结，缺商品失败，取消事件未直接发送。"
+    },
+    {
+      "id": "RF-04",
+      "status": "满足",
+      "requirement": "recovery未变且仍只选reserved，不把packing直接可取消等同自动超时",
+      "source": "modules/recovery/service.py:run L6-12",
+      "output": "chapter.md:P43-08; flow.mmd:M1; TP-20/35; analysis.md:L48/L73/L99",
+      "verified": "created_at严格早于cutoff且status==reserved；30分钟/20条/3次配置与无调度器边界保留。"
+    },
+    {
+      "id": "RF-05",
+      "status": "满足",
+      "requirement": "cancel未清picks/packages，freeze自身实现未变",
+      "source": "orders.cancel L37-52完整读写；picking.complete; packing.complete; shipping.dispatch; catalog.freeze",
+      "output": "chapter.md:P43-06/P43-10/P43-11; flow.mmd:C9; TP-31/35; analysis.md:L30/L35/L69/L99; C-ORD-007",
+      "verified": "已有done拣货/packed包裹及pending积分保留；cancelled状态阻止dispatch，不包装成完整仓内撤销。"
+    },
+    {
+      "id": "RF-06",
+      "status": "满足",
+      "requirement": "只复核变化、相关依赖及边界，保留无关章节/主张，不重开访谈",
+      "source": "当前源码3份及旧缓存8份必要直接连接；定位/大纲指纹未变",
+      "output": "analysis.md:L5-11/L97-115; checkpoint.change_review; read-scope.json; 正文独立差异检查",
+      "verified": "P43-02/03/04/05/07/09正文原文保留；改P43-01/06/08/10并增P43-11；26条旧主张statement原文保留，2条修订、2条新增；无4.1/4.2/4.4重写材料。",
+      "qualification": "读取数量应按3份当前全文+8份旧缓存全文及旧diff片段陈述，不能写仅3份模型源码阅读；见READ-01/02。"
+    },
+    {
+      "id": "RF-07",
+      "status": "满足",
+      "requirement": "更新checkpoint/claims真实来源、修订、覆盖及产物关联；变更只提示复核",
+      "source": "新旧指纹、实际3源差异、未变源",
+      "output": "checkpoint.sources/source_revision/change_review/current_claims；claims.review/targets；inventory-current.json/inventory-diff.json",
+      "verified": "31份来源和全部claim来源指纹独立核对无错；保留旧sha及previous基线；13条受提示旧主张仅C-ORD-004修订、C-ORD-007扩展，其余11条复核保留；关联的P43/FIG/TP目标存在。",
+      "qualification": "旧28条analysis locator继续宽泛；计量字段语义尚不统一；见LOC-01/READ-02。"
+    }
+  ],
+  "modules": [
+    {
+      "module_id": "residents",
+      "status": "满足",
+      "source": "modules/residents/service.py:register/require_active",
+      "output": "analysis.md:L29; checkpoint.modules[name=residents]",
+      "verification": "首轮已核规则沿用；独立指纹比较确认源码未变。"
+    },
+    {
+      "module_id": "catalog",
+      "status": "满足",
+      "source": "modules/catalog/service.py:list_saleable/require_saleable/freeze",
+      "output": "analysis.md:L30; checkpoint.modules[name=catalog]",
+      "verification": "规则源码未变；新增recalls.apply→freeze调用入口已更新，未把freeze本身说成新增算法。"
+    },
+    {
+      "module_id": "pricing",
+      "status": "满足",
+      "source": "modules/pricing/service.py:subtotal",
+      "output": "analysis.md:L31; checkpoint.modules[name=pricing]",
+      "verification": "首轮已核规则沿用；独立指纹比较确认源码未变。"
+    },
+    {
+      "module_id": "carts",
+      "status": "满足",
+      "source": "modules/carts/service.py:put/lines_for",
+      "output": "analysis.md:L32; checkpoint.modules[name=carts]",
+      "verification": "首轮已核规则沿用；独立指纹比较确认源码未变。"
+    },
+    {
+      "module_id": "coupons",
+      "status": "满足",
+      "source": "modules/coupons/service.py:discount",
+      "output": "analysis.md:L33; checkpoint.modules[name=coupons]",
+      "verification": "首轮已核规则沿用；独立指纹比较确认源码未变。"
+    },
+    {
+      "module_id": "inventory",
+      "status": "满足",
+      "source": "modules/inventory/service.py:stock/reserve/release/consume",
+      "output": "analysis.md:L34; checkpoint.modules[name=inventory]",
+      "verification": "同指纹，整单取消继续逐行release；出库consume与释放区分正确。"
+    },
+    {
+      "module_id": "orders",
+      "status": "满足",
+      "source": "modules/orders/service.py:place/cancel",
+      "output": "analysis.md:L35; checkpoint.modules[name=orders]",
+      "verification": "新cancel仅L42判断由reserved扩大为reserved/packing；place全文及后续释放/退款/作废/入队顺序保留。"
+    },
+    {
+      "module_id": "payments",
+      "status": "满足",
+      "source": "modules/payments/service.py:capture",
+      "output": "analysis.md:L36; checkpoint.modules[name=payments]",
+      "verification": "首轮已核规则沿用；独立指纹比较确认源码未变。"
+    },
+    {
+      "module_id": "invoices",
+      "status": "满足",
+      "source": "modules/invoices/service.py:create/void",
+      "output": "analysis.md:L37; checkpoint.modules[name=invoices]",
+      "verification": "首轮已核规则沿用；独立指纹比较确认源码未变。"
+    },
+    {
+      "module_id": "picking",
+      "status": "满足",
+      "source": "modules/picking/service.py:complete",
+      "output": "analysis.md:L38; checkpoint.modules[name=picking]",
+      "verification": "同指纹；reserved/captured写done并packing，新取消条件可接受该状态。"
+    },
+    {
+      "module_id": "packing",
+      "status": "满足",
+      "source": "modules/packing/service.py:complete",
+      "output": "analysis.md:L39; checkpoint.modules[name=packing]",
+      "verification": "同指纹；包装只写packed，订单仍packing；取消不删除既有包装。"
+    },
+    {
+      "module_id": "shipping",
+      "status": "满足",
+      "source": "modules/shipping/service.py:dispatch",
+      "output": "analysis.md:L40; checkpoint.modules[name=shipping]",
+      "verification": "同指纹；仅packing+packed才consume并shipped；取消后保留包裹仍不满足订单状态。"
+    },
+    {
+      "module_id": "delivery",
+      "status": "满足",
+      "source": "modules/delivery/service.py:confirm",
+      "output": "analysis.md:L41; checkpoint.modules[name=delivery]",
+      "verification": "首轮已核规则沿用；独立指纹比较确认源码未变。"
+    },
+    {
+      "module_id": "returns",
+      "status": "满足",
+      "source": "modules/returns/service.py:request/approve",
+      "output": "analysis.md:L42; checkpoint.modules[name=returns]",
+      "verification": "首轮已核规则沿用；独立指纹比较确认源码未变。"
+    },
+    {
+      "module_id": "refunds",
+      "status": "满足",
+      "source": "modules/refunds/service.py:issue",
+      "output": "analysis.md:L43; checkpoint.modules[name=refunds]",
+      "verification": "同指纹；正整数与本地余额/全额refunded条件保留；失败传播可触发召回外层恢复。"
+    },
+    {
+      "module_id": "notifications",
+      "status": "满足",
+      "source": "modules/notifications/service.py:TEMPLATES/send",
+      "output": "analysis.md:L44; checkpoint.modules[name=notifications]",
+      "verification": "首轮已核规则沿用；独立指纹比较确认源码未变。"
+    },
+    {
+      "module_id": "outbox",
+      "status": "满足",
+      "source": "modules/outbox/service.py:enqueue/deliver_pending",
+      "output": "analysis.md:L45; checkpoint.modules[name=outbox]",
+      "verification": "首轮已核规则沿用；独立指纹比较确认源码未变。"
+    },
+    {
+      "module_id": "loyalty",
+      "status": "满足",
+      "source": "modules/loyalty/service.py:prepare/grant",
+      "output": "analysis.md:L46; checkpoint.modules[name=loyalty]",
+      "verification": "首轮已核规则沿用；独立指纹比较确认源码未变。"
+    },
+    {
+      "module_id": "settlements",
+      "status": "满足",
+      "source": "modules/settlements/service.py:accrue/close",
+      "output": "analysis.md:L47; checkpoint.modules[name=settlements]",
+      "verification": "首轮已核规则沿用；独立指纹比较确认源码未变。"
+    },
+    {
+      "module_id": "recovery",
+      "status": "满足",
+      "source": "modules/recovery/service.py:run",
+      "output": "analysis.md:L48; checkpoint.modules[name=recovery]",
+      "verification": "同指纹；仍reserved-only，维护没有整批快照，前序完成取消保留。"
+    },
+    {
+      "module_id": "recalls",
+      "status": "满足",
+      "source": "modules/recalls/service.py:apply L5-13",
+      "output": "analysis.md:L49; checkpoint.modules[name=recalls]",
+      "verification": "新增全文核查：外层transaction→freeze→状态/any目标商品筛选→ID升序逐单cancel；整单、无匹配、缺商品与异常整批恢复均有源支持。"
+    }
+  ],
+  "nested_transaction_and_connections": [
+    {
+      "id": "nested-store",
+      "status": "满足",
+      "source": "recalls.apply L6-12; orders.cancel L38-51; Store.transaction L26-33",
+      "output": "chapter.md:P43-11第二段; flow.mmd:R1/R5/RFAIL; TP-34; C-RECALL-002",
+      "verified": "每次调用单独深拷贝rows/sequence；内层Exception恢复后重抛，外层再恢复召回前快照，因此前序成功取消与freeze一并撤销。局部cancelled列表在异常时不会正常返回，不影响该存储恢复论述。",
+      "limit": "只覆盖Exception路径的单进程内存状态；无持久数据库/并发隔离/外部副作用回滚证据。"
+    },
+    {
+      "id": "maintenance-contrast",
+      "status": "满足",
+      "source": "recovery.run L5-13",
+      "output": "chapter.md:P43-08/P43-11; flow.mmd:MFAIL/RFAIL; TP-24/34",
+      "verified": "maintenance逐单边界保留前序成功；recall外层整批边界恢复前序，未混淆。"
+    },
+    {
+      "id": "new-registration",
+      "status": "满足",
+      "source": "registry.py:REVISION/ROUTES; app.application未变",
+      "output": "checkpoint.entry_map.public_route_mapping; analysis.md:L17/L57; flow.mmd:R0",
+      "verified": "15条函数映射，新增召回入口完整；配置维护后台入口和无HTTP/认证/调度器边界原样保留。"
+    }
+  ],
+  "artifact_synchronization": [
+    {
+      "artifact": "chapter.md",
+      "status": "满足",
+      "locations": "P43-01/06/08/10/11",
+      "verified": "创建文字仅必要调整首段；packing允许、出库边界、维护不选packing、仓内记录残留、整单召回及嵌套恢复均更新；六段不相关正文原文相同。"
+    },
+    {
+      "artifact": "flow.mmd",
+      "status": "满足",
+      "locations": "C2/C9/M1/R0-RFAIL",
+      "verified": "C2扩大条件，C9保留记录，M1仍reserved；召回子图覆盖freeze、any匹配、整单循环、空结果和外层失败恢复；其他创建流程沿用。",
+      "limit": "只审内容，未渲染/查看/入正式页面。"
+    },
+    {
+      "artifact": "test-plan.md",
+      "status": "满足",
+      "locations": "TP-14/20/31-35; L49-55",
+      "verified": "修订旧packing拒绝，增直接取消packing两阶段、召回整单/排除状态/无匹配/缺商品/重复召回、后单异常整批恢复与dispatch拒绝；35例全部明示未执行。",
+      "limit": "测试可执行性仍待确认；结构核对passed不能当业务测试通过。"
+    },
+    {
+      "artifact": "analysis.md",
+      "status": "满足（继承定位精度问题）",
+      "locations": "L29-49/L68-78/L84-117",
+      "verified": "21模块实际规则与新入口/链和语义审查一致；读取口径末尾补充较完整，但L11等局部统计措辞仍需结合read-scope阅读。"
+    },
+    {
+      "artifact": "claims.json",
+      "status": "满足（analysis locator低风险）",
+      "locations": "C-ORD-004/C-ORD-007/C-RECALL-001/C-RECALL-002及其他旧26条",
+      "verified": "28旧ID保留、2新ID；26旧statement原文保留；所有当前指纹无错；正文/图/计划目标存在，逐条语义与源一致。"
+    },
+    {
+      "artifact": "checkpoint.json",
+      "status": "满足（读取计量字段语义部分）",
+      "locations": "source_revision/sources/modules/entry_map/change_review/reading_measurement/resume_protocol/open_items",
+      "verified": "新旧基线、21地图、15映射、30主张及静态/未运行/未渲染边界都保存；变更未直接判全失效。"
+    }
+  ],
+  "read_scope_review": {
+    "status": "部分：范围已披露，未统一自动计量",
+    "current_wrapper": {
+      "inventory_calls": 1,
+      "hash_disk_files": 31,
+      "hash_disk_bytes": 23210,
+      "content_batches": 1,
+      "content_fulltext_paths": 3,
+      "content_fulltext_bytes": 4498,
+      "paths": [
+        "modules/orders/service.py",
+        "registry.py",
+        "modules/recalls/service.py"
+      ],
+      "evidence": "read-log.jsonl只有inventory/content_read两个动作；read-01-changes.json含完整text；与当前源指纹一致。"
+    },
+    "old_cache_model_fulltexts": {
+      "reported_paths": 8,
+      "original_source_bytes": 6050,
+      "paths": [
+        "store.py",
+        "modules/catalog/service.py",
+        "modules/inventory/service.py",
+        "modules/refunds/service.py",
+        "modules/picking/service.py",
+        "modules/packing/service.py",
+        "modules/shipping/service.py",
+        "modules/recovery/service.py"
+      ],
+      "independent_check": "8份在previous原始read JSON均有完整text，且原指纹全部与当前清单一致；逐项理由与新增连接直接相关，无须为少读而省略这些内容。",
+      "measurement_limit": "8份向模型显示及次数是read-scope/analysis/checkpoint自报，未由统一material_reader自动记录；仅保存缓存存在不能独立证明实际显示次数/范围。父任务提供的实际范围与该自报一致。"
+    },
+    "old_diff_excerpts": {
+      "paths": [
+        "modules/orders/service.py",
+        "registry.py"
+      ],
+      "scope": "旧版本的取消条件、新导入/路由/修订统一差异片段；应与全文事件分开。"
+    },
+    "python_cache_loading": {
+      "files": 5,
+      "json_bytes": 32362,
+      "contained_unique_old_source_paths": 30,
+      "contained_original_source_bytes": 22448,
+      "evidence": "独立解析previous/read-01-positioning.json至read-05-fulfilment.json所得；与read-scope登记相符。",
+      "interpretation": "程序解析5包30份旧文本是磁盘/程序加载范围；只有已显示给模型的8份全文和2份旧diff片段计入模型内容范围，不能把全30份都计为模型重读。"
+    },
+    "total_interpretation": "按所披露实际范围，本轮涉及3份当前源码全文加8份同指纹旧缓存全文，共11个不同来源全路径；另有orders/registry旧版本片段及旧正式产物/检查点恢复。不是仅3份源码被模型读，也不是模型重读全部30旧源。旧正式产物的实际读取事件次数未单独计数。",
+    "source_reuse_reason_verdict": "满足：Store/冻结/释放/退款/拣货/包装/出库/维护均影响新增召回或取消边界；同指纹已独立确认。读取8份未变必要源不是盲目通读全部未变模块的失败。",
+    "protocol_gap": "缓存直读与正式产物恢复未纳入统一reader事件记录，历史与当前版本、全文与片段、程序加载与模型显示无法从单一自动日志复算；不能据wrapper3份推导总体阅读减少比例或效率增益。"
+  },
+  "issues": [
+    {
+      "id": "READ-01",
+      "severity": "medium",
+      "category": "measurement_protocol_gap",
+      "status": "部分",
+      "locations": "read-scope.json:model_previous_source_cache_rereads/cache_parse_scope/read_event_counts_for_previous_artifacts；read-log.jsonl；checkpoint.reading_measurement",
+      "evidence": "统一日志仅自动记录当前inventory与3源content_read；旧8全文显示、旧2diff及正式产物事件范围/次数由作者补充自报，正式产物事件明确“没有单独计数”。",
+      "impact": "不否定已正确核实的业务内容，但不能从自动日志独立复算完整模型阅读成本，也不能把3份wrapper读取当总体阅读成本。",
+      "fix": "后续协议应让缓存全文/片段显示与正式产物读取统一留事件，标来源版本、全路径、显示范围/字节及重复次数；原始产物本次保持不变。"
+    },
+    {
+      "id": "READ-02",
+      "severity": "low",
+      "category": "measurement_field_semantics",
+      "status": "部分",
+      "locations": "analysis.md:L11“本轮实际重读项目仅3份”；checkpoint.evidence_scope.current_round_model_read_paths；checkpoint.reading_measurement.repeated_project_content_reads=0",
+      "evidence": "这些字段只含当前wrapper3份，8份旧缓存全文另在source_reading_scope_note/read-scope及analysis:L117解释；L11若单独引用容易被理解成模型仅看3份源码。",
+      "impact": "补充文本阻止将其判成最终隐瞒，但局部字段/措辞仍会使汇总器或读者少算旧源重读；0重复应明确限当前wrapper。",
+      "fix": "统一改称current_wrapper_*，另列model_visible_current/old_fulltext/old_excerpt事件，不用含混“项目重读”概括。"
+    },
+    {
+      "id": "LOC-01",
+      "severity": "low",
+      "category": "inherited_artifact_locator_precision",
+      "status": "部分",
+      "locations": "claims.json:28条旧claim的analysis.md locator均仍为“模块覆盖表或关键连接；<claim_id>”；C-CONTEXT-001实际标识见analysis.md:L84蓝图、事实见L5/L17/L56-57",
+      "evidence": "首轮OBS-01未修复；新C-RECALL-001定位更具体到关键连接8/P43-11蓝图，新C-RECALL-002仍是章节标题范围。",
+      "impact": "人工可搜索，正文/图/测试定位具体；不构成业务事实错误，但analysis跳转与后续定向读取精度仍弱。",
+      "fix": "后续可用稳定analysis段/表行/连接ID；本次如实继承，不修饰原件。"
+    }
+  ],
+  "research_design_limits": [
+    {
+      "id": "LIMIT-COMPARISON",
+      "observed": "四条件comparison仍未执行；本轮是单候选连续案例。",
+      "consequence": "只能报告该候选静态内容和接续结果，无技能/原规范/当前/候选之间无实际差值或增益可报。"
+    },
+    {
+      "id": "LIMIT-SIZE",
+      "observed": "首轮20模块/22448字节，续轮21模块/23210字节。",
+      "consequence": "结构、入口发现和接续的小型合成试点，未施加大上下文容量压力，不代表生产规模或真实跨组织迁移。"
+    },
+    {
+      "id": "LIMIT-STATIC",
+      "observed": "源码静态分析；Mermaid未渲染；计划未执行业务；verification.json的passed仅结构及静态复核。",
+      "consequence": "不能据此认定功能运行正确、性能、可靠调度、通知/资金实际送达、页面质量或生产可靠性。"
+    }
+  ],
+  "final_scope": "本报告仅新增resume-review.json。首轮评审、first/resume原始项目和产物均未被修改。"
+}
+

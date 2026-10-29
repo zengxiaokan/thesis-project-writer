@@ -1,0 +1,40 @@
+{
+  "files": [
+    {
+      "path": "modules/picking/service.py",
+      "text": "\"\"\"Synthetic picking moves paid reserved orders to packing.\"\"\"\ndef complete(repo, order_id):\n    with repo.transaction():\n        order = repo.get(\"orders\", order_id)\n        if order is None or order[\"status\"] != \"reserved\" or order[\"payment_state\"] != \"captured\":\n            raise ValueError(\"picking not allowed\")\n        repo.insert(\"picks\", {\"order_id\": order_id, \"status\": \"done\"})\n        order[\"status\"] = \"packing\"\n    return \"packing\"\n",
+      "sha256_text_lf": "fee0cddea17a1208bcfbe39b94a18c2a83f398dfe9dee0cc3e4a763e6230130a",
+      "bytes": 446
+    },
+    {
+      "path": "modules/packing/service.py",
+      "text": "\"\"\"Synthetic package creation leaves the order in packing status.\"\"\"\ndef complete(repo, order_id):\n    order = repo.get(\"orders\", order_id)\n    picks = repo.find(\"picks\", lambda row: row[\"order_id\"] == order_id and row[\"status\"] == \"done\")\n    if order is None or order[\"status\"] != \"packing\" or not picks:\n        raise ValueError(\"packing not allowed\")\n    if repo.find(\"packages\", lambda row: row[\"order_id\"] == order_id):\n        raise ValueError(\"package exists\")\n    return repo.insert(\"packages\", {\"order_id\": order_id, \"status\": \"packed\"})\n",
+      "sha256_text_lf": "20708fd703dc69aafa5a94d9804805b99a8fbf87da00f7977e5694c09b5dfce2",
+      "bytes": 548
+    },
+    {
+      "path": "modules/shipping/service.py",
+      "text": "\"\"\"Synthetic dispatch consumes reservation; no external carrier API.\"\"\"\nfrom modules.inventory.service import consume\nfrom modules.outbox.service import enqueue\n\ndef dispatch(repo, order_id):\n    with repo.transaction():\n        order = repo.get(\"orders\", order_id)\n        packages = repo.find(\"packages\", lambda row: row[\"order_id\"] == order_id and row[\"status\"] == \"packed\")\n        if order is None or order[\"status\"] != \"packing\" or not packages:\n            raise ValueError(\"dispatch not allowed\")\n        for line in order[\"lines\"]:\n            consume(repo, line[\"product_id\"], line[\"quantity\"])\n        order[\"status\"] = \"shipped\"\n        shipment = repo.insert(\"shipments\", {\"order_id\": order_id, \"zone\": order[\"zone\"], \"status\": \"in_transit\"})\n        enqueue(repo, \"order_shipped\", order_id)\n    return shipment\n",
+      "sha256_text_lf": "e05da7d83471ec46f3634d4b0777f2c36ea73aaae28a898d849ec0374c074677",
+      "bytes": 825
+    },
+    {
+      "path": "modules/delivery/service.py",
+      "text": "\"\"\"Synthetic confirmation checks the stored delivery zone.\"\"\"\nfrom modules.loyalty.service import grant\nfrom modules.settlements.service import accrue\n\ndef confirm(repo, shipment_id, zone):\n    with repo.transaction():\n        shipment = repo.get(\"shipments\", shipment_id)\n        if shipment is None or shipment[\"status\"] != \"in_transit\" or shipment[\"zone\"] != zone:\n            raise ValueError(\"delivery confirmation rejected\")\n        order = repo.get(\"orders\", shipment[\"order_id\"])\n        if order[\"status\"] != \"shipped\":\n            raise ValueError(\"order not shipped\")\n        shipment[\"status\"] = \"delivered\"\n        order[\"status\"] = \"delivered\"\n        grant(repo, order[\"id\"])\n        accrue(repo, order[\"id\"])\n    return \"delivered\"\n",
+      "sha256_text_lf": "71f81db95b134f355c74a30086b89b55d11945d7491a3f6de6afa5432e776456",
+      "bytes": 748
+    },
+    {
+      "path": "modules/returns/service.py",
+      "text": "\"\"\"Synthetic requested/approved return records; no automatic refund/restock.\"\"\"\ndef request(repo, order_id, reason):\n    order = repo.get(\"orders\", order_id)\n    if order is None or order[\"status\"] != \"delivered\" or not reason.strip():\n        raise ValueError(\"return request rejected\")\n    return repo.insert(\"returns\", {\"order_id\": order_id, \"reason\": reason, \"status\": \"requested\"})\n\ndef approve(repo, return_id):\n    row = repo.get(\"returns\", return_id)\n    if row is None or row[\"status\"] != \"requested\":\n        raise ValueError(\"approval rejected\")\n    row[\"status\"] = \"approved\"\n    return row\n",
+      "sha256_text_lf": "18ffdc0d974ff28b78be39df22c33fdc128f73a173f0c0562c76deee3023fa93",
+      "bytes": 603
+    },
+    {
+      "path": "modules/settlements/service.py",
+      "text": "\"\"\"Synthetic merchant accounting; booked does not mean bank transfer.\"\"\"\ndef accrue(repo, order_id):\n    order = repo.get(\"orders\", order_id)\n    if order[\"status\"] != \"delivered\":\n        raise ValueError(\"settlement requires delivery\")\n    return repo.insert(\"settlements\", {\"order_id\": order_id, \"merchant_id\": order[\"merchant_id\"], \"amount_cents\": order[\"total_cents\"], \"status\": \"pending\"})\n\ndef close(repo, merchant_id):\n    rows = repo.find(\"settlements\", lambda row: row[\"merchant_id\"] == merchant_id and row[\"status\"] == \"pending\")\n    total = sum(row[\"amount_cents\"] for row in rows)\n    for row in rows:\n        row[\"status\"] = \"booked\"\n    return {\"merchant_id\": merchant_id, \"amount_cents\": total}\n",
+      "sha256_text_lf": "8fc0dcf0d5807c8bd6d7eadd3400bf78e010eb131819462de4037b7700eb91ca",
+      "bytes": 711
+    }
+  ]
+}

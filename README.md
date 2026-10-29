@@ -8,7 +8,7 @@
 
 [开始使用](#获取与使用) · [看看实际样例](examples/initialization-study/README.md) · [下载发行包](https://github.com/zengxiaokan/thesis-project-writer/raw/refs/heads/main/dist/thesis-project-writer.zip)
 
-当前版本 [0.5.0](VERSION) · [MIT 开源](LICENSE) · [跨平台 CI](https://github.com/zengxiaokan/thesis-project-writer/actions)
+当前版本 [0.6.0](VERSION) · [MIT 开源](LICENSE) · [跨平台 CI](https://github.com/zengxiaokan/thesis-project-writer/actions)
 
 ## 从你正在做的事开始
 
@@ -29,6 +29,8 @@
 - **章节看得到机制。** 按本章任务检查主体、条件、处理关系、数据变化和失败边界，用原稿位置定位“只列功能”的段落，补依据、删重复。
 - **检查有位置，变更有去向。** 可选只读工具定位图表ID、图片路径、已登记合计和结构问题，并将来源变化关联到需要复核的正文、图表及测试说明。
 - **认真对待你的原稿。** 沿用作者指定的正式稿与同步方向，按本轮范围续写、审查或润色。
+- **文献读到论点。** 将真实书目、访问状态、已读范围与原文支持分别核实，围绕问题解释共识与差异，留下可复查的阅读位置。
+- **大材料有地图。** 只读清单辅助发现模块与后台入口，记录业务连接与基线；换会话时先查变化，再补读相关材料。
 - **进度能接续。** 复用已有答案、蓝图与有效证据，把已完成内容和下一步记录下来。
 - **执行贴合实际条件。** 文档、浏览器、MCP 和本地工具按可用能力选择；条件变化时说明替代方案及交付差距。
 
@@ -62,6 +64,8 @@
 - **缺工具也有下一步。** 优先使用当前可用的绘图和文档工具；不能渲染时先交可编辑图源或绘制说明，明确导出与页面检查的待办，不把未查看的页面记为验收通过。
 
 详见 [图表与流程图指南](references/figures-and-tables.md) 和 [图表示例](examples/figures/README.md)。已有论文只改一张图时，直接读取有关证据与正文即可接续。
+
+文献部分可从 [检索与综合指南](references/literature-workflow.md) 和 [真实文献小例](examples/literature-synthesis/README.md) 开始；多模块与接续任务参照 [大材料指南](references/large-materials-and-resume.md)。第三批的实际运行、失败及适用边界见 [验证记录](docs/batch3-validation.md)。
 
 ## 获取与使用
 

@@ -1,0 +1,138 @@
+{
+  "schema_version": 1,
+  "recorded_on": "2026-10-29",
+  "locator_convention": "使用所读 arXiv 版本的节名；未核验 PDF 页码，故不填页码。无原文直接引语。",
+  "works": [
+    {
+      "id": "L1",
+      "bibliography": {
+        "title": "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks",
+        "first_author": "Patrick Lewis",
+        "other_authors": "et al.; 完整作者表见官方页",
+        "first_submitted": "2020-05-22",
+        "read_version": "2005.11401v4",
+        "version_date": "2021-04-12",
+        "status": "verified_on_official_arxiv_record",
+        "doi": "10.48550/arXiv.2005.11401",
+        "doi_kind": "arXiv DOI，不作为会议 DOI",
+        "url": "https://arxiv.org/abs/2005.11401v4"
+      },
+      "fulltext_access": {
+        "status": "opened_versioned_html",
+        "url": "https://arxiv.org/html/2005.11401v4",
+        "checked_on": "2026-10-29"
+      },
+      "actual_reading": {
+        "status": "selected_sections_only",
+        "locations": ["Abstract", "§2 Methods 与 §2.1 Models", "§3.1 Open-domain Question Answering"],
+        "not_read_in_full": ["其余方法细节", "结果部分", "相关工作", "附录"],
+        "note": "不据此给出完整性能评审"
+      },
+      "comparison": {
+        "question": "如何将检索内容用于生成？",
+        "object": "开放域问答等知识密集任务；此处只核对问答设置",
+        "method": "检索与生成结合；两种模型对整段或逐 token 的文档潜变量作边缘化",
+        "metric": "§3.1 使用 Exact Match（EM），并区分 TriviaQA 测试划分",
+        "conclusion_scope": "该处可支持方法与评估口径说明，不支持本例尚未核对的效果数字"
+      },
+      "claims": [
+        {
+          "id": "LC-01",
+          "claim": "RAG 将检索文档用于生成，并提供两种文档边缘化方式。",
+          "support": "supported_for_method_description",
+          "locator": "§2—2.1",
+          "use_in": "synthesis.md 第一段",
+          "limit": "不等于消除所有事实错误"
+        }
+      ]
+    },
+    {
+      "id": "L2",
+      "bibliography": {
+        "title": "Lost in the Middle: How Language Models Use Long Contexts",
+        "first_author": "Nelson F. Liu",
+        "other_authors": "et al.; 完整作者表见官方页",
+        "first_submitted": "2023-07-06",
+        "read_version": "2307.03172v3",
+        "version_date": "2023-11-20",
+        "status": "verified_on_official_arxiv_record",
+        "doi": "10.48550/arXiv.2307.03172",
+        "doi_kind": "arXiv DOI；正式期刊卷期页码本例未核实",
+        "url": "https://arxiv.org/abs/2307.03172v3"
+      },
+      "fulltext_access": {
+        "status": "opened_versioned_html",
+        "url": "https://arxiv.org/html/2307.03172v3",
+        "checked_on": "2026-10-29"
+      },
+      "actual_reading": {
+        "status": "selected_sections_only",
+        "locations": ["Abstract", "§2.1 Experimental Setup", "§2.2 Models", "§2.3 Results and Discussion"],
+        "not_read_in_full": ["其余实验", "解释性分析", "相关工作", "附录"],
+        "note": "不把所测版本外推为当前所有模型"
+      },
+      "comparison": {
+        "question": "相关信息在输入中的位置是否影响使用？",
+        "object": "含答案文档与干扰文档的多文档问答及文中所测模型",
+        "method": "控制含答案文档的位置与文档数量",
+        "metric": "accuracy：输出中是否出现任一标注答案（§2.1）",
+        "conclusion_scope": "§2.3 报告位置敏感，开头和结尾通常较好；限于所测条件"
+      },
+      "claims": [
+        {
+          "id": "LC-02",
+          "claim": "相关信息进入上下文后，其位置仍可能影响所测模型的问答结果。",
+          "support": "supported_with_experimental_scope",
+          "locator": "§2.1—2.3，Figure 5 对应讨论",
+          "use_in": "synthesis.md 第一段",
+          "limit": "不构成对所有模型、任务和长度的普遍定理"
+        }
+      ]
+    },
+    {
+      "id": "L3",
+      "bibliography": {
+        "title": "Attention Is All You Need",
+        "first_author": "Ashish Vaswani",
+        "other_authors": "et al.; 完整作者表见官方页",
+        "first_submitted": "2017-06-12",
+        "read_version": "1706.03762v7",
+        "version_date": "2023-08-02",
+        "status": "verified_on_official_arxiv_record",
+        "doi": "10.48550/arXiv.1706.03762",
+        "doi_kind": "arXiv DOI，不作为会议 DOI",
+        "url": "https://arxiv.org/abs/1706.03762v7"
+      },
+      "fulltext_access": {
+        "status": "not_checked",
+        "url": null,
+        "checked_on": null,
+        "note": "摘要页提供全文入口，不等于本例已成功打开全文"
+      },
+      "actual_reading": {
+        "status": "abstract_only",
+        "locations": ["官方摘要页 Abstract"],
+        "not_read_in_full": ["正文所有节", "附录"],
+        "note": "未进行全文检索，未核实细节或研究缺项"
+      },
+      "comparison": {
+        "question": "基础架构背景是什么？",
+        "object": "摘要所述序列转换与翻译任务",
+        "method": "提出基于注意力、去除循环和卷积的 Transformer",
+        "metric": "摘要报告翻译 BLEU；未读其完整计算设置",
+        "conclusion_scope": "可作摘要级架构背景；不参与本例效果比较"
+      },
+      "claims": [
+        {
+          "id": "LC-03",
+          "claim": "Transformer 是本文相关架构背景的候选来源。",
+          "support": "abstract_support_only",
+          "locator": "Abstract",
+          "use_in": "synthesis.md 第三段",
+          "limit": "引用具体机制与实验前补读相应正文；摘要未提及某项不能证明全文或领域未研究"
+        }
+      ]
+    }
+  ],
+  "pending": ["若需要正式参考文献条目，核实出版版书目信息", "若讨论具体架构或数值，补读相关原文设置", "若主张研究空缺，扩大并记录检索范围"]
+}

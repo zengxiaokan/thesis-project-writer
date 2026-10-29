@@ -1,0 +1,12 @@
+test_external_hard_link_log_cannot_mutate_project_source (test_material_reader.MaterialReaderTests.test_external_hard_link_log_cannot_mutate_project_source) ... ok
+test_hash_inventory_and_content_reads_are_separate_events (test_material_reader.MaterialReaderTests.test_hash_inventory_and_content_reads_are_separate_events) ... ok
+test_log_cannot_be_written_inside_audited_materials (test_material_reader.MaterialReaderTests.test_log_cannot_be_written_inside_audited_materials) ... ok
+test_content_log_without_inventory_is_explicitly_incomplete (test_summarize.LoggedEvidenceTests.test_content_log_without_inventory_is_explicitly_incomplete) ... ok
+test_disk_hashes_are_not_counted_as_model_content_events (test_summarize.LoggedEvidenceTests.test_disk_hashes_are_not_counted_as_model_content_events) ... ok
+test_version_change_keeps_background_selector_unchanged (test_summarize.LoggedEvidenceTests.test_version_change_keeps_background_selector_unchanged) ... ok
+test_wrong_source_fingerprint_is_not_accepted_as_read_evidence (test_summarize.LoggedEvidenceTests.test_wrong_source_fingerprint_is_not_accepted_as_read_evidence) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.145s
+
+OK

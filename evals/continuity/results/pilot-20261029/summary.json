@@ -1,0 +1,105 @@
+{
+  "first": {
+    "content_file_events": 30,
+    "unique_content_paths": [
+      "README.md",
+      "app.py",
+      "jobs/runner.py",
+      "modules/carts/service.py",
+      "modules/catalog/service.py",
+      "modules/coupons/service.py",
+      "modules/delivery/service.py",
+      "modules/inventory/service.py",
+      "modules/invoices/service.py",
+      "modules/loyalty/service.py",
+      "modules/notifications/service.py",
+      "modules/orders/service.py",
+      "modules/outbox/service.py",
+      "modules/packing/service.py",
+      "modules/payments/service.py",
+      "modules/picking/service.py",
+      "modules/pricing/service.py",
+      "modules/recovery/service.py",
+      "modules/refunds/service.py",
+      "modules/residents/service.py",
+      "modules/returns/service.py",
+      "modules/settlements/service.py",
+      "modules/shipping/service.py",
+      "project.json",
+      "registry.py",
+      "schema.sql",
+      "store.py",
+      "task.md",
+      "thesis/outline.md",
+      "thesis/positioning.md"
+    ],
+    "unique_content_files": 30,
+    "repeated_content_events": 0,
+    "inventory_scans": 1,
+    "hash_disk_reads": 30,
+    "hash_disk_bytes": 22448
+  },
+  "resume": {
+    "content_file_events": 3,
+    "unique_content_paths": [
+      "modules/orders/service.py",
+      "modules/recalls/service.py",
+      "registry.py"
+    ],
+    "unique_content_files": 3,
+    "repeated_content_events": 0,
+    "inventory_scans": 1,
+    "hash_disk_reads": 31,
+    "hash_disk_bytes": 23210,
+    "changed_paths_read": [
+      "modules/orders/service.py",
+      "modules/recalls/service.py",
+      "registry.py"
+    ],
+    "unchanged_paths_read": [],
+    "cached_source_paths_self_reported": [
+      "store.py",
+      "modules/catalog/service.py",
+      "modules/inventory/service.py",
+      "modules/refunds/service.py",
+      "modules/picking/service.py",
+      "modules/packing/service.py",
+      "modules/shipping/service.py",
+      "modules/recovery/service.py"
+    ],
+    "current_and_cached_source_paths_union_self_reported": [
+      "modules/catalog/service.py",
+      "modules/inventory/service.py",
+      "modules/orders/service.py",
+      "modules/packing/service.py",
+      "modules/picking/service.py",
+      "modules/recalls/service.py",
+      "modules/recovery/service.py",
+      "modules/refunds/service.py",
+      "modules/shipping/service.py",
+      "registry.py",
+      "store.py"
+    ],
+    "previous_cache_packages_loaded_self_reported": [
+      "previous/read-01-positioning.json",
+      "previous/read-02-core.json",
+      "previous/read-03-order-chain.json",
+      "previous/read-04-ledgers-maintenance.json",
+      "previous/read-05-fulfilment.json"
+    ],
+    "previous_cache_package_bytes_self_reported": 32362,
+    "previous_artifact_read_events_measured": false
+  },
+  "changed_source_paths": [
+    "modules/orders/service.py",
+    "modules/recalls/service.py",
+    "registry.py"
+  ],
+  "limits": [
+    "Log records content returned by the instructed reader, not mental understanding or an OS-enforced audit.",
+    "Hash scans read all selected file bytes; content-read counts do not measure total disk I/O or elapsed time.",
+    "A fresh agent tests checkpoint handoff, not desktop restart, device migration, or broad quality gain.",
+    "Semantic coverage and claim correctness require the separate reviews.",
+    "Three current-source files are not total model source reading: old cached text was also displayed, with supplemental self-report rather than reader events."
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "project": "synthetic-community-orders",
+  "currency": "CNY-cents",
+  "reservation_minutes": 30,
+  "job_handlers": {"maintenance": "modules.recovery.service:run"},
+  "outbox_batch": 20,
+  "max_delivery_attempts": 3
+}
