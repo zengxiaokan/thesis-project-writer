@@ -1,0 +1,203 @@
+{
+  "scope": "Actual read-only audit CLI calls on temporary copies of synthetic text; not a real thesis acceptance",
+  "runtime": {
+    "python": "3.14.6",
+    "system": "Windows"
+  },
+  "sources": {
+    "scripts/audit_common.py": "ab44cd158a3904f62cc0b290396e8cbb1feaa880bb707ce4118d39b2613607c6",
+    "scripts/check_consistency.py": "5d674860aa6b68a93b55fa840d0d8f8ed37d4a3e1860385e63c4fef8ec29cd99",
+    "scripts/check_evidence_changes.py": "5320d5950401d3bef4bdf55f883b7cd77e6df67aa61e5a4767d157eac177e504",
+    "scripts/run_readonly_example.py": "f69e1ac80cea38804af7552cc514450cb3a6eed22e5d18f22a3d4ae5baa4c854"
+  },
+  "observations": {
+    "configured_consistency_control_findings": [],
+    "evidence_control_findings": [],
+    "different_historical_context_not_flagged": true,
+    "injected_consistency_findings": [
+      {
+        "code": "image_missing",
+        "severity": "warning",
+        "message": "Local image file does not exist",
+        "path": "chapters/chapter-5.md",
+        "line": 8,
+        "details": {
+          "target": "../figures/export/missing.png"
+        }
+      },
+      {
+        "code": "unresolved_marker",
+        "severity": "warning",
+        "message": "Review this explicit unresolved marker",
+        "path": "chapters/chapter-5.md",
+        "line": 28,
+        "details": {
+          "marker": "\u3010\u5f85\u786e\u8ba4\uff1a\u8865\u5145\u8be5\u5173\u7cfb\u7684\u6765\u6e90\u3011"
+        }
+      },
+      {
+        "code": "duplicate_id",
+        "severity": "warning",
+        "message": "Stable ID has multiple definition positions",
+        "path": "chapters/chapter-5.md",
+        "line": 7,
+        "details": {
+          "id": "FIG-501",
+          "locations": [
+            {
+              "path": "chapters/chapter-5.md",
+              "line": 7
+            },
+            {
+              "path": "chapters/chapter-5.md",
+              "line": 26
+            }
+          ]
+        }
+      },
+      {
+        "code": "missing_id",
+        "severity": "warning",
+        "message": "Expected stable ID has no registered definition",
+        "details": {
+          "id": "FIG-777"
+        }
+      },
+      {
+        "code": "dangling_reference",
+        "severity": "warning",
+        "message": "Explicit reference has no stable-ID definition",
+        "path": "chapters/chapter-5.md",
+        "line": 27,
+        "details": {
+          "id": "FIG-599"
+        }
+      },
+      {
+        "code": "section_missing",
+        "severity": "warning",
+        "message": "Required exact heading is missing",
+        "path": "chapters/chapter-5.md",
+        "details": {
+          "heading": "5.3 \u5f02\u5e38\u4e0e\u4e8b\u52a1"
+        }
+      },
+      {
+        "code": "table_total_mismatch",
+        "severity": "warning",
+        "message": "Declared total does not equal the registered component sum",
+        "path": "chapters/chapter-6.md",
+        "line": 11,
+        "details": {
+          "id": "current",
+          "expected": "12",
+          "actual": "13",
+          "unit": "cases",
+          "context": {
+            "version": "v2",
+            "batch": "regression-A",
+            "object": "functional-cases",
+            "method": "count"
+          }
+        }
+      },
+      {
+        "code": "number_conflict",
+        "severity": "warning",
+        "message": "Explicitly comparable table observations disagree",
+        "path": "chapters/chapter-6.md",
+        "line": 11,
+        "details": {
+          "comparison_id": "functional-results",
+          "metric_id": "test.total",
+          "unit": "cases",
+          "context": {
+            "batch": "regression-A",
+            "method": "count",
+            "object": "functional-cases",
+            "version": "v2"
+          },
+          "observations": [
+            {
+              "path": "chapters/chapter-6.md",
+              "line": 11,
+              "table_id": "current",
+              "value": "13"
+            },
+            {
+              "path": "chapters/abstract.md",
+              "line": 11,
+              "table_id": "abstract",
+              "value": "12"
+            }
+          ]
+        }
+      },
+      {
+        "code": "authority_changed",
+        "severity": "warning",
+        "message": "Authoritative file fingerprint changed; review its declared version and synchronization direction",
+        "path": "chapters/abstract.md",
+        "details": {
+          "declared_version": "synthetic-v2-authority",
+          "expected_sha256": "5ea692a63de942905dbec2b3d3922f167a3498d4e36811b6f27d9ba736a0e8d9",
+          "actual_sha256": "de4a3658aac4060ba996674ed95a2dfcc668009210b49735143658d027cb9dab"
+        }
+      }
+    ],
+    "changed_source_claims": [
+      "C-STATE"
+    ],
+    "unaffected_claims_after_state_change": [
+      "C-CATALOG"
+    ],
+    "changed_source_targets": [
+      {
+        "kind": "chapter",
+        "path": "chapters/chapter-5.md",
+        "exists": true,
+        "locator": "5.1",
+        "claim_ids": [
+          "C-STATE"
+        ]
+      },
+      {
+        "kind": "figure",
+        "path": "figures/source/FIG-501.mmd",
+        "exists": true,
+        "locator": "FIG-501",
+        "claim_ids": [
+          "C-STATE"
+        ]
+      },
+      {
+        "kind": "test",
+        "path": "tests/plan.md",
+        "exists": true,
+        "locator": "\u72b6\u6001\u6761\u4ef6",
+        "claim_ids": [
+          "C-STATE"
+        ]
+      }
+    ],
+    "renamed_source_findings": [
+      {
+        "code": "source_missing",
+        "severity": "warning",
+        "message": "Registered source is missing; candidate paths are not adopted automatically",
+        "path": "source/catalog.py",
+        "details": {
+          "rename_candidates": [
+            "source/catalog-renamed.py"
+          ],
+          "rename_status": "unique_candidate",
+          "claim_id": "C-CATALOG",
+          "manifest": "evidence/claims.json",
+          "record": "claims[1].sources[0]"
+        }
+      }
+    ],
+    "all_audit_input_bytes_mtimes_and_file_lists_unchanged": true,
+    "base_fixture_unchanged": true
+  }
+}

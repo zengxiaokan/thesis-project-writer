@@ -8,7 +8,7 @@
 
 [开始使用](#获取与使用) · [看看实际样例](examples/initialization-study/README.md) · [下载发行包](https://github.com/zengxiaokan/thesis-project-writer/raw/refs/heads/main/dist/thesis-project-writer.zip)
 
-当前版本 [0.4.0](VERSION) · [MIT 开源](LICENSE) · [跨平台 CI](https://github.com/zengxiaokan/thesis-project-writer/actions)
+当前版本 [0.5.0](VERSION) · [MIT 开源](LICENSE) · [跨平台 CI](https://github.com/zengxiaokan/thesis-project-writer/actions)
 
 ## 从你正在做的事开始
 
@@ -27,6 +27,7 @@
 - **材料有归处。** 按需组织证据、章节蓝图、正文、图源与审查记录，给关键论述留下可回查的来源。
 - **图表讲得清。** 从章节问题选择图种，让流程、关系和数据各有依据，保留可编辑源与导出文件，并检查图文是否一致。
 - **章节看得到机制。** 按本章任务检查主体、条件、处理关系、数据变化和失败边界，用原稿位置定位“只列功能”的段落，补依据、删重复。
+- **检查有位置，变更有去向。** 可选只读工具定位图表ID、图片路径、已登记合计和结构问题，并将来源变化关联到需要复核的正文、图表及测试说明。
 - **认真对待你的原稿。** 沿用作者指定的正式稿与同步方向，按本轮范围续写、审查或润色。
 - **进度能接续。** 复用已有答案、蓝图与有效证据，把已完成内容和下一步记录下来。
 - **执行贴合实际条件。** 文档、浏览器、MCP 和本地工具按可用能力选择；条件变化时说明替代方案及交付差距。
@@ -128,18 +129,21 @@ python scripts/init_workspace.py --workspace "<已有论文目录>" --profile so
 
 ## 验证与发行
 
+[只读一致性检查](references/consistency-checks.md)与[证据变更提示](references/evidence-changes.md)只输出报告，不写回论文或重建基线。旧稿可从选定Markdown开始，按需映射已有主张记录；[合成小样稿与实际复跑](examples/readonly-checks/README.md)展示错误定位、历史口径隔离和针对性复核，实际范围见[第二批验证记录](docs/readonly-validation.md)。工具没有检查的内容、普通语义与正式页面仍须相应审查。
+
 章节充分性见 [深度指南](references/chapter-quality.md) 和 [完整章对照](examples/chapter-depth/README.md)。基础行为回归与[原始材料困难评测](https://github.com/zengxiaokan/thesis-project-writer/tree/main/evals/difficult)分别维护；后者使用四种规则条件和独立输入/评分，开发评测不装入技能 ZIP。[首轮十二次实测](docs/depth-evaluation.md)未显示候选规则相对基线的增益。实际输出与结果以报告为准，不以脚本通过率或规则数量证明写作效果。
 
 ```text
 python -B -m unittest discover -s tests -v
 python -B scripts/run_worked_example.py
+python -B scripts/run_readonly_example.py
 python -B scripts/build_release.py
 python -B scripts/build_release.py --check
 ```
 
 [CI 运行记录](https://github.com/zengxiaokan/thesis-project-writer/actions) 检查 Linux/Windows 与 Python 3.8、3.12、3.14；是否已通过以对应提交的实际运行结果为准。Windows 特有测试在其他平台明确跳过；权限不足或 Python 未提供 Junction 接口时也会报告跳过，不计为通过。
 
-初始化、观察与发行检查脚本目标兼容 Python 3.8+，仅使用标准库，不依赖模型 API。本机验证环境与 CI 结果分别记录；语法兼容检查不代替解释器运行。可选图表示例的统计图渲染需要当前已有的 Matplotlib 和中文字体，DOT 流程图需要可用的渲染器；缺少时仍可交付图源与数据。宿主另需提供写作模型，以及任务实际需要的文件、检索、文档或浏览器能力。
+初始化、只读检查、观察与发行脚本目标兼容 Python 3.8+，仅使用标准库，不依赖模型 API。本机验证环境与 CI 结果分别记录；语法兼容检查不代替解释器运行。可选图表示例的统计图渲染需要当前已有的 Matplotlib 和中文字体，DOT 流程图需要可用的渲染器；缺少时仍可交付图源与数据。宿主另需提供写作模型，以及任务实际需要的文件、检索、文档或浏览器能力。
 
 发行包按明确文件范围、LF 文本、固定顺序和时间戳生成，使用不受压缩库版本影响的 ZIP 存储方式。`--check` 验证完整字节及本地文档链接；`.github/`、`dist/` 自身、本机 `workspace/` 与缓存不重复装入包中。
 

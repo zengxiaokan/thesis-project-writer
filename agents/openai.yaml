@@ -1,4 +1,4 @@
 interface:
   display_name: "论文定位与写作助手"
-  short_description: "先分析再定位，图表与正文有真实依据，六阶段写作交付、局部任务随时接续"
-  default_prompt: "请使用 $thesis-project-writer，按真实材料推进分析、访谈定位、章节与图表规划、取证绘图、写作审查和交付；已有论文或单张图表按需接续，保留图源与依据，缺工具时给可行替代。"
+  short_description: "先分析再定位，正文图表有依据；只读检查一致性，证据变化按关联内容复核"
+  default_prompt: "请使用 $thesis-project-writer 完成本轮论文任务，沿用已确认定位和正式稿，依据真实材料写作及制图；按需只读检查一致性和证据变化，定位相关内容复核，说明实际范围与缺口。"

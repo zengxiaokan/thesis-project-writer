@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "documents": [
+    "chapters/chapter-5.md",
+    "chapters/chapter-6.md",
+    "chapters/abstract.md",
+    "chapters/history.md"
+  ],
+  "expected_ids": [
+    "FIG-501",
+    "TAB-601",
+    "TAB-ABS",
+    "TAB-OLD"
+  ],
+  "required_sections": [
+    {
+      "document": "chapters/chapter-5.md",
+      "heading": "5.3 异常与事务"
+    }
+  ],
+  "table_checks": [
+    {
+      "label_column": 0,
+      "value_column": 1,
+      "value_type": "integer",
+      "unit": "cases",
+      "tolerance": "0",
+      "comparison_id": "functional-results",
+      "context": {
+        "version": "v2",
+        "batch": "regression-A",
+        "object": "functional-cases",
+        "method": "count"
+      },
+      "metrics": [
+        {
+          "metric_id": "test.total",
+          "row": "合计"
+        }
+      ],
+      "id": "current",
+      "document": "chapters/chapter-6.md",
+      "anchor": "TAB-601",
+      "sum_of": [
+        "通过",
+        "失败",
+        "阻塞"
+      ],
+      "total": "合计"
+    },
+    {
+      "label_column": 0,
+      "value_column": 1,
+      "value_type": "integer",
+      "unit": "cases",
+      "tolerance": "0",
+      "comparison_id": "functional-results",
+      "context": {
+        "version": "v2",
+        "batch": "regression-A",
+        "object": "functional-cases",
+        "method": "count"
+      },
+      "metrics": [
+        {
+          "metric_id": "test.total",
+          "row": "合计"
+        }
+      ],
+      "id": "abstract",
+      "document": "chapters/abstract.md",
+      "anchor": "TAB-ABS",
+      "sum_of": [
+        "通过",
+        "失败",
+        "阻塞"
+      ],
+      "total": "合计"
+    },
+    {
+      "label_column": 0,
+      "value_column": 1,
+      "value_type": "integer",
+      "unit": "requests",
+      "tolerance": "0",
+      "comparison_id": "functional-results",
+      "context": {
+        "version": "v1",
+        "batch": "smoke-old",
+        "object": "HTTP-requests",
+        "method": "response-count"
+      },
+      "metrics": [
+        {
+          "metric_id": "test.total",
+          "row": "合计"
+        }
+      ],
+      "id": "history",
+      "document": "chapters/history.md",
+      "anchor": "TAB-OLD",
+      "sum_of": [
+        "成功响应",
+        "失败响应"
+      ],
+      "total": "合计"
+    }
+  ],
+  "authority": {
+    "path": "chapters/abstract.md",
+    "version": "synthetic-v2-authority",
+    "hash_mode": "text-lf",
+    "sha256": "5ea692a63de942905dbec2b3d3922f167a3498d4e36811b6f27d9ba736a0e8d9"
+  }
+}

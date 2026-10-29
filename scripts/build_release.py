@@ -5,6 +5,7 @@ import io
 from pathlib import Path
 import re
 import sys
+from urllib.parse import unquote, urlsplit
 import zipfile
 
 
@@ -56,18 +57,29 @@ def make_archive(root=ROOT):
 
 
 def verify_links(root=ROOT):
+    # Reuse the audit parser so code examples, angle-bracket destinations and
+    # balanced parentheses do not become false broken links in the release.
+    sys.dont_write_bytecode = True
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    from check_consistency import visible_lines, image_targets
+
     root = Path(root)
     for relative in release_files(root):
         if relative.suffix != ".md":
             continue
         document = root / relative
-        for target in re.findall(r"\[[^\]]+\]\(([^)]+)\)", document.read_text(encoding="utf-8")):
-            if "://" in target or target.startswith("#"):
-                continue
-            destination = (document.parent / target.split("#", 1)[0]).resolve()
-            destination.relative_to(root.resolve())
-            if not destination.is_file():
-                raise ValueError("Broken local link in " + str(relative) + ": " + target)
+        for line in visible_lines(document.read_text(encoding="utf-8")):
+            # The destination grammar is shared by ordinary links and images.
+            linked = re.sub(r"(?<!!)\[([^\]\n]*)\]\(", r"![\1](", line)
+            targets, _ = image_targets(linked)
+            for target in targets:
+                parsed = urlsplit(target)
+                if parsed.scheme or parsed.netloc or not parsed.path:
+                    continue
+                destination = (document.parent / unquote(parsed.path)).resolve()
+                destination.relative_to(root.resolve())
+                if not destination.is_file():
+                    raise ValueError("Broken local link in " + str(relative) + ": " + target)
 
 
 def main():

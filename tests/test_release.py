@@ -21,7 +21,11 @@ class ReleaseTests(unittest.TestCase):
                              ".gitignore", "references/host-adapters.md", "references/figures-and-tables.md",
                              "examples/figures/initializer-flow.dot", "examples/figures/initializer-flow.svg",
                              "examples/figures/render_chart.py", "examples/figures/source_data.csv",
-                             "examples/figures/counts.svg"):
+                             "examples/figures/counts.svg", "scripts/check_consistency.py",
+                             "scripts/check_evidence_changes.py", "scripts/audit_common.py",
+                             "references/consistency-checks.md", "references/evidence-changes.md",
+                             "examples/readonly-checks/base/evidence/claims.json",
+                             "examples/readonly-checks/observation.json"):
                 self.assertIn("thesis-project-writer/" + required, names)
             self.assertFalse(any("workspace/" in name or ".github/" in name or "__pycache__" in name
                                  or "evals/difficult/" in name for name in names))
@@ -43,6 +47,22 @@ class ReleaseTests(unittest.TestCase):
 
     def test_public_markdown_links_resolve(self):
         BUILD["verify_links"]()
+
+    def test_link_verifier_handles_real_markdown_and_does_not_read_code_examples(self):
+        with tempfile.TemporaryDirectory(prefix="thesis-link-check-") as temporary:
+            root = Path(temporary).resolve()
+            for relative in BUILD["release_files"](ROOT):
+                target = root / relative
+                target.parent.mkdir(parents=True, exist_ok=True)
+                target.write_bytes(BUILD["canonical_bytes"](ROOT / relative))
+            target = root / "examples/target (1).md"
+            target.write_text("A real target\n", encoding="utf-8")
+            entry = root / "README.md"
+            entry.write_text('[real](<examples/target (1).md>)\n```text\n[fake](absent.md)\n```\n', encoding="utf-8")
+            BUILD["verify_links"](root)
+            entry.write_text('[broken](absent.md)\n', encoding="utf-8")
+            with self.assertRaises(ValueError):
+                BUILD["verify_links"](root)
 
     def test_scripts_support_declared_python_syntax(self):
         for path in (ROOT / "scripts").glob("*.py"):

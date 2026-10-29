@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "claims": [
+    {
+      "claim_id": "C-STATE",
+      "statement": "合成状态入口只接受available",
+      "sources": [
+        {
+          "path": "source/service.py",
+          "sha256": "b13df1f6e60a8b534f6bd03ad33380d1f47a473ad28fa6dcaa1b52fc6891417e",
+          "hash_mode": "text-lf",
+          "locator": "can_borrow"
+        }
+      ],
+      "targets": [
+        {
+          "kind": "chapter",
+          "path": "chapters/chapter-5.md",
+          "locator": "5.1"
+        },
+        {
+          "kind": "figure",
+          "path": "figures/source/FIG-501.mmd",
+          "locator": "FIG-501"
+        },
+        {
+          "kind": "test",
+          "path": "tests/plan.md",
+          "locator": "状态条件"
+        }
+      ]
+    },
+    {
+      "claim_id": "C-CATALOG",
+      "statement": "目录服务来源独立",
+      "sources": [
+        {
+          "path": "source/catalog.py",
+          "sha256": "c1b1e8a71ff9cde998b608f719760ac23a79cb7135b8f9d92621d3e6f3b350cc",
+          "hash_mode": "text-lf"
+        }
+      ],
+      "targets": [
+        {
+          "kind": "chapter",
+          "path": "chapters/chapter-2.md",
+          "locator": "第二章"
+        }
+      ]
+    }
+  ]
+}

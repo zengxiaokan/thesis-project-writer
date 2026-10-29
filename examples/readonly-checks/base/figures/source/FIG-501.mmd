@@ -1,0 +1,4 @@
+flowchart TD
+ A[接收借用] --> B{状态为 available?}
+ B -- 是 --> C[进入后续处理]
+ B -- 否 --> D[拒绝]
