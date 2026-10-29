@@ -1,6 +1,6 @@
 # 工作区职责与续写
 
-目录由已确认定位决定，不能先铺一套计算机论文模板再让内容迁就它。已有论文沿用原路径，不迁移旧稿。
+完整目录由已确认定位决定，第一阶段先用最小记录了解项目或研究材料，第三阶段再扩展；不能先铺一套计算机论文模板再让内容迁就它。已有论文沿用原路径，不迁移旧稿。
 
 先识别本轮范围、正式稿及已有记录的职责。只审查或润色少量文字时不初始化工作区；已有 README、进度、证据索引或定位文档可按职责复用，不要求统一命名。项目明确采用分章 Markdown 作为内容源时遵守该约定；只有 Word 或在线文档时沿用现有权威稿，不先创建一套可能过时的 Markdown。
 
@@ -13,8 +13,9 @@
 `--root` 指论文目录的父目录。例如从项目 `D:/work/project` 补建 `D:/work/project/thesis`：
 
 ```text
-python <技能路径>/scripts/init_workspace.py --root D:/work/project --profile intake --dry-run
-python <技能路径>/scripts/init_workspace.py --root D:/work/project --directory thesis --profile software
+python <技能路径>/scripts/init_workspace.py --root D:/work/project --dry-run
+python <技能路径>/scripts/init_workspace.py --root D:/work/project --profile analysis
+python <技能路径>/scripts/init_workspace.py --workspace D:/work/project/thesis --profile intake
 ```
 
 `--root` 未指定时使用当前目录作父目录；不要在 `thesis/` 内把它自身传给 `--root`，否则会再建一层 `thesis/`。接续已有论文目录时直接指定：
@@ -23,13 +24,13 @@ python <技能路径>/scripts/init_workspace.py --root D:/work/project --directo
 python <技能路径>/scripts/init_workspace.py --workspace D:/work/project/thesis --profile software --dry-run
 ```
 
-`--workspace` 必须是已存在的论文目录，与 `--root`、`--directory` 互斥；根参数模式会复用已有 `thesis/` 或 `论文/`，二者同时存在时需明确选择。路径含空格时给路径加引号。实际执行前根据预览核对位置；上例 `software` 仅用于已确认该路径的任务。
+`--workspace` 必须是已存在的论文目录，与 `--root`、`--directory` 互斥；根参数模式会复用已有 `thesis/` 或 `论文/`，二者同时存在时需明确选择。路径含空格时给路径加引号。实际执行前根据预览核对位置；上例 `intake` 用于第二阶段，`software` 等研究路径在第三阶段定位明确后选择。
 
-脚本始终只补缺。返回值区分实际新增文件/目录、预览计划、已保留文件及 `continuation_required` 接续提示；预览不算已创建。从 `intake` 扩充路径时，原 README、progress、定位和环境记录会被保留，因此不能把文件中的旧“待访谈”文字当成当前事实。执行者需读取已保留入口，依真实反馈更新阶段、链接与下一步；用户已授权扩充时无需再问同一定位，且不得让脚本自动确认定位或覆盖用户文字。
+脚本始终只补缺。返回值区分实际新增文件/目录、预览计划、已保留文件及 `continuation_required` 接续提示；预览不算已创建。从 `analysis` 到 `intake` 再扩充研究路径，原画像、README、progress、定位和环境记录会被保留，因此不能把文件中的旧“待分析/待访谈”文字当成当前事实。执行者读取保留入口，依真实成果与反馈更新阶段、链接和下一步；用户已授权扩充时无需再问同一定位，不得让脚本自动确认定位、大纲或覆盖用户文字。
 
 ## 目录职责
 
-定位未确认时，默认配置 `intake` 仅包含 README.md、progress.md、intake/interview.md、intake/positioning.md 和 intake/environment.md 五份最小记录；也可先在对话中访谈，不建目录。环境记录初始为未检查，不能将初始化当作探测成功。下面是定位确认后各路径共享的职责，不要求每种论文具有所有专项目录：
+第一阶段默认配置 `analysis` 仅包含 README.md、progress.md、intake/project-analysis.md 和 intake/environment.md 四份记录。画像文件同时容纳来源索引、覆盖表与未知项。第二阶段运行 `intake` 时补访谈与定位两份文件，共六份；直接显式运行旧 `intake` 仍创建原五份入口，若尚未分析，由执行者先补做第一阶段并按需保存画像。第三阶段扩展相应研究路径，不覆盖已有内容。环境记录初始为未检查，不能将初始化当作探测成功；没有落盘需要时可在对话中保留最小成果。下面是定位确认后共享的职责：
 
 ```text
 thesis/
@@ -37,6 +38,7 @@ thesis/
   AGENTS.md                         仅适用于论文目录的工作规则
   writing-rules.md                  写作原则
   quality-standards.md              覆盖与验收要求
+  intake/project-analysis.md        第一阶段画像、来源索引、覆盖和未知项
   intake/interview.md               分轮访谈摘要及来源
   intake/positioning.md             已确认论文定位与研究边界
   intake/environment.md             所需能力、实际检查、缺口、补充及兜底
@@ -46,7 +48,9 @@ thesis/
     index.md                        主张与来源索引
     academic-format.md              学校条款及原件定位
     reference-samples/              规范、模板及样稿原件
-  design/                           章节蓝图与论点映射
+  design/workspace-plan.md          文件夹职责、权威稿位置和材料去向
+  design/outline.md                 正式章节目次、章节职责及确认依据
+  design/blueprints.md              节级蓝图、主张—证据映射和图表缺口
   chapters/                         项目约定的正文源；采用分章 Markdown 时含汇总稿
   figures/                          当前路径实际需要的图源及导出图
   resources/
@@ -65,7 +69,7 @@ thesis/
 
 通用 Evidence 覆盖：研究问题、来源与版本、材料类型、取得状态、处理方法、支持的主张及限制。软件模块再覆盖入口、处理链、表字段、权限、状态和异常；其他路径按其样本、变量、筛选框架或推理过程组织。不得把原始数据、分析结果和作者解释混为一类。
 
-蓝图记录：章节标题、本节问题、论证顺序、主张与证据编号、拟用图表、与相邻章节分工、缺口。章节组织以学校和用户正式目录为准；工程论文通常说明需求、设计、数据库、实现、测试和结论，但不固定章节数或篇幅。
+第三阶段分开三种规划：工作区计划说明文件夹职责和材料去向；正式大纲说明章/节标题和分工，并记录用户确认或既有正式目录来源；蓝图说明各节问题、论证顺序、主张与证据编号、拟用图表和缺口。已有一份文件承载这些职责时可复用，不为新命名拆散原记录。正式大纲待确认时可整理材料，不能把模型建议当正式目录推进全文写作。章节组织以学校和用户正式目录为准；工程论文通常说明需求、设计、数据库、实现、测试和结论，但不固定章节数或篇幅。第四阶段补证据后更新映射，再进入分章写作。
 
 进度记录最近处理的文件、当前阶段、已完成的实际动作、证据对应的材料基线、下一步和阻碍。再次进入时先看定位与相关材料变化；变更只使受影响的 Evidence 和正文需要复核，不使全篇自动失效。分别记录本轮交付状态和全文验收状态，不能因为全文另有无关待确认项，把已经完成的局部修改反复重做。
 

@@ -64,7 +64,7 @@ class WorkspaceTests(unittest.TestCase):
         self.assertEqual(self.snapshot(), before)
 
     def test_intake_upgrade_preserves_answers_and_returns_continuation(self):
-        initialize(self.root)
+        initialize(self.root, profile="intake")
         before = self.snapshot()
         result = initialize(self.root, profile="software")
         for relative, original in before.items():
@@ -77,8 +77,44 @@ class WorkspaceTests(unittest.TestCase):
         self.assertIn("不能自动确认", actions["thesis/intake/positioning.md"])
         self.assertIn("thesis/tests/README.md", result["created_files"])
 
+    def test_analysis_interview_and_structure_expand_without_losing_stage_records(self):
+        preview = initialize(self.root, dry_run=True)
+        self.assertEqual(list(self.root.iterdir()), [])
+        self.assertEqual(preview["profile"], "analysis")
+        analyzed = initialize(self.root)
+        workspace = Path(analyzed["workspace"])
+        self.assertEqual(len(analyzed["created_files"]), 4)
+        self.assertFalse((workspace / "intake/interview.md").exists())
+        self.assertFalse((workspace / "intake/positioning.md").exists())
+        self.assertFalse((workspace / "chapters").exists())
+        portrait = workspace / "intake/project-analysis.md"
+        portrait.write_text("用户已有模块清单与覆盖笔记\n", encoding="utf-8")
+        before = self.snapshot()
+        interview = initialize(workspace=workspace, profile="intake")
+        self.assertEqual(set(interview["created_files"]), {
+            "thesis/intake/interview.md", "thesis/intake/positioning.md"})
+        self.assertEqual({item["path"] for item in interview["continuation_required"]}, {
+            "thesis/README.md", "thesis/progress.md", "thesis/intake/environment.md"})
+        for name, contents in before.items():
+            self.assertEqual(self.snapshot()[name], contents)
+        notes = workspace / "intake/positioning.md"
+        notes.write_text("用户已确认的题目与范围\n", encoding="utf-8")
+        before = self.snapshot()
+        expanded = initialize(workspace=workspace, profile="software")
+        for name, contents in before.items():
+            self.assertEqual(self.snapshot()[name], contents)
+        for name in ("workspace-plan.md", "outline.md", "blueprints.md"):
+            self.assertTrue((workspace / "design" / name).is_file())
+        actions = {item["path"] for item in expanded["continuation_required"]}
+        self.assertTrue({"thesis/intake/project-analysis.md", "thesis/intake/positioning.md",
+                         "thesis/progress.md"}.issubset(actions))
+        before = self.snapshot()
+        self.assertEqual(initialize(workspace=workspace, profile="software")["created_files"], [])
+        self.assertEqual(self.snapshot(), before)
+
     def test_profiles_add_only_their_own_specialized_directories(self):
         expected = {
+            "analysis": ("intake",),
             "intake": ("intake",),
             "software": ("evidence/modules", "tests", "resources/screenshots"),
             "empirical": ("materials/data", "materials/instruments", "analysis"),
@@ -95,7 +131,7 @@ class WorkspaceTests(unittest.TestCase):
                 workspace = Path(result["workspace"])
                 for directory in directories:
                     self.assertTrue((workspace / directory).is_dir())
-                if profile not in ("intake", "software"):
+                if profile not in ("analysis", "intake", "software"):
                     self.assertFalse((workspace / "tests").exists())
                     self.assertFalse((workspace / "resources/screenshots").exists())
                     self.assertTrue((workspace / "research-facts.md").is_file())

@@ -18,7 +18,7 @@ python -B scripts/run_worked_example.py
 python -B scripts/run_worked_example.py --output examples/initialization-study/observation.json
 ```
 
-流程为预览、最小初始化、写入测试入口、扩充 software、重复运行，实际比较文件字节、时间戳和接续清单。解释器和操作系统信息如实记录，后续环境可能不同。
+流程为预览、默认 analysis 初始化四份记录、写入测试入口、intake 补两份访谈定位记录、扩充 software、重复运行，实际比较文件字节、时间戳和接续清单。脚本只是配置接续演示，没有实际开展六阶段中的项目分析或作者访谈，也不确认定位与大纲。解释器和操作系统信息如实记录，后续环境可能不同。
 
 ## 写作链
 

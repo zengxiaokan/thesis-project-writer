@@ -22,10 +22,16 @@ def observe():
         project.mkdir()
         initialize(project, dry_run=True)
         preview_empty = list(project.iterdir()) == []
-        intake = initialize(project)
-        workspace = Path(intake["workspace"])
+        analyzed = initialize(project)
+        workspace = Path(analyzed["workspace"])
         entry = workspace / "README.md"
         entry.write_text("Existing entry used only as test input.\n", encoding="utf-8")
+        analysis_records = {p.relative_to(workspace).as_posix(): (p.read_bytes(), p.stat().st_mtime_ns)
+                            for p in workspace.rglob("*") if p.is_file()}
+        intake = initialize(workspace=workspace, profile="intake")
+        analysis_preserved = all((workspace / name).read_bytes() == value[0]
+                                 and (workspace / name).stat().st_mtime_ns == value[1]
+                                 for name, value in analysis_records.items())
         initial = {p.relative_to(workspace).as_posix(): (p.read_bytes(), p.stat().st_mtime_ns)
                    for p in workspace.rglob("*") if p.is_file()}
         expanded = initialize(project, profile="software")
@@ -38,7 +44,10 @@ def observe():
                         for p in workspace.rglob("*") if p.is_file()}
         observations = {
             "preview_wrote_nothing": preview_empty,
+            "analysis_created_files": len(analyzed["created_files"]),
             "intake_created_files": len(intake["created_files"]),
+            "analysis_records_preserved_on_intake": analysis_preserved,
+            "intake_continuation_paths": sorted(item["path"] for item in intake["continuation_required"]),
             "upgrade_created_files": len(expanded["created_files"]),
             "existing_file_bytes_preserved": preserved,
             "existing_file_mtimes_preserved": times,
@@ -46,10 +55,13 @@ def observe():
             "repeat_created_files": len(repeated["created_files"]),
             "repeat_all_bytes_and_mtimes_preserved": before_repeat == after_repeat,
         }
-        assert preview_empty and preserved and times and before_repeat == after_repeat
-        assert observations["intake_created_files"] == 5
+        assert preview_empty and analysis_preserved and preserved and times and before_repeat == after_repeat
+        assert observations["analysis_created_files"] == 4
+        assert observations["intake_created_files"] == 2
+        assert observations["upgrade_created_files"] == 13
+        assert len(observations["intake_continuation_paths"]) == 3
         assert observations["repeat_created_files"] == 0
-        assert len(observations["continuation_paths"]) == 5
+        assert len(observations["continuation_paths"]) == 6
     return {
         "scope": "Real initializer execution in temporary directories; one writing-section example, not a full thesis",
         "input_kind": "Scripted test data; no real author interview or private manuscript",

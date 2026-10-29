@@ -3,7 +3,7 @@
   "input_kind": "Scripted test data; no real author interview or private manuscript",
   "source": {
     "path": "scripts/init_workspace.py",
-    "sha256": "1cc42c2a2ee94f8d633b5e9e3cada61a66d2765e01b25a1ff3853bd984a831b8"
+    "sha256": "eb237ae291bbc7bce0010ae1eb64bb3df27726004dd8f5752ba574c68f88d8b7"
   },
   "runtime": {
     "python": "3.14.6",
@@ -11,8 +11,15 @@
   },
   "observations": {
     "preview_wrote_nothing": true,
-    "intake_created_files": 5,
-    "upgrade_created_files": 11,
+    "analysis_created_files": 4,
+    "intake_created_files": 2,
+    "analysis_records_preserved_on_intake": true,
+    "intake_continuation_paths": [
+      "thesis/README.md",
+      "thesis/intake/environment.md",
+      "thesis/progress.md"
+    ],
+    "upgrade_created_files": 13,
     "existing_file_bytes_preserved": true,
     "existing_file_mtimes_preserved": true,
     "continuation_paths": [
@@ -20,6 +27,7 @@
       "thesis/intake/environment.md",
       "thesis/intake/interview.md",
       "thesis/intake/positioning.md",
+      "thesis/intake/project-analysis.md",
       "thesis/progress.md"
     ],
     "repeat_created_files": 0,
