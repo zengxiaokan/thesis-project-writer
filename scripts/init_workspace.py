@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """Initialize a thesis workspace without overwriting files (Python 3.8+)."""
 import argparse
 import json

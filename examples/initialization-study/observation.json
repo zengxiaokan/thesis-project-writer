@@ -3,7 +3,7 @@
   "input_kind": "Scripted test data; no real author interview or private manuscript",
   "source": {
     "path": "scripts/init_workspace.py",
-    "sha256": "eb237ae291bbc7bce0010ae1eb64bb3df27726004dd8f5752ba574c68f88d8b7"
+    "sha256": "8fc7beee51e3d5da943c04eba5ab634c19387b951b33ffea3488044058703edb"
   },
   "runtime": {
     "python": "3.14.6",

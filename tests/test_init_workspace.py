@@ -295,7 +295,8 @@ class WorkspaceTests(unittest.TestCase):
         workspace.mkdir()
         command = [sys.executable, "-B", str(SCRIPT)]
         result = subprocess.run(command + ["--workspace", str(workspace), "--dry-run"],
-                                capture_output=True, text=True, encoding="utf-8", check=True)
+                                capture_output=True, text=True, encoding="utf-8")
+        self.assertEqual(result.returncode, 0, msg=result.stderr)
         self.assertEqual(Path(json.loads(result.stdout)["workspace"]), workspace)
         for conflicting in (["--root", str(self.root)], ["--directory", "论文"]):
             result = subprocess.run(command + ["--workspace", str(workspace)] + conflicting,
@@ -312,8 +313,9 @@ class WorkspaceTests(unittest.TestCase):
         environment = dict(os.environ, PYTHONUTF8="0", PYTHONIOENCODING="ascii")
         completed = subprocess.run(
             [sys.executable, "-B", str(SCRIPT), "--workspace", str(workspace), "--dry-run"],
-            env=environment, capture_output=True, text=True, encoding="ascii", check=True,
+            env=environment, capture_output=True, text=True, encoding="ascii",
         )
+        self.assertEqual(completed.returncode, 0, msg=completed.stderr)
         self.assertEqual(Path(json.loads(completed.stdout)["workspace"]), workspace)
         self.assertEqual(list(workspace.iterdir()), [])
 
