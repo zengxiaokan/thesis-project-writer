@@ -8,7 +8,7 @@
 
 [开始使用](#获取与使用) · [看看实际样例](examples/initialization-study/README.md) · [下载发行包](https://github.com/zengxiaokan/thesis-project-writer/raw/refs/heads/main/dist/thesis-project-writer.zip)
 
-当前版本 [0.2.0](VERSION) · [MIT 开源](LICENSE) · [跨平台 CI](https://github.com/zengxiaokan/thesis-project-writer/actions)
+当前版本 [0.3.0](VERSION) · [MIT 开源](LICENSE) · [跨平台 CI](https://github.com/zengxiaokan/thesis-project-writer/actions)
 
 ## 从你正在做的事开始
 
@@ -25,6 +25,7 @@
 
 - **先看懂，再定位。** 让提问建立在项目和材料画像上，把“想研究什么”和“现在能做什么”放在一起考虑。
 - **材料有归处。** 按需组织证据、章节蓝图、正文、图源与审查记录，给关键论述留下可回查的来源。
+- **图表讲得清。** 从章节问题选择图种，让流程、关系和数据各有依据，保留可编辑源与导出文件，并检查图文是否一致。
 - **认真对待你的原稿。** 沿用作者指定的正式稿与同步方向，按本轮范围续写、审查或润色。
 - **进度能接续。** 复用已有答案、蓝图与有效证据，把已完成内容和下一步记录下来。
 - **执行贴合实际条件。** 文档、浏览器、MCP 和本地工具按可用能力选择；条件变化时说明替代方案及交付差距。
@@ -48,13 +49,26 @@
 
 已有论文从当前任务进入，沿用已确认的定位、大纲与有效证据。只润色几段或核查一项结论时，聚焦该范围即可。材料变化时复核受影响内容，进度记录帮助下一次继续。
 
+## 让图表成为论证的一部分
+
+图表从第三阶段的章节规划开始安排，第四阶段核实来源并生成，第五阶段与正文一起审查，第六阶段检查编号、引用和正式页面。
+
+- **选对表达方式。** 流程图说明步骤与判断，架构图说明组成与连接，时序图说明调用，状态图说明变化，ER 图说明实体关系，统计图和表格呈现真实数据与比较；不按固定数量凑图。
+- **画出的内容有来处。** 节点、连线、分支、约束和数值对应源码、SQL、记录或已核实资料。设计方案、实际实现与运行观察分别标明。
+- **留下能继续修改的材料。** 保存可编辑图源、必要数据和实际导出文件，登记来源、章节位置及检查状态；图源写好与图片导出成功分别记录。
+- **图文一起核对。** 检查名称、方向、单位、数字和结论，避免正文更新了而图仍是旧版本。插入正式稿后按实际尺寸检查中文、清晰度、裁切和分页，图题、表题及编号遵守学校规范。
+- **缺工具也有下一步。** 优先使用当前可用的绘图和文档工具；不能渲染时先交可编辑图源或绘制说明，明确导出与页面检查的待办，不把未查看的页面记为验收通过。
+
+详见 [图表与流程图指南](references/figures-and-tables.md) 和 [图表示例](examples/figures/README.md)。已有论文只改一张图时，直接读取有关证据与正文即可接续。
+
 ## 获取与使用
 
 - [下载发行包](https://github.com/zengxiaokan/thesis-project-writer/raw/refs/heads/main/dist/thesis-project-writer.zip)：含使用说明、许可、版本、技能指引、脚本、测试和公开样例；解压得到 `thesis-project-writer/`
 - [技能入口](SKILL.md)：任务分流与写作规则
 - [宿主适配指南](references/host-adapters.md)：Codex 用法及其他环境的手动加载方式
 - [单节流程样例](examples/initialization-study/README.md)：从真实运行材料到证据、蓝图、草稿、审查与单节定稿
-- [评估改进记录](docs/evaluation-follow-up.md)、[六阶段验证记录](docs/six-stage-validation.md) 与 [更新记录](CHANGELOG.md)
+- [图表与流程图指南](references/figures-and-tables.md) 及 [图表示例](examples/figures/README.md)：选图、来源、图源、导出和图文核对
+- [评估改进记录](docs/evaluation-follow-up.md)、[六阶段验证记录](docs/six-stage-validation.md)、[图表验证记录](docs/figure-validation.md) 与 [更新记录](CHANGELOG.md)
 
 ### Codex
 
@@ -105,6 +119,8 @@ python scripts/init_workspace.py --workspace "<已有论文目录>" --profile so
 
 目录规划保存在 `design/workspace-plan.md`，正式章、节目录保存在 `design/outline.md`，各节的论述顺序、证据和图表安排保存在 `design/blueprints.md`。这些文件是待填写的容器；定位与正式大纲的确认均以用户真实反馈为准。
 
+第三阶段各研究路径还会补建 `figures/README.md` 和 `figures/index.md`，以及 `figures/source/`、`figures/data/`、`figures/export/`，分别组织图表规则与索引、可编辑图源、必要数据和导出图片。最初的四份分析记录与第二阶段补两份记录保持不变；创建图表目录不代表已经绘图、导出或完成页面检查。
+
 `--workspace` 与 `--root`、`--directory` 互斥。确认位置后去掉 `--dry-run` 才会实际补建，已有文件保留并返回接续清单。中文路径在 JSON 中用 ASCII 转义输出，解析后的值不变。
 
 在可信且没有并发改变目录结构的工作区使用。全量预检及每次写入前的复查可以拒绝已发现的路径变化，但不是原子防竞态，也不提供失败自动回滚。详见 [工作区指南](references/workspace.md)。
@@ -120,10 +136,10 @@ python -B scripts/build_release.py --check
 
 [CI 运行记录](https://github.com/zengxiaokan/thesis-project-writer/actions) 检查 Linux/Windows 与 Python 3.8、3.12、3.14；是否已通过以对应提交的实际运行结果为准。Windows 特有测试在其他平台明确跳过；权限不足或 Python 未提供 Junction 接口时也会报告跳过，不计为通过。
 
-脚本目标兼容 Python 3.8+。本机验证环境与 CI 结果分别记录；语法兼容检查不代替解释器运行。运行不依赖模型 API 或第三方 Python 包。宿主仍需提供写作模型，以及任务实际需要的文件、检索、文档或浏览器能力。
+初始化、观察与发行检查脚本目标兼容 Python 3.8+，仅使用标准库，不依赖模型 API。本机验证环境与 CI 结果分别记录；语法兼容检查不代替解释器运行。可选图表示例的统计图渲染需要当前已有的 Matplotlib 和中文字体，DOT 流程图需要可用的渲染器；缺少时仍可交付图源与数据。宿主另需提供写作模型，以及任务实际需要的文件、检索、文档或浏览器能力。
 
 发行包按明确文件范围、LF 文本、固定顺序和时间戳生成，使用不受压缩库版本影响的 ZIP 存储方式。`--check` 验证完整字节及本地文档链接；`.github/`、`dist/` 自身、本机 `workspace/` 与缓存不重复装入包中。
 
 ## 质量边界
 
-公开样例使用本仓库真实源码和实际临时目录运行记录，只覆盖一个工程论文小节的生产流程。八个 eval 是文字行为场景，用于检查任务分流、证据边界及阶段接续；场景定义不代表已完成模型实跑或全部通过，也不能代替真实完整论文、Word 页面、跨题目稳定性或跨学科方法验收。缺关键材料时保留具体缺口；已有工具并不能补造研究结果。
+单节流程样例使用本仓库真实源码和实际临时目录运行记录，只覆盖一个工程论文小节的生产流程；图表示例另行记录材料来源、生成及检查范围。十一个 eval 是文字行为场景，用于检查任务分流、证据边界、阶段接续及图表处理；场景定义不代表已完成模型实跑或全部通过，也不能代替真实完整论文、Word 页面、跨题目稳定性或跨学科方法验收。缺关键材料时保留具体缺口；已有工具并不能补造研究结果。

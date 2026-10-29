@@ -3,7 +3,7 @@
   "input_kind": "Scripted test data; no real author interview or private manuscript",
   "source": {
     "path": "scripts/init_workspace.py",
-    "sha256": "8fc7beee51e3d5da943c04eba5ab634c19387b951b33ffea3488044058703edb"
+    "sha256": "885fa9e3c2a05392dcb6d10bf08db4bbb980d57c5c20c68c4af9ae682e815b4b"
   },
   "runtime": {
     "python": "3.14.6",
@@ -19,7 +19,7 @@
       "thesis/intake/environment.md",
       "thesis/progress.md"
     ],
-    "upgrade_created_files": 13,
+    "upgrade_created_files": 15,
     "existing_file_bytes_preserved": true,
     "existing_file_mtimes_preserved": true,
     "continuation_paths": [

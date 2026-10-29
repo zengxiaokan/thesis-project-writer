@@ -6,7 +6,7 @@
 
 本机 Windows / Python 3.14.6 执行 28 项回归检查，27 项通过，1 项目录符号链接用例因缺少系统权限跳过。Windows Junction 用例实际执行。新增接续用例核对默认分析、访谈补文件、研究路径扩展、已有笔记字节与时间保留、阶段接续提示及重复执行零新增。
 
-[真实程序观察](../examples/initialization-study/observation.json) 的调用序列为 analysis → intake → software：分别新增 4、2、13 份文件；进入访谈时返回 3 份入口接续提示，扩展研究路径时返回 6 份提示。脚本不将任何阶段或用户确认自动标记完成。
+[0.2.0 真实程序观察](https://github.com/zengxiaokan/thesis-project-writer/blob/695d65a815a1afeba9d5c359b10b0205f347692a/examples/initialization-study/observation.json) 的调用序列为 analysis → intake → software：分别新增 4、2、13 份文件；进入访谈时返回 3 份入口接续提示，扩展研究路径时返回 6 份提示。脚本不将任何阶段或用户确认自动标记完成。
 
 技能结构校验、发行包构建与完整字节检查、本地文档链接检查通过。跨平台与其他 Python 版本以 [GitHub CI](https://github.com/zengxiaokan/thesis-project-writer/actions) 对应提交的运行结果为准。
 

@@ -18,7 +18,10 @@ class ReleaseTests(unittest.TestCase):
         with zipfile.ZipFile(io.BytesIO(payload)) as archive:
             names = set(archive.namelist())
             for required in ("README.md", "LICENSE", "VERSION", "SKILL.md", "CHANGELOG.md",
-                             ".gitignore", "references/host-adapters.md"):
+                             ".gitignore", "references/host-adapters.md", "references/figures-and-tables.md",
+                             "examples/figures/initializer-flow.dot", "examples/figures/initializer-flow.svg",
+                             "examples/figures/render_chart.py", "examples/figures/source_data.csv",
+                             "examples/figures/counts.svg"):
                 self.assertIn("thesis-project-writer/" + required, names)
             self.assertFalse(any("workspace/" in name or ".github/" in name or "__pycache__" in name for name in names))
             self.assertTrue(all(info.date_time == (1980, 1, 1, 0, 0, 0) for info in archive.infolist()))

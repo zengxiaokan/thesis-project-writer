@@ -58,7 +58,7 @@ def observe():
         assert preview_empty and analysis_preserved and preserved and times and before_repeat == after_repeat
         assert observations["analysis_created_files"] == 4
         assert observations["intake_created_files"] == 2
-        assert observations["upgrade_created_files"] == 13
+        assert observations["upgrade_created_files"] == 15
         assert len(observations["intake_continuation_paths"]) == 3
         assert observations["repeat_created_files"] == 0
         assert len(observations["continuation_paths"]) == 6

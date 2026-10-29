@@ -12,7 +12,9 @@ ROOT = Path(__file__).resolve().parents[1]
 ROOT_FILES = (".gitattributes", ".gitignore", "README.md", "SKILL.md", "LICENSE", "VERSION", "CHANGELOG.md")
 SOURCE_GROUPS = {"agents": (".yaml",), "references": (".md",),
                  "scripts": (".py",), "tests": (".py",),
-                 "evals": (".json",), "examples": (".md", ".json"), "docs": (".md",)}
+                 "evals": (".json",),
+                 "examples": (".md", ".json", ".mmd", ".dot", ".svg", ".csv", ".py"),
+                 "docs": (".md",)}
 
 
 def canonical_bytes(path):

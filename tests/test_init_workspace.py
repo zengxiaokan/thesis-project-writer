@@ -152,6 +152,24 @@ class WorkspaceTests(unittest.TestCase):
         self.assertIn("thesis/materials/README.md", actions)
         self.assertIn("thesis/progress.md", actions)
 
+    def test_existing_figure_sources_data_exports_and_index_are_preserved(self):
+        initialize(self.root, profile="software")
+        workspace = self.root / "thesis"
+        originals = {
+            "figures/source/FIG-001.mmd": "flowchart TD\n A[已核入口] --> B[已核处理]\n",
+            "figures/data/results.csv": "status,count\npassed,10\nfailed,1\nblocked,1\n",
+            "figures/export/FIG-001.svg": '<svg xmlns="http://www.w3.org/2000/svg"><text>原图</text></svg>\n',
+            "figures/index.md": "FIG-001：已有编号、来源与页面检查记录\n",
+        }
+        for relative, contents in originals.items():
+            (workspace / relative).write_text(contents, encoding="utf-8")
+        before = self.snapshot()
+        result = initialize(workspace=workspace, profile="software")
+        self.assertEqual(result["created_files"], [])
+        self.assertEqual(self.snapshot(), before)
+        actions = {item["path"] for item in result["continuation_required"]}
+        self.assertIn("thesis/figures/index.md", actions)
+
     def test_parent_entry_reuses_existing_chinese_workspace(self):
         workspace = self.root / "论文"
         workspace.mkdir()

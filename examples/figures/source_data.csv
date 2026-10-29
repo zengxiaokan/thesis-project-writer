@@ -1,0 +1,4 @@
+configuration,label,observation_key,created_files
+analysis,分析记录初始化,analysis_created_files,4
+intake,访谈记录补建,intake_created_files,2
+software,软件路径扩展,upgrade_created_files,15

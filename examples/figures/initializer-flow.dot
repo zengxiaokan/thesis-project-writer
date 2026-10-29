@@ -1,0 +1,26 @@
+digraph InitializerFlow {
+  graph [rankdir=TB, bgcolor="white", pad="0.20", nodesep="0.30", ranksep="0.32"];
+  node [shape=box, style="rounded,filled", fillcolor="white", color="#334155",
+        fontname="Microsoft YaHei", fontsize=11, margin="0.16,0.10", width=2.4];
+  edge [color="#475569", fontname="Microsoft YaHei", fontsize=11, arrowsize=0.75];
+
+  start [label="初始化调用", shape=oval, style="filled", fillcolor="#eef2f6"];
+  choose [label="选择工作区\n读取目录配置"];
+  preflight [label="预检目标与祖先目录\n检查边界、链接及类型"];
+  preview [label="预览模式？", shape=diamond, style="filled", margin="0.12,0.06", width=2.1];
+  plan [label="统计计划补建项\n保留已有文件"];
+  create [label="逐项复查并补建\n新文件独占创建\n已有文件予以保留"];
+  result [label="汇总补建及保留清单\n生成入口接续提示"];
+  done [label="CLI 输出 JSON\n退出 0", shape=oval, style="filled", fillcolor="#eef2f6"];
+  failed [label="CLI 报告错误\n退出 1", shape=oval, style="filled", fillcolor="#f6f0ec"];
+
+  start -> choose -> preflight -> preview;
+  preview -> plan [label="是"];
+  preview -> create [label="否"];
+  plan -> result;
+  create -> result;
+  result -> done;
+  choose -> failed [label="位置/配置无效", style=dashed, constraint=false];
+  preflight -> failed [label="预检失败", style=dashed, constraint=false];
+  create -> failed [label="复查或写入失败", style=dashed, constraint=false];
+}
